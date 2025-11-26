@@ -1,16 +1,5 @@
 # Project_MockUp
 Context for Project Methdology
 
-    <a
-    id="cy-effective-orcid-url"
-    class="underline"
-     href="https://orcid.org/0009-0002-4026-7271"
-     target="orcid.widget"
-     rel="me noopener noreferrer"
-     style="vertical-align: top">
-     <img
-        src="https://orcid.org/sites/default/files/images/orcid_16x16.png"
-        style="width: 1em; margin-inline-start: 0.5em"
-        alt="ORCID iD icon"/>
-      https://orcid.org/0009-0002-4026-7271
-    </a>
+    [![ORCID iD](https://orcid.org/sites/default/files/images/orcid_16x16.png)](https://orcid.org/0009-0002-4026-7271) https://orcid.org/0009-0002-4026-7271
+
