@@ -1,0 +1,155 @@
+// Prisma schema (initial, minimal). Adjust provider and datasource as needed.
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["public", "auth"]
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  role      Role     @default(ORIGINATOR)
+  createdAt DateTime @default(now())
+  projects  Project[] 
+  @@schema("public")
+}
+
+enum Role {
+  ORIGINATOR
+  PM
+  EVALUATOR
+  INVESTOR
+  OPERATOR
+  @@schema("public")
+}
+
+model Project {
+  id             String   @id @default(uuid())
+  ownerId        String
+  owner          User     @relation(fields: [ownerId], references: [id])
+  title          String
+  description    String?
+  status         String   @default("draft")
+  devLevel       Int      @default(1)
+  createdAt      DateTime @default(now())
+  logicalFramework LogicalFramework?
+  indicators     Indicator[]
+  checklists     Checklist[]
+  oracleReadings OracleReading[]
+  evaluatorReports EvaluatorReport[]
+  fnvcTranches   FnvcTranche[]
+  marketListing  MarketListing?
+  auditLogs      AuditLog[] @relation("project_audit")
+  @@schema("public")
+}
+
+model LogicalFramework {
+  id         String  @id @default(uuid())
+  projectId  String  @unique
+  project    Project @relation(fields: [projectId], references: [id])
+  impact     String?
+  outcomes   Json
+  outputs    Json
+  activities Json
+  createdAt  DateTime @default(now())
+  @@schema("public")
+}
+
+model Indicator {
+  id                  String   @id @default(uuid())
+  projectId           String
+  project             Project  @relation(fields: [projectId], references: [id])
+  name                String
+  racer               Json     // {R,A,C,E,R} structure
+  fnvcEligible        Boolean  @default(false)
+  usdValue            Float?
+  verificationSource  String?
+  createdAt           DateTime @default(now())
+  fnvcTranches         FnvcTranche[]
+  @@schema("public")
+}
+
+model Checklist {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id])
+  type      String
+  schema    Json
+  createdAt DateTime @default(now())
+  entries   ChecklistEntry[]
+  @@schema("public")
+}
+
+model ChecklistEntry {
+  id          String   @id @default(uuid())
+  checklistId String
+  checklist   Checklist @relation(fields: [checklistId], references: [id])
+  date        DateTime @default(now())
+  values      Json
+  submittedBy String?
+  approvedBy  String?
+  @@schema("public")
+}
+
+model OracleReading {
+  id         String   @id @default(uuid())
+  projectId  String
+  project    Project  @relation(fields: [projectId], references: [id])
+  source     String
+  rawValue   Json
+  value      Float?
+  timestamp  DateTime @default(now())
+  validated  Boolean  @default(false)
+  @@schema("public")
+}
+
+model EvaluatorReport {
+  id          String   @id @default(uuid())
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id])
+  evaluatorId String?
+  report      Json
+  status      String   @default("pending")
+  approvedAt  DateTime?
+  createdAt   DateTime @default(now())
+  @@schema("public")
+}
+
+model FnvcTranche {
+  id           String   @id @default(uuid())
+  projectId    String
+  project      Project  @relation(fields: [projectId], references: [id])
+  indicatorId  String
+  indicator    Indicator @relation(fields: [indicatorId], references: [id])
+  threshold    Float
+  payoutUsd    Float
+  paid         Boolean  @default(false)
+  @@schema("public")
+}
+
+model MarketListing {
+  id         String   @id @default(uuid())
+  projectId  String   @unique
+  project    Project  @relation(fields: [projectId], references: [id])
+  publicSlug String
+  scenarios  Json
+  @@schema("public")
+}
+
+model AuditLog {
+  id         String   @id @default(uuid())
+  entityType String
+  entityId   String
+  actorId    String?
+  action     String
+  payload    Json
+  createdAt  DateTime @default(now())
+  // Optional relation to project for fast queries:
+  project    Project? @relation("project_audit", fields: [entityId], references: [id])
+  @@schema("public")
+}
