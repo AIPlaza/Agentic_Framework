@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react'
 import { motion } from 'framer-motion'
 import { Layers, Activity, AlertCircle, RefreshCw, Shield, FileCheck, DollarSign } from 'lucide-react'
-import { supabase } from '../../lib/supabase'
-import { RACERTable } from '../../components/dashboard/RACERTable'
-import { GovernanceKanban } from '../../components/dashboard/GovernanceKanban'
-import { ChecklistBuilder } from '../../components/dashboard/ChecklistBuilder'
+import { supabase } from '@/lib/supabase'
+import { RACERTable } from '@/app/components/dashboard/RACERTable'
+import { GovernanceKanban } from '@/app/components/dashboard/GovernanceKanban'
+import { ChecklistBuilder } from '@/app/components/dashboard/ChecklistBuilder'
 
 const DEMO_PROJECT = {
   id: 'demo-project',
@@ -33,7 +33,10 @@ const DEMO_PROJECT = {
   ]
 }
 
-export default function ProjectBoard({ params }: { params: { id: string } }) {
+export default function ProjectBoard({ params }: { params: any }) {
+  const resolvedParams = typeof params?.then === 'function' ? use(params) : params
+  const targetId = (resolvedParams as any)?.id || 'demo-project'
+
   const [project, setProject] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<'logframe' | 'racer' | 'governance' | 'checklists'>('logframe')
@@ -41,7 +44,7 @@ export default function ProjectBoard({ params }: { params: { id: string } }) {
   async function fetchProject() {
     setLoading(true)
     try {
-      if (params.id === 'demo-project') {
+      if (targetId === 'demo-project') {
         setProject(DEMO_PROJECT)
         return
       }
@@ -49,7 +52,7 @@ export default function ProjectBoard({ params }: { params: { id: string } }) {
       const { data: { session } } = await supabase.auth.getSession()
       const token = session?.access_token
 
-      const res = await fetch(`http://localhost:4001/api/projects/${params.id}`, {
+      const res = await fetch(`http://localhost:4001/api/projects/${targetId}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -58,11 +61,11 @@ export default function ProjectBoard({ params }: { params: { id: string } }) {
         const data = await res.json()
         setProject(data)
       } else {
-        setProject({ ...DEMO_PROJECT, id: params.id, title: `Proyecto #${params.id.slice(0, 8)}` })
+        setProject({ ...DEMO_PROJECT, id: targetId, title: `Proyecto #${targetId.slice(0, 8)}` })
       }
     } catch(e) {
       console.error(e)
-      setProject({ ...DEMO_PROJECT, id: params.id })
+      setProject({ ...DEMO_PROJECT, id: targetId })
     } finally {
       setLoading(false)
     }
@@ -70,7 +73,7 @@ export default function ProjectBoard({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchProject()
-  }, [params.id])
+  }, [targetId])
 
   if (loading) {
     return (

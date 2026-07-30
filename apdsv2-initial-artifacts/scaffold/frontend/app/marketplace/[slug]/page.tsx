@@ -1,10 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, use } from 'react'
 import { motion } from 'framer-motion'
 import { ShieldCheck, TrendingUp, Download, Eye, Layers, Activity, CheckCircle2, ChevronRight, PieChart } from 'lucide-react'
 
-export default function MarketplaceFiche({ params }: { params: { slug: string } }) {
+export default function MarketplaceFiche({ params }: { params: any }) {
+  const resolvedParams = typeof params?.then === 'function' ? use(params) : params
   const [scenario, setScenario] = useState<'conservative' | 'base' | 'optimistic'>('base')
 
   const scenarioData = {
