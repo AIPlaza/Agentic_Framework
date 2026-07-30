@@ -5,7 +5,7 @@
 :root {
   --background: 222.2 84% 4.9%;
   --foreground: 210 40% 98%;
-  --primary: 217.2 91.2% 59.8%;
+  --primary: 197 86% 66%; /* #5EC8F2 */
   --primary-foreground: 222.2 47.4% 11.2%;
   --card: 222.2 84% 4.9%;
   --card-foreground: 210 40% 98%;
@@ -16,12 +16,12 @@ html, body, #__next { height: 100%; }
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: hsl(var(--background));
-  color: hsl(var(--foreground));
+  background-color: #020624;
+  color: #FFFFFF;
   background-image: 
-    radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, hsla(225,39%,30%,0.2) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, hsla(339,49%,30%,0.2) 0, transparent 50%);
+    linear-gradient(rgba(94, 200, 242, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(94, 200, 242, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
   background-attachment: fixed;
 }
 
@@ -33,12 +33,62 @@ body {
   .glass-card {
     @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/10;
   }
+
+  .glass-platinum {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .glass-blue-card {
+    background: rgba(94, 200, 242, 0.02);
+    backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(94, 200, 242, 0.12);
+    border-radius: 24px;
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.1),
+      0 10px 30px -10px rgba(2, 6, 36, 0.5),
+      0 0 20px -5px rgba(94, 200, 242, 0.05);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .dark-section-card {
+    background: rgba(8, 12, 30, 0.4);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
   
   .glass-input {
     @apply bg-white/5 border border-white/10 rounded-lg px-4 py-2 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-primary/50 transition-all;
   }
   
   .glass-button {
-    @apply bg-primary/80 hover:bg-primary text-primary-foreground font-medium rounded-lg px-6 py-2.5 transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)] hover:shadow-[0_0_25px_rgba(37,99,235,0.5)];
+    @apply bg-emerald-500 hover:bg-emerald-400 text-black font-semibold rounded-lg px-6 py-2.5 transition-all shadow-[0_0_15px_rgba(52,211,153,0.3)];
+  }
+
+  .text-gradient {
+    background: linear-gradient(90deg, #5EC8F2, #5ED7F2, #377D8C);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .glow-primary {
+    box-shadow: 0 0 20px rgba(94, 200, 242, 0.3);
+  }
+
+  .vignette {
+    background: radial-gradient(ellipse 88% 82% at 50% 50%, transparent 52%, rgba(0,0,0,.28) 76%, rgba(0,0,0,.68) 100%);
+  }
+
+  .grain {
+    opacity: 0.032;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 150px 150px;
   }
 }
