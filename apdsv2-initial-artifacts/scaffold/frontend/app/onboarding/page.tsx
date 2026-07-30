@@ -4,6 +4,13 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FileText, Cpu, CheckCircle2, ArrowRight, Loader2, UploadCloud, File, AlertTriangle, Settings } from 'lucide-react'
 
+import { createClient } from '@supabase/supabase-js'
+
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+)
+
 export default function OnboardingPage() {
   const [step, setStep] = useState(1)
   const [loading, setLoading] = useState(false)
@@ -36,12 +43,16 @@ export default function OnboardingPage() {
 
   async function handleSubmit() {
     setLoading(true)
-    
-    // In a real app we'd attach the JWT token here
     try {
+      const { data: { session } } = await supabase.auth.getSession()
+      const token = session?.access_token
+
       const projRes = await fetch('http://localhost:4001/api/projects', { 
         method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ title: formData.title, description: formData.brief }) 
       })
       
@@ -50,7 +61,10 @@ export default function OnboardingPage() {
 
       await fetch('http://localhost:4001/api/agents/tasks', { 
         method: 'POST', 
-        headers: { 'Content-Type': 'application/json' }, 
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }, 
         // We pass the selected model and context to the backend agent task
         body: JSON.stringify({ taskName: 'onboarding', projectId: project.id, brief: formData.brief, model: formData.model }) 
       })

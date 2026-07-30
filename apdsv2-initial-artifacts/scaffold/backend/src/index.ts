@@ -107,6 +107,10 @@ import IORedis from 'ioredis'
 const connection = new IORedis(process.env.REDIS_URL || 'redis://localhost:6379')
 const queue = new Queue('agent-tasks', { connection })
 
+import evaluatorRouter from './modules/evaluator/routes'
+
+app.use('/api/evaluator', evaluatorRouter)
+
 app.post('/api/agents/tasks', requireAuth, async (req, res) => {
   const { taskName, projectId, brief } = req.body
   console.log('enqueuing task', taskName)
