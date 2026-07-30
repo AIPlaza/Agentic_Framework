@@ -22,14 +22,6 @@ export default function LoginPage() {
     setLoading(true)
     setError(null)
 
-    // 🛡️ Exclusive Access Check
-    const allowedEmail = 'accet.project@gmail.com'
-    if (email.toLowerCase() !== allowedEmail) {
-      setError('Acceso restringido. Por favor contacte al administrador.')
-      setLoading(false)
-      return
-    }
-
     const { error: loginError } = await supabase.auth.signInWithPassword({
       email,
       password,
