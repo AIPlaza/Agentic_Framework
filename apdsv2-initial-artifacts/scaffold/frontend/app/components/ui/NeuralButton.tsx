@@ -2,6 +2,10 @@
 
 import { motion, HTMLMotionProps } from 'framer-motion'
 
+function cn(...classes: (string | undefined | null | false)[]) {
+  return classes.filter(Boolean).join(' ')
+}
+
 interface NeuralButtonProps extends HTMLMotionProps<'button'> {
   variant?: 'primary' | 'outline'
   isLoading?: boolean
@@ -10,7 +14,7 @@ interface NeuralButtonProps extends HTMLMotionProps<'button'> {
 
 export default function NeuralButton({
   children,
-  className = '',
+  className,
   variant = 'primary',
   isLoading,
   ...props
@@ -19,11 +23,15 @@ export default function NeuralButton({
     <motion.button
       whileHover={{ scale: 1.02, filter: 'brightness(1.1)' }}
       whileTap={{ scale: 0.98 }}
-      className={`relative py-3 px-8 rounded-xl font-bold text-xs uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden group font-mono ${
+      className={cn(
+        'relative py-3 px-8 rounded-xl font-black text-sm uppercase tracking-[0.2em] transition-all duration-300 overflow-hidden group',
         variant === 'primary' 
-          ? 'bg-[#5EC8F2] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.3)] hover:shadow-[0_0_30px_rgba(94,200,242,0.5)]' 
-          : 'bg-transparent border border-[#5EC8F2]/40 text-[#5EC8F2] hover:bg-[#5EC8F2]/10'
-      } ${isLoading ? 'opacity-70 cursor-not-allowed' : ''} ${className}`}
+          ? 'bg-[#5EC8F2] text-[#0D0D0D] shadow-[0_0_20px_rgba(94,200,242,0.3)] hover:shadow-[0_0_30px_rgba(94,200,242,0.5)]' 
+          : 'bg-transparent border border-[#5EC8F2]/40 text-[#5EC8F2] hover:bg-[#5EC8F2]/10',
+        isLoading && 'opacity-70 cursor-not-allowed',
+        className
+      )}
+      style={{ fontFamily: 'var(--font-syne)' }}
       {...props}
     >
       {/* Neural Pulse Overlay */}

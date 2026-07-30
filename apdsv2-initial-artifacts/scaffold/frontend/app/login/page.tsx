@@ -1,8 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { createClient } from '@supabase/supabase-js'
 import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import CinematicBackground from '@/app/components/auth/CinematicBackground'
 import LoginIntro from '@/app/components/auth/LoginIntro'
 import NeuralButton from '@/app/components/ui/NeuralButton'
@@ -65,13 +65,15 @@ export default function LoginPage() {
             <div className="fixed inset-0 grain pointer-events-none z-0" />
 
             <div className="flex flex-col items-center mb-12">
-              <div className="mb-6 w-20 h-20 rounded-2xl bg-[#5EC8F2]/20 p-3 shadow-[0_0_30px_rgba(94,200,242,0.2)] flex items-center justify-center">
-                {/* ACCET Shield Icon */}
-                <svg viewBox="0 0 24 24" fill="none" stroke="#5EC8F2" strokeWidth="1.5" className="w-10 h-10">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-                </svg>
-              </div>
-              <h1 className="text-4xl font-bold text-white tracking-tight mb-2 uppercase font-mono">
+              <Image 
+                src="/logo.png" 
+                alt="ACCET" 
+                width={80} 
+                height={80} 
+                className="mb-6 rounded-2xl bg-[#5EC8F2]/20 p-2 shadow-[0_0_30px_rgba(94,200,242,0.2)]"
+                priority
+              />
+              <h1 className="text-4xl font-black text-white tracking-tight mb-2 uppercase" style={{ fontFamily: 'var(--font-syne)' }}>
                 ACCET<span className="text-[#5EC8F2]">.</span>
               </h1>
               <p className="font-mono text-[10px] text-[#5EC8F2]/60 tracking-[4px] uppercase font-bold">
