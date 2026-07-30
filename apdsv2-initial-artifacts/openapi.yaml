@@ -1,0 +1,127 @@
+openapi: 3.0.3
+info:
+  title: APDS v2.0 Minimal API
+  version: "0.1.0"
+servers:
+  - url: https://api.example.com
+paths:
+  /api/auth/request-otp:
+    post:
+      summary: Request OTP for email login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+      responses:
+        '200':
+          description: OTP sent
+  /api/auth/verify-otp:
+    post:
+      summary: Verify OTP and return session token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                otp: { type: string }
+      responses:
+        '200':
+          description: Authenticated
+  /api/projects:
+    post:
+      summary: Create project (originator)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjectCreate'
+      responses:
+        '201':
+          description: Created
+    get:
+      summary: List projects (filter by owner/role)
+      responses:
+        '200':
+          description: OK
+  /api/projects/{projectId}:
+    get:
+      summary: Get project details
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200': { description: OK }
+  /api/projects/{projectId}/logical-framework:
+    post:
+      summary: Upsert logical framework (agent output)
+      parameters:
+        - name: projectId
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                impact: { type: string }
+                outcomes: { type: array, items: { type: object } }
+                outputs:  { type: array, items: { type: object } }
+                activities: { type: array, items: { type: object } }
+      responses:
+        '200': { description: OK }
+  /api/projects/{projectId}/indicators:
+    post:
+      summary: Add indicator(s)
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: object
+                properties:
+                  name: { type: string }
+                  racer: { type: object }
+                  fnvcEligible: { type: boolean }
+                  usdValue: { type: number }
+      responses:
+        '201': { description: Created }
+  /api/agents/tasks:
+    post:
+      summary: Trigger an agent task (onboarding, mockup, assign-indicators)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                task: { type: string, enum: [onboarding, build-logframe, assign-indicators] }
+                projectId: { type: string }
+                input: { type: object }
+      responses:
+        '202':
+          description: Agent task accepted (worker enqueued)
+components:
+  schemas:
+    ProjectCreate:
+      type: object
+      properties:
+        title: { type: string }
+        description: { type: string }
+        devLevel: { type: integer, default: 1 }

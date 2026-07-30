@@ -1,0 +1,23 @@
+Domain ERD (high-level)
+
+Users (1) ---< Projects (N)
+Projects (1) ---< LogicalFramework (1)
+Projects (1) ---< Indicators (N)
+Projects (1) ---< Checklists (N)
+Checklists (1) ---< ChecklistEntries (N)
+Projects (1) ---< OracleReadings (N)
+Projects (1) ---< EvaluatorReports (N)
+Indicators (1) ---< FnvCTranches (N)
+Projects (1) ---< MarketListings (0..1)
+AuditLogs: append-only, references entities by (entity_type, entity_id)
+
+Key entities and important fields:
+- users: id, email, role
+- projects: id, owner_id, title, status, dev_level
+- logical_framework: project_id, impact, outcomes[], outputs[], activities[]
+- indicators: project_id, name, racer JSON, fnvc_eligible, usd_value, verification_source
+- checklists/checklist_entries: schema JSON + values JSON, submitted_by, approved_by
+- oracle_readings: source, raw_value, normalized_value, validated
+- evaluator_reports: evaluator_id, report_json, status, approved_at
+- fnvc_tranches: indicator_id, threshold, payout_usd, paid
+- market_listings: project_id, public_slug, scenarios JSON
