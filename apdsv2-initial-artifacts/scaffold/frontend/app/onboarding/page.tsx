@@ -4,12 +4,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FileText, Cpu, CheckCircle2, ArrowRight, Loader2, UploadCloud, File, AlertTriangle, Settings } from 'lucide-react'
 
-import { createClient } from '@supabase/supabase-js'
-
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+import { supabase } from '../../lib/supabase'
 
 export default function OnboardingPage() {
   const [step, setStep] = useState(1)
