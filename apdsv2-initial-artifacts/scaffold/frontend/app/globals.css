@@ -22,7 +22,7 @@ body {
 }
 
 @layer utilities {
-  /* ── Glassmorphism Variants (High Translucency & Refraction) ── */
+  /* ── Glassmorphism Variants (Matching Onboarding Glass-Platinum) ── */
   .glass {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(20px) saturate(130%);
@@ -31,33 +31,33 @@ body {
   }
 
   .glass-platinum {
-    background: rgba(255, 255, 255, 0.07) !important;
+    background: rgba(2, 6, 36, 0.8) !important;
     backdrop-filter: blur(24px) saturate(140%) !important;
     -webkit-backdrop-filter: blur(24px) saturate(140%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.18) !important;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.15) !important;
   }
 
   .dark-section-card {
-    background: rgba(8, 12, 30, 0.35);
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(24px) saturate(150%);
     -webkit-backdrop-filter: blur(24px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    border-radius: 20px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .glass-blue-card {
-    background: rgba(94, 200, 242, 0.03);
+    background: rgba(94, 200, 242, 0.05);
     backdrop-filter: blur(20px) saturate(130%);
     -webkit-backdrop-filter: blur(20px) saturate(130%);
-    border: 1px solid rgba(94, 200, 242, 0.15);
+    border: 1px solid rgba(94, 200, 242, 0.3);
     border-radius: 24px;
     box-shadow: 
       inset 0 1px 1px rgba(255, 255, 255, 0.15),
       0 10px 30px -10px rgba(2, 6, 36, 0.5),
-      0 0 20px -5px rgba(94, 200, 242, 0.08);
+      0 0 25px -5px rgba(94, 200, 242, 0.15);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
@@ -85,7 +85,7 @@ body {
   }
 
   .glow-primary {
-    box-shadow: 0 0 20px rgba(94, 200, 242, 0.3);
+    box-shadow: 0 0 25px rgba(94, 200, 242, 0.4);
   }
 
   .signature-line {
@@ -102,15 +102,5 @@ body {
     opacity: 0.032;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 150px 150px;
-    animation: grain-shift .12s steps(1) infinite;
-  }
-
-  @keyframes grain-shift {
-    0%{transform:translate(0,0)}10%{transform:translate(-3%,-4%)}
-    20%{transform:translate(5%,2%)}30%{transform:translate(-2%,6%)}
-    40%{transform:translate(4%,-3%)}50%{transform:translate(-5%,1%)}
-    60%{transform:translate(3%,5%)}70%{transform:translate(-4%,-2%)}
-    80%{transform:translate(2%,4%)}90%{transform:translate(-3%,-5%)}
-    100%{transform:translate(0,0)}
   }
 }

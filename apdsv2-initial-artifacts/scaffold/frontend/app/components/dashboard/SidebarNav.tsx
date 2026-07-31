@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   LayoutGrid,
   ListTodo,
@@ -10,7 +11,6 @@ import {
   Store,
   ChevronLeft,
   ChevronRight,
-  FolderKanban,
   PlusCircle,
   BarChart3
 } from 'lucide-react';
@@ -42,16 +42,16 @@ export function SidebarNav({
 
   return (
     <aside
-      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col bg-[#020624]/60 backdrop-blur-2xl border-r border-white/10 ${
+      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col bg-[#020624]/80 backdrop-blur-2xl border-r border-white/15 ${
         collapsed ? 'w-20' : 'w-72'
       }`}
     >
       {/* Sidebar Header & Workspace Selector */}
-      <div className="p-4 border-b border-white/10 flex items-center justify-between">
+      <div className="p-4 border-b border-white/15 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center gap-2.5 overflow-hidden">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#5EC8F2] to-[#377D8C] flex items-center justify-center text-[#020624] font-bold shadow-md shadow-[#5EC8F2]/20 flex-shrink-0">
-              <FolderKanban className="w-5 h-5 text-[#020624]" />
+            <div className="w-8 h-8 rounded-xl bg-black/40 border border-[#5EC8F2]/30 flex items-center justify-center p-1 flex-shrink-0">
+              <Image src="/logo.png" alt="ACCET Logo" width={24} height={24} className="object-contain" />
             </div>
             <div className="truncate">
               <span className="text-[10px] font-mono text-[#5EC8F2] uppercase tracking-wider block font-bold">
@@ -64,7 +64,7 @@ export function SidebarNav({
 
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-2 rounded-xl bg-white/[0.03] hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors mx-auto"
+          className="p-2 rounded-xl bg-black/40 hover:bg-white/10 text-slate-400 hover:text-white border border-white/15 transition-colors mx-auto"
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
@@ -100,7 +100,7 @@ export function SidebarNav({
               onClick={() => onViewChange(item.id)}
               className={`w-full flex items-center gap-3 px-3.5 py-3 rounded-xl text-xs font-mono font-medium transition-all ${
                 isActive
-                  ? 'bg-gradient-to-r from-[#5EC8F2]/20 to-[#377D8C]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 shadow-[0_0_15px_rgba(94,200,242,0.15)]'
+                  ? 'bg-gradient-to-r from-[#5EC8F2]/20 to-[#377D8C]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 shadow-[0_0_15px_rgba(94,200,242,0.15)] font-bold'
                   : 'text-slate-300 hover:text-white hover:bg-white/5 border border-transparent'
               } ${collapsed ? 'justify-center' : ''}`}
             >
@@ -113,7 +113,7 @@ export function SidebarNav({
 
       {/* Bottom Progress Widget */}
       {!collapsed && (
-        <div className="p-4 border-t border-white/10 bg-white/[0.02]">
+        <div className="p-4 border-t border-white/15 bg-black/40">
           <div className="flex items-center justify-between text-xs font-mono text-slate-300 mb-2">
             <span className="flex items-center gap-1.5">
               <BarChart3 className="w-3.5 h-3.5 text-[#5EC8F2]" /> Completion Status

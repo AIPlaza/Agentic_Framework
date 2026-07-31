@@ -2,17 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import {
-  Search,
-  DollarSign,
-  User,
-  Activity,
-  Layers,
-  Shield,
-  FileCheck2,
-  CheckCircle2,
-  AlertCircle
-} from 'lucide-react';
+import { Search, DollarSign, User } from 'lucide-react';
 import { TaskItem, TaskDetailModal } from './TaskDetailModal';
 
 function generateInitialStories(projectTitle: string): TaskItem[] {
@@ -76,8 +66,8 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
 
   const columns: { id: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE'; label: string; color: string; badgeBg: string }[] = [
-    { id: 'BACKLOG', label: '1. Backlog & Requirements', color: 'border-[#5EC8F2]/20', badgeBg: 'bg-white/10 text-slate-300' },
-    { id: 'DESIGN', label: '2. Design & Architecture', color: 'border-[#377D8C]/30', badgeBg: 'bg-[#377D8C]/20 text-[#5ED7F2]' },
+    { id: 'BACKLOG', label: '1. Backlog & Requirements', color: 'border-white/20', badgeBg: 'bg-white/10 text-slate-300' },
+    { id: 'DESIGN', label: '2. Design & Architecture', color: 'border-[#377D8C]/40', badgeBg: 'bg-[#377D8C]/20 text-[#5ED7F2]' },
     { id: 'EXECUTION', label: '3. Operational Execution', color: 'border-[#5EC8F2]/40', badgeBg: 'bg-[#5EC8F2]/20 text-[#5EC8F2]' },
     { id: 'AUDIT', label: '4. Auditor Review Queue', color: 'border-amber-500/40', badgeBg: 'bg-amber-500/20 text-amber-300' },
     { id: 'DONE', label: '5. Milestone Released', color: 'border-emerald-500/40', badgeBg: 'bg-emerald-500/20 text-emerald-400' }
@@ -96,29 +86,29 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
 
   return (
     <div className="space-y-6">
-      {/* Search & Filter Header Toolbar */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#020624]/60 p-4 rounded-3xl border border-white/10 backdrop-blur-2xl">
+      {/* Search & Filter Header Toolbar matching Onboarding inputs */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#020624]/80 p-5 rounded-3xl border border-white/20 backdrop-blur-2xl shadow-2xl">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
           <input
             type="text"
             placeholder="Search 126 stories by title or ID..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-black/40 border border-white/15 rounded-xl py-2.5 pl-10 pr-4 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-[#5EC8F2] transition-all"
+            className="w-full bg-black/40 border border-white/20 rounded-xl py-3 pl-11 pr-4 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-[#5EC8F2] transition-all"
           />
         </div>
 
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 w-full sm:w-auto font-mono text-xs">
+        {/* Category Filter Pills matching Onboarding category buttons */}
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-xs">
           {['ALL', 'Strategy & Legal', 'Engineering & IoT', 'Quality & ISO 9001', 'Tokenomics & Tranches'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-2 rounded-xl text-[11px] font-bold transition-all ${
+              className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase transition-all ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_15px_rgba(94,200,242,0.3)]'
-                  : 'bg-black/30 text-slate-300 hover:text-white border border-white/10 hover:bg-white/5'
+                  ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.4)]'
+                  : 'bg-black/30 text-slate-300 hover:text-white border border-white/15 hover:bg-white/10'
               }`}
             >
               {cat}
@@ -128,33 +118,33 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
       </div>
 
       {/* 5-Column Kanban Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 items-stretch">
         {columns.map((col) => {
           const colTasks = filteredTasks.filter((t) => t.status === col.id);
 
           return (
             <div
               key={col.id}
-              className={`p-4 bg-[#020624]/60 border rounded-3xl flex flex-col gap-3 backdrop-blur-2xl min-h-[620px] ${col.color}`}
+              className={`p-5 bg-[#020624]/80 border rounded-3xl flex flex-col gap-4 backdrop-blur-2xl min-h-[640px] shadow-2xl ${col.color}`}
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+              <div className="flex items-center justify-between pb-3 border-b border-white/15">
                 <h4 className="text-xs font-mono font-bold text-white tracking-tight flex items-center gap-1.5">
                   <span>{col.label}</span>
                 </h4>
-                <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold ${col.badgeBg}`}>
+                <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${col.badgeBg}`}>
                   {colTasks.length}
                 </span>
               </div>
 
               {/* Task Cards Container */}
-              <div className="space-y-3 flex-1">
+              <div className="space-y-3.5 flex-1">
                 {colTasks.slice(0, 15).map((task) => (
                   <motion.div
                     key={task.id}
                     layout
                     onClick={() => setSelectedTask(task)}
-                    className="p-4 bg-[#020624]/80 border border-white/10 hover:border-[#5EC8F2]/60 rounded-2xl space-y-3 cursor-pointer hover:shadow-[0_0_20px_rgba(94,200,242,0.15)] transition-all duration-200 group relative backdrop-blur-md"
+                    className="p-4 bg-black/40 border border-white/15 hover:border-[#5EC8F2]/60 rounded-2xl space-y-3 cursor-pointer hover:shadow-[0_0_20px_rgba(94,200,242,0.2)] transition-all duration-200 group relative backdrop-blur-md"
                   >
                     {/* Top ID & Priority */}
                     <div className="flex justify-between items-center">
@@ -174,7 +164,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                       </span>
                     </div>
 
-                    {/* Title with clean text wrapping */}
+                    {/* Title */}
                     <p className="text-xs font-sans font-medium text-slate-200 group-hover:text-white leading-relaxed">
                       {task.title}
                     </p>
@@ -185,7 +175,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     </div>
 
                     {/* Bottom Metadata */}
-                    <div className="pt-2.5 border-t border-white/5 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-400">
                       <span className="flex items-center gap-1.5">
                         <User className="w-3 h-3 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
                       </span>
