@@ -1,0 +1,1 @@
+Understand context.md and also be aware if any history.md file is opresent to complement context
