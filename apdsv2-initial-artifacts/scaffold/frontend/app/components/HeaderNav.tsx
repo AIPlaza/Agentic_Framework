@@ -4,7 +4,6 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { Sparkles, LayoutDashboard, ShieldCheck, Store, UserCheck } from 'lucide-react';
 
 export default function HeaderNav() {
   const pathname = usePathname();
@@ -13,74 +12,68 @@ export default function HeaderNav() {
     {
       name: 'Onboarding',
       href: '/onboarding',
-      icon: Sparkles
     },
     {
       name: 'Project Studio',
       href: '/project/demo-project-001',
-      icon: LayoutDashboard
     },
     {
       name: 'Auditor Portal',
       href: '/evaluator',
-      icon: ShieldCheck
     },
     {
       name: 'Marketplace',
       href: '/marketplace/demo-project-001',
-      icon: Store
     }
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-2xl bg-[#020624]/80 border-b border-white/15 shadow-2xl">
-      {/* Signature Decorator Line */}
-      <div className="h-[3px] w-full bg-gradient-to-r from-[#5EC8F2] via-[#5ED7F2] to-[#377D8C]" />
+    <header className="sticky top-0 z-50 w-full backdrop-blur-3xl bg-black/40 border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+      {/* Signature Decorator Line - Subtle */}
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#5EC8F2]/30 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with Official ACCET Asset */}
-        <Link href="/project/demo-project-001" className="flex items-center gap-3 group">
-          <div className="relative w-9 h-9 flex items-center justify-center rounded-xl bg-black/40 border border-[#5EC8F2]/40 p-1 group-hover:border-[#5EC8F2] group-hover:shadow-[0_0_20px_rgba(94,200,242,0.4)] transition-all duration-300">
+        <Link href="/project/demo-project-001" className="flex items-center gap-4 group">
+          <div className="relative w-8 h-8 flex items-center justify-center">
             <Image
               src="/logo.png"
               alt="ACCET Logo"
-              width={34}
-              height={34}
-              className="object-contain filter drop-shadow"
+              width={32}
+              height={32}
+              className="object-contain filter drop-shadow opacity-90 group-hover:opacity-100 transition-opacity"
             />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="font-syne text-xl font-bold tracking-tight text-white group-hover:text-[#5EC8F2] transition-colors">
+              <span className="font-sans text-lg font-semibold tracking-wide text-white group-hover:text-[#5EC8F2] transition-colors">
                 ACCET
               </span>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[#5EC8F2]/15 text-[#5EC8F2] border border-[#5EC8F2]/30 font-bold">
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-sans bg-white/10 text-slate-300 border border-white/10">
                 v1.0.7
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-sans tracking-wide">
+            <p className="text-[10px] text-slate-400 font-sans tracking-widest uppercase">
               Active Management Suite
             </p>
           </div>
         </Link>
 
-        {/* Center Navigation Menu */}
-        <nav className="hidden md:flex items-center gap-1.5 bg-black/40 p-1.5 rounded-2xl border border-white/15 backdrop-blur-2xl">
+        {/* Center Navigation Menu - Minimalist Pills */}
+        <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const Icon = item.icon;
             const isActive = pathname === item.href || (item.href !== '/onboarding' && pathname?.startsWith(item.href));
 
             return (
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl font-mono text-xs font-medium transition-all duration-200 ${
+                className={`flex items-center px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all duration-300 ${
                   isActive
-                    ? 'bg-gradient-to-r from-[#5EC8F2]/20 to-[#377D8C]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 shadow-[0_0_15px_rgba(94,200,242,0.2)] font-bold'
-                    : 'text-slate-300 hover:text-white hover:bg-white/5 border border-transparent'
+                    ? 'text-white bg-white/10 border border-white/10'
+                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isActive ? 'text-[#5EC8F2]' : 'text-slate-400'}`} />
                 <span>{item.name}</span>
               </Link>
             );
@@ -88,18 +81,17 @@ export default function HeaderNav() {
         </nav>
 
         {/* Right Status / Auth */}
-        <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="font-bold">Node Active</span>
+        <div className="flex items-center gap-4">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-emerald-400 text-[11px] font-sans tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>Node Active</span>
           </div>
 
           <Link
             href="/login"
-            className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono text-[#020624] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:shadow-[0_0_20px_rgba(94,200,242,0.4)] transition-all shadow-md font-bold"
+            className="flex items-center px-5 py-2 rounded-full text-[13px] font-sans font-medium text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-opacity"
           >
-            <UserCheck className="w-4 h-4 text-[#020624]" />
-            <span>Sign In</span>
+            Sign In
           </Link>
         </div>
       </div>
