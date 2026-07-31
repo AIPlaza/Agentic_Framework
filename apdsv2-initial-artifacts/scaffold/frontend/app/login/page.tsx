@@ -36,7 +36,7 @@ export default function LoginPage() {
       }
 
       if (data.session) {
-        // Give the SSR cookie a tick to propagate, then hard navigate
+        // Allow session cookie to propagate then redirect to onboarding
         await new Promise(resolve => setTimeout(resolve, 300))
         window.location.href = '/onboarding'
       }
@@ -47,7 +47,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center p-4 bg-[#0D0D0D] overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center justify-center p-4 bg-[#020624] overflow-hidden">
       {/* Cinematic Background Engine */}
       <CinematicBackground />
 
@@ -66,19 +66,19 @@ export default function LoginPage() {
             <div className="fixed inset-0 vignette pointer-events-none z-10" />
             <div className="fixed inset-0 grain pointer-events-none z-0" />
 
-            <div className="flex flex-col items-center mb-12">
+            <div className="flex flex-col items-center mb-10">
               <Image 
                 src="/logo.png" 
-                alt="ACCET" 
+                alt="ACCET Logo" 
                 width={80} 
                 height={80} 
-                className="mb-6 rounded-2xl bg-[#5EC8F2]/20 p-2 shadow-[0_0_30px_rgba(94,200,242,0.2)]"
+                className="mb-5 rounded-2xl bg-[#5EC8F2]/20 p-2 shadow-[0_0_30px_rgba(94,200,242,0.25)] border border-[#5EC8F2]/30"
                 priority
               />
-              <h1 className="text-4xl font-black text-white tracking-tight mb-2 uppercase" style={{ fontFamily: 'var(--font-syne)' }}>
+              <h1 className="text-4xl font-syne font-black text-white tracking-tight mb-1 uppercase">
                 ACCET<span className="text-[#5EC8F2]">.</span>
               </h1>
-              <p className="font-mono text-[10px] text-[#5EC8F2]/60 tracking-[4px] uppercase font-bold">
+              <p className="font-mono text-[10px] text-[#5EC8F2]/70 tracking-[4px] uppercase font-bold">
                 Tokenization Engine
               </p>
             </div>
@@ -88,32 +88,34 @@ export default function LoginPage() {
               transition={{ duration: 0.4 }}
               className="glass-platinum p-8 rounded-3xl relative overflow-hidden"
             >
-              <h2 className="text-xl font-bold text-white mb-6 uppercase tracking-tight font-mono">Iniciar Sesión</h2>
+              <h2 className="text-xl font-syne font-bold text-white mb-6 uppercase tracking-tight">
+                Iniciar Sesión
+              </h2>
               
               <form onSubmit={handleLogin} className="space-y-6">
                 <div>
-                  <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 font-black">
+                  <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-2 font-black">
                     Email Corporativo
                   </label>
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all outline-none font-medium"
+                    className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
                     placeholder="accet.project@gmail.com"
                     required
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] font-mono text-slate-500 uppercase tracking-widest mb-2 font-black">
+                  <label className="block text-[10px] font-mono text-slate-400 uppercase tracking-widest mb-2 font-black">
                     Contraseña
                   </label>
                   <input
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all outline-none font-medium"
+                    className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
                     placeholder="••••••••"
                     required
                   />
@@ -125,7 +127,7 @@ export default function LoginPage() {
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -10 }}
-                      className="p-3 rounded-lg bg-[#8B1A1A]/10 border border-[#8B1A1A]/20 text-[#FF7575] text-[11px] font-bold font-mono uppercase tracking-wider"
+                      className="p-3 rounded-lg bg-[#8B1A1A]/20 border border-[#8B1A1A]/40 text-[#FF7575] text-[11px] font-bold font-mono uppercase tracking-wider"
                     >
                       {error}
                     </motion.div>
@@ -135,14 +137,14 @@ export default function LoginPage() {
                 <NeuralButton
                   type="submit"
                   isLoading={loading}
-                  className="w-full py-4 mt-2"
+                  className="w-full py-4 mt-2 font-syne font-black"
                 >
                   Entrar — Access Gate
                 </NeuralButton>
               </form>
             </motion.div>
 
-            <div className="mt-8 text-center text-[10px] font-mono text-slate-600 tracking-wider font-bold">
+            <div className="mt-8 text-center text-[10px] font-mono text-slate-500 tracking-wider font-bold">
               PROTECCIÓN DE ACTIVOS · BASE L2 · ACCET v1.0.7
             </div>
           </motion.div>
