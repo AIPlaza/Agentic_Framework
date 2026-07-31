@@ -158,3 +158,29 @@ Agentic_Framework/
   - Backend API: `http://localhost:4001`
 - **When creating new UI components**: Always inspect `.agents/skills/branding/SKILL.md` and use `font-syne`, `font-mono`, `font-sans`, `#5EC8F2` Sky Blue accents, and `.glass-platinum` frosted glass translucency.
 - **When editing DB schemas**: Never run destructive migrations. Add new tables using `apds_v2_migration.sql` with `IF NOT EXISTS`.
+
+---
+
+## 7. Reconciliation & Audit Analysis: July 30 Context Update vs. Active Implementation
+
+A thorough audit comparing the **July 30 Context Log Export** (`context.md` lines 651–2137) against the **active codebase trajectory** (`6adf8a29-3341-4c43-805e-06bba9e33e8a`) revealed four critical misalignments that were successfully resolved in production:
+
+### Key Misalignments & Resolved Improvements
+
+| Area | July 30 Context Update Proposal | Active Implementation (`history.md` Baseline) | Resolution / Improvement Status |
+| :--- | :--- | :--- | :--- |
+| **Authentication Engine** | Generic `@supabase/supabase-js` `createClient` without cookie persistence. | `@supabase/ssr` `createBrowserClient` with explicit cookie propagation and `await cookies()` in Next.js 16 server handlers. | **Resolved**: Eliminated infinite auth loading spinner; aligned middleware session checks across Next.js 16 App Router. |
+| **Database Migration Strategy** | Direct `prisma db push` / raw migrations that risk dropping existing schema tables. | Safe additive PostgreSQL migration script (`apds_v2_migration.sql`) using `IF NOT EXISTS`. | **Resolved**: Protected existing `auth.users`, `User`, `Tenant`, `Document`, `Signature`, `Transaction`, and `profiles` tables. |
+| **Brand & Design System** | Generic UI placeholders and generic styling. | Full ACCET Brand Manual v1.0 (`Syne` headlines, `JetBrains Mono` badges, `DM Sans` body, `#5EC8F2` Sky Blue palette, `.glass-platinum` frosted glass, `CinematicBackground`). | **Resolved**: Replicated exact high-contrast glassmorphic design system from `accet-app` marketplace. |
+| **Project Management Architecture** | High-level theoretical review of 14 open-source PM repositories (Focalboard, Wekan, OpenProject, Taiga, etc.). | Native Next.js 16 PM suite (`GovernanceKanban`, `RACERTable`, `ChecklistBuilder`) integrated with Supabase and REST API. | **Benchmarked**: Core patterns (Focalboard DnD, Wekan WebSockets, OpenProject tolerance tracking) integrated into APDS v2.0 roadmap. |
+
+### Open-Source PM Repository Benchmarking Summary (14 Repos)
+
+The 14 open-source PM repositories evaluated in the July 30 update serve as functional benchmarks for APDS v2.0:
+
+1. **Focalboard / Taskcafe**: Benchmark for visual drag-and-drop board UX (Logframe & PM Board builder).
+2. **Wekan**: Benchmark for real-time WebSocket pub/sub feeds (Investor transparency portal & field oracle streams).
+3. **OpenProject / Redmine**: Benchmark for enterprise WorkPackage hierarchy, budget/schedule tolerance tracking (+10%/+15%), and PDF export engines.
+4. **Taiga**: Benchmark for REST API serialization and clean backend/frontend separation.
+5. **Odoo / GitLab CE**: Benchmark for marketplace listing metadatos, fine-grained RBAC permissions, and approval workflows.
+
