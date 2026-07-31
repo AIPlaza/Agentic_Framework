@@ -1,0 +1,160 @@
+# ACCET APDS v2.0 — Comprehensive System History & Agent Context Log
+
+> **Log Creation Date:** July 31, 2026  
+> **Source Baseline:** `context.md` (Initial Context: July 28, 2026)  
+> **Target Repository:** `AIPlaza/Agentic_Framework`  
+> **Active Branch / Tag:** `v1.0.7-test` (Mirrors `v1.0.7`)  
+
+---
+
+## 1. System Vision & Core Objectives
+
+The **Project Design & Active Management Suite (APDS v2.0)** is the flagship agentic software engine for the **ACCET Tokenization Platform** (AgoraLink S.A.S.).
+
+Unlike traditional passive tokenization platforms that emit tokens and disappear, ACCET's competitive moat is **Active Management & Operational Quality Auditing**. APDS v2.0 guides Project Originators and Active Project Managers through structured onboarding, logical framework generation, RACER indicator assignment, ISO 9001 field telemetry logging, and programmatic FNVC milestone payouts audited by Independent Quality Auditors (TPA Annex VII-B).
+
+---
+
+## 2. Tri-Systemic Isomorphic Fusion Architecture
+
+The framework synthesizes four core methodologies into a single state machine:
+
+```
+┌──────────────────────────────────────────────────────────────────────────────────────────────┐
+│                   APDS v2.0: TRI-SYSTEMIC ISOMORPHIC FUSION ARCHITECTURE                     │
+└──────────────────────────────────────────────────────────────────────────────────────────────┘
+  PASO 1: Concept       PASO 2: Mockup          PASO 3: Strategy        PASO 4: Governance &    PASO 5: Publication &
+  & Onboarding           & Logical Framework     & Oracles               FNVC Payouts (TPA)      Active Monitoring
+┌──────────────┐       ┌─────────────────┐      ┌────────────────┐      ┌────────────────────┐  ┌──────────────────┐
+│ • PDF Upload │ ────> │ • EU Logframe   │ ───> │ • RACER        │ ───> │ • FNVC USD Link    │ ─>│ • Marketplace    │
+│ • Scope      │       │   (Annex C)     │      │   Indicators   │      │ • Tolerances       │  │ • SGC Oracles    │
+│   Discard IA │       │ • ISO Layout    │      │ • SGC Oracles  │      │ • TPA Annex VII-B  │  │ • Milestone      │
+│ • Field      │       │ • PRINCE2 PID / │      │   (Daily BDO/  │      │ • CAR 5-Whys       │  │   Disbursement   │
+│   Diagnosis  │       │   Scrum RACI    │      │   Cold Chain)  │      │   Zero-Defects     │  │   Automated      │
+└──────────────┘       └─────────────────┘      └────────────────┘      └────────────────────┘  └──────────────────┘
+ (AUTOMATIZATION)       (DIGITALIZATION)          (TOKENIZATION)          (SECURITIZATION)         (GAMIFICATION)
+```
+
+1. **Tech Governance (PRINCE2 + Agile Scrum)**:
+   - Business Case & Project Initiation Document (PID).
+   - RACI Matrix & Definition of Done (DoD).
+   - Variance Tolerances: **+10% Budget** / **+15% Schedule**.
+2. **Physical Quality Management (ISO 9001:2008 + TEG Field Standards)**:
+   - Layouts, Planograms, and Process Maps (Clause 4.1).
+   - Digital Field Instruments (Clause 8.4): Daily Operational Quality Log (BDO), Cold Chain & Storage Controls, IoT Sensor Streams.
+   - Root-Cause Analysis: **5 Whys & Corrective Action Requests (CAR)** targeting a **Zero-Defects Policy** (Clause 8.5).
+3. **Verification Logic & EU Grant Mechanics (FNVC / Non-Cost-Linked Financing)**:
+   - EU Logical Framework (Annex C): Impact → Outcomes → Outputs → Activities.
+   - Neutral RACER Indicators (Relevant, Accepted, Credible, Easy to monitor, Robust).
+   - FNVC Milestone Payouts (Annex K): Yield tranches disbursed upon objective milestone verification signed by an Independent Quality Auditor (TPA Annex VII-B) without requiring financial expense invoices.
+4. **Maturity Lifecycle (DEv-matrix 5x4 Roadmap)**:
+   - 5 Stages: *Automatization → Digitalization → Tokenization → Securitization → Gamification* across LOGIC, DESIGN, DEFI, and 4D PATH.
+
+---
+
+## 3. Mandatory Protocols & Interaction Rules
+
+Every AI agent operating within this codebase MUST adhere strictly to the following rules:
+
+### A. Versioning & Git Protocol (`AGENTS.md`)
+- **Strict Branching**: NEVER commit directly to `main` or production branches. Always work on versioned feature or test branches (e.g., `v1.0.7`, `v1.0.7-test`).
+- **Semantic Versioning**: Use formal SemVer tags (`v0.1`, `v0.2`, ..., `v1.0.7`).
+- **User Consent**: Ask for explicit permission before executing `git push` or `git pull`.
+- **Commit Formatting**: Follow Conventional Commits (`feat:`, `fix:`, `style:`, `refactor:`).
+
+### B. Database Safety Protocol
+- **Production Supabase DB**: Connected to cloud project `ladhrrjidksmynazoybx.supabase.co`.
+- **Safe Additive SQL Migrations**: NEVER run `prisma db push --accept-data-loss`. Existing tables (`auth.users`, `User`, `Tenant`, `Document`, `Signature`, `Transaction`, `profiles`) must remain intact.
+- **Migration File**: Execute safe additive DDL scripts like `prisma/apds_v2_migration.sql` with `CREATE TABLE IF NOT EXISTS` and `ALTER TABLE ADD COLUMN IF NOT EXISTS`.
+
+### C. ACCET Design System & Aesthetics (Brand Manual v1.0)
+- **Typography DNA**:
+  - **Display / Headlines**: `Syne` (700–900 weight, `font-syne`).
+  - **System / Badges / Buttons**: `JetBrains Mono` (uppercase, tracking-widest, `font-mono`).
+  - **Body / Content**: `DM Sans` (300–500 weight, `font-sans`).
+- **Official Color Tokens**:
+  - `Sky Blue`: `#5EC8F2` (Primary accent - 45%)
+  - `Ice Blue`: `#5ED7F2` (Highlight - 3%)
+  - `Teal`: `#377D8C` (Accent - 5%)
+  - `Deep Base`: `#020624` / `#0D0D0D` (Backgrounds - 35%)
+  - `Light Text`: `#F2F2F2` (Text - 12%)
+  - `Pass Status`: `#1A7A4A` / `#10B981`
+  - `Fail Status`: `#8B1A1A` / `#FF7575`
+- **Glassmorphism Spec**:
+  - `.glass-platinum`: `rgba(255, 255, 255, 0.07)` background fill, `backdrop-filter: blur(24px) saturate(140%)`, `border: 1px solid rgba(255, 255, 255, 0.18)`, `inset 0 1px 1px rgba(255, 255, 255, 0.15)`.
+  - `.dark-section-card`: `rgba(8, 12, 30, 0.35)` background fill, `backdrop-filter: blur(24px) saturate(150%)`, `border: 1px solid rgba(255, 255, 255, 0.12)`.
+  - `.signature-line`: Top gradient decorator line (`linear-gradient(90deg, #5EC8F2, #5ED7F2, #377D8C)`).
+  - `CinematicBackground`: Video engine (`Marketplace-background.mp4`) with `vignette` and `grain` overlays for high-contrast frosted glass refracion.
+
+---
+
+## 4. Key Work Accomplished & Milestones (`v1.0.7`)
+
+1. **Authentication Engine Fix**:
+   - Resolved infinite loading spinner by migrating `lib/supabase.ts` to `@supabase/ssr` (`createBrowserClient`).
+   - Synced cookie sessions with Next.js 16 `middleware.ts` and enabled hard window navigation (`window.location.href = '/onboarding'`).
+   - Fixed `app/auth/callback/route.ts` for Next.js 16 (`await cookies()`).
+2. **Database Schema Initialization**:
+   - Applied safe additive migration (`apds_v2_migration.sql`) to Supabase Cloud DB.
+   - Created tables: `projects`, `logical_frameworks`, `indicators`, `checklists`, `checklist_entries`, `oracle_readings`, `evaluator_reports`, `fnvc_tranches`, `market_listings`, `audit_logs`.
+   - Enabled Row Level Security (RLS) policies.
+3. **Full ACCET Brand Manual v1.0 Overhaul**:
+   - **Login**: Replicated `accet-app/apps/marketplace` login flow with `CinematicBackground`, `LoginIntro`, `NeuralButton`, and `glass-platinum` card.
+   - **Onboarding**: Redesigned 4-step wizard and updated **"Analysis Queued!"** modal with `#5EC8F2` Sky Blue atmosphere ring, `Syne` headlines, `JetBrains Mono` badges, and `NeuralButton`.
+   - **Project Management Board (`project/[id]/page.tsx`)**: Removed hardcoded `DEMO_PROJECT` fallbacks, connected to live Supabase DB and REST APIs, added 404 state.
+   - **PM Components**: Overhauled `RACERTable`, `GovernanceKanban`, `ChecklistBuilder`, and `Marketplace Fiche` to 100% ACCET Brand System specifications.
+4. **Branching & Release**:
+   - Tagged and released `v1.0.7`.
+   - Created and pushed mirror branch `v1.0.7-test` to GitHub.
+
+---
+
+## 5. Architectural Directory Layout
+
+```
+Agentic_Framework/
+├── .agents/                        # Customization Root (Skills & Rules)
+│   ├── AGENTS.md                   # Global ACCET Project Rules & Branching Protocols
+│   └── skills/
+│       └── branding/SKILL.md       # ACCET 2026 UI/UX Design System Skill
+├── apdsv2-initial-artifacts/
+│   └── scaffold/
+│       ├── frontend/               # Next.js 16 App Router Client
+│       │   ├── app/
+│       │   │   ├── auth/callback/  # SSR Auth Callback Handler
+│       │   │   ├── components/     # UI, Auth, and Dashboard Components
+│       │   │   ├── evaluator/      # TPA Independent Auditor Portal
+│       │   │   ├── login/          # Cinematic Glassmorphic Login
+│       │   │   ├── marketplace/    # Public Fiche & Scenario Simulator
+│       │   │   ├── onboarding/     # 4-Step AI Wizard & Analysis Modal
+│       │   │   ├── project/[id]/   # Live PM Board & Maturity Studio
+│       │   │   ├── globals.css     # Brand Design System Tokens & Glass Utilities
+│       │   │   ├── layout.tsx      # Root Layout & Typography Loader
+│       │   │   └── middleware.ts   # SSR Auth Route Protection
+│       │   ├── lib/
+│       │   │   └── supabase.ts     # @supabase/ssr Browser Client Provider
+│       │   └── tailwind.config.js  # ACCET Theme Colors & Font Families
+│       └── backend/                # Express + TypeScript + Prisma API
+│           ├── prisma/
+│           │   ├── apds_v2_migration.sql # Safe Additive DDL Migration Script
+│           │   └── schema.prisma         # Prisma Schema Definition
+│           └── src/
+│               ├── index.ts        # Express REST Endpoints & Memory Fallback Store
+│               ├── worker.ts       # BullMQ Agent Task Worker Stub
+│               └── modules/
+│                   └── evaluator/  # TPA Milestone Approval Routes
+├── context.md                      # Historical Project Context Baseline
+└── history.md                      # Active Session History & Guidelines Log
+```
+
+---
+
+## 6. Quick Reference for Incoming AI Agents
+
+- **Primary Credentials**: `accet.project@gmail.com` / `Accet2026!`
+- **Cloud Supabase URL**: `https://ladhrrjidksmynazoybx.supabase.co`
+- **Local Dev Servers**:
+  - Frontend: `http://localhost:3003` (or `3000`)
+  - Backend API: `http://localhost:4001`
+- **When creating new UI components**: Always inspect `.agents/skills/branding/SKILL.md` and use `font-syne`, `font-mono`, `font-sans`, `#5EC8F2` Sky Blue accents, and `.glass-platinum` frosted glass translucency.
+- **When editing DB schemas**: Never run destructive migrations. Add new tables using `apds_v2_migration.sql` with `IF NOT EXISTS`.
