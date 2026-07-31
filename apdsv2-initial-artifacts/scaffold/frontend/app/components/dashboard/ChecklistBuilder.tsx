@@ -31,24 +31,24 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-white/10 pb-2">
+      <div className="flex flex-wrap gap-2 border-b border-white/10 pb-3">
         <button 
           onClick={() => setActiveTab('bdo')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all ${activeTab === 'bdo' ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30' : 'text-white/60 hover:text-white'}`}
+          className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'bdo' ? 'bg-[#5EC8F2]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 shadow-[0_0_15px_rgba(94,200,242,0.2)]' : 'text-slate-400 hover:text-white bg-black/40 border border-white/10'}`}
         >
           <FileCheck className="w-4 h-4" /> Checklist BDO Diario
         </button>
         <button 
           onClick={() => setActiveTab('cold_chain')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all ${activeTab === 'cold_chain' ? 'bg-blue-500/20 text-blue-300 border border-blue-500/30' : 'text-white/60 hover:text-white'}`}
+          className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'cold_chain' ? 'bg-[#377D8C]/20 text-[#5ED7F2] border border-[#377D8C]/40 shadow-[0_0_15px_rgba(55,125,140,0.2)]' : 'text-slate-400 hover:text-white bg-black/40 border border-white/10'}`}
         >
           <Thermometer className="w-4 h-4" /> Cadena de Frío & Inocuidad
         </button>
         <button 
           onClick={() => setActiveTab('iot')}
-          className={`px-3 py-1.5 rounded-lg text-xs font-medium flex items-center gap-1.5 transition-all ${activeTab === 'iot' ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30' : 'text-white/60 hover:text-white'}`}
+          className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${activeTab === 'iot' ? 'bg-[#5EC8F2]/20 text-[#5EC8F2] border border-[#5EC8F2]/40' : 'text-slate-400 hover:text-white bg-black/40 border border-white/10'}`}
         >
           <Activity className="w-4 h-4" /> Telemetría IoT (Oráculo)
         </button>
@@ -57,37 +57,37 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
       {/* Tab 1: BDO Checklist */}
       {activeTab === 'bdo' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center bg-white/5 p-3 rounded-lg border border-white/10">
+          <div className="flex justify-between items-center bg-black/60 p-4 rounded-2xl border border-white/10">
             <div>
-              <h4 className="text-xs font-semibold text-white">Registro Diario de Operaciones (BDO)</h4>
-              <p className="text-[11px] text-white/50">Cumplimiento de estándares ISO 9001:2008 en campo</p>
+              <h4 className="text-base font-syne font-bold text-white">Registro Diario de Operaciones (BDO)</h4>
+              <p className="text-xs font-mono text-slate-400">Cumplimiento de estándares ISO 9001:2008 en campo</p>
             </div>
             <button 
               onClick={submitNewBDO}
-              className="px-3 py-1 bg-emerald-500 hover:bg-emerald-600 text-black font-semibold text-xs rounded transition-all flex items-center gap-1"
+              className="px-4 py-2 bg-[#5EC8F2] hover:bg-[#5ED7F2] text-[#020624] font-mono font-bold text-xs uppercase tracking-wider rounded-xl transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(94,200,242,0.3)]"
             >
               <Upload className="w-3.5 h-3.5" /> Registrar Hoy
             </button>
           </div>
 
           {submitted && (
-            <div className="p-2.5 bg-emerald-500/20 border border-emerald-500/30 rounded text-xs text-emerald-300">
+            <div className="p-3 bg-[#5EC8F2]/15 border border-[#5EC8F2]/30 rounded-xl text-xs font-mono text-[#5EC8F2]">
               ✓ Registro enviado a la cola del Tercero Evaluador (TPA - Anexo VII-B)
             </div>
           )}
 
           <div className="space-y-2">
             {bdoEntries.map((entry, idx) => (
-              <div key={idx} className="flex justify-between items-center p-3 bg-black/40 border border-white/5 rounded-lg text-xs">
-                <div className="space-y-0.5">
-                  <span className="font-mono text-white/90">{entry.date}</span>
-                  <div className="text-[10px] text-white/40">{entry.operator}</div>
+              <div key={idx} className="flex justify-between items-center p-4 bg-black/50 border border-white/10 rounded-xl text-xs">
+                <div className="space-y-1">
+                  <span className="font-mono font-bold text-[#5EC8F2]">{entry.date}</span>
+                  <div className="text-[11px] font-sans text-slate-400">{entry.operator}</div>
                 </div>
                 <div className="flex items-center gap-3">
-                  <span className="text-emerald-400 font-medium flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5" /> 100% Estándar
+                  <span className="text-[#5EC8F2] font-mono text-xs font-bold flex items-center gap-1">
+                    <ShieldCheck className="w-4 h-4" /> 100% Estándar
                   </span>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] ${entry.status === 'APPROVED_TPA' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                  <span className={`px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider ${entry.status === 'APPROVED_TPA' ? 'bg-[#1A7A4A]/20 text-[#1A7A4A] border border-[#1A7A4A]/30' : 'bg-amber-500/20 text-amber-300 border border-amber-500/30'}`}>
                     {entry.status === 'APPROVED_TPA' ? 'Aprobado TPA' : 'Pendiente TPA'}
                   </span>
                 </div>
@@ -99,19 +99,19 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
 
       {/* Tab 2: Cold Chain */}
       {activeTab === 'cold_chain' && (
-        <div className="p-4 bg-black/40 border border-white/10 rounded-xl space-y-3 text-xs">
+        <div className="p-5 bg-black/50 border border-white/10 rounded-2xl space-y-4 text-xs">
           <div className="flex justify-between items-center">
-            <span className="text-white/50">Sensor Asignado:</span>
-            <span className="font-mono text-blue-400">{coldChain.sensorId}</span>
+            <span className="text-slate-400 font-mono">Sensor Asignado:</span>
+            <span className="font-mono font-bold text-[#5EC8F2]">{coldChain.sensorId}</span>
           </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 bg-white/5 rounded-lg">
-              <span className="text-[10px] text-white/40 uppercase">Rango Seguro</span>
-              <div className="text-sm font-semibold text-white mt-0.5">{coldChain.tempMin} - {coldChain.tempMax}</div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 bg-black/60 border border-white/5 rounded-xl">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold">Rango Seguro</span>
+              <div className="text-base font-mono font-bold text-white mt-1">{coldChain.tempMin} - {coldChain.tempMax}</div>
             </div>
-            <div className="p-3 bg-white/5 rounded-lg">
-              <span className="text-[10px] text-white/40 uppercase">Lectura En Tiempo Real</span>
-              <div className="text-sm font-semibold text-emerald-400 mt-0.5">{coldChain.lastReading}</div>
+            <div className="p-4 bg-black/60 border border-white/5 rounded-xl">
+              <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider font-bold">Lectura En Tiempo Real</span>
+              <div className="text-base font-mono font-bold text-[#5EC8F2] mt-1">{coldChain.lastReading}</div>
             </div>
           </div>
         </div>
@@ -119,13 +119,13 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
 
       {/* Tab 3: IoT Oracle */}
       {activeTab === 'iot' && (
-        <div className="p-4 bg-black/40 border border-white/10 rounded-xl space-y-2 text-xs">
-          <div className="flex justify-between items-center text-white/80">
-            <span>Oráculo de Producción Biogás / KWh</span>
-            <span className="text-emerald-400 font-mono">Conectado (MQTT / TLS)</span>
+        <div className="p-5 bg-black/50 border border-white/10 rounded-2xl space-y-3 text-xs">
+          <div className="flex justify-between items-center text-white">
+            <span className="font-syne font-bold text-sm">Oráculo de Telemetría Biogás / KWh</span>
+            <span className="text-[#5EC8F2] font-mono font-bold">Conectado (MQTT / TLS)</span>
           </div>
-          <p className="text-[11px] text-white/50">
-            Los datos son ingeridos continuamente en el bus de oráculos y validados antes de activar los tramos FNVC.
+          <p className="text-xs font-sans text-slate-400 leading-relaxed">
+            Los datos son ingeridos continuamente en el bus de oráculos y validados de forma inmutable antes de activar los tramos FNVC.
           </p>
         </div>
       )}
