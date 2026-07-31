@@ -7,7 +7,7 @@ import CinematicBackground from '@/app/components/auth/CinematicBackground'
 import LoginIntro from '@/app/components/auth/LoginIntro'
 import NeuralButton from '@/app/components/ui/NeuralButton'
 import { motion, AnimatePresence } from 'framer-motion'
-import { supabase } from '@/lib/supabase'
+import { createClient } from '@/lib/supabase'
 
 export default function LoginPage() {
   const [email, setEmail] = useState('')
@@ -22,17 +22,27 @@ export default function LoginPage() {
     setLoading(true)
     setError(null)
 
-    const { error: loginError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
+    try {
+      const supabase = createClient()
+      const { data, error: loginError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      })
 
-    if (loginError) {
-      setError(loginError.message === 'Invalid login credentials' ? 'Credenciales inválidas.' : loginError.message)
+      if (loginError) {
+        setError(loginError.message === 'Invalid login credentials' ? 'Credenciales inválidas.' : loginError.message)
+        setLoading(false)
+        return
+      }
+
+      if (data.session) {
+        // Give the SSR cookie a tick to propagate, then hard navigate
+        await new Promise(resolve => setTimeout(resolve, 300))
+        window.location.href = '/onboarding'
+      }
+    } catch (err: any) {
+      setError(err.message || 'Error de conexión. Intenta de nuevo.')
       setLoading(false)
-    } else {
-      router.push('/onboarding')
-      router.refresh()
     }
   }
 
