@@ -24,7 +24,6 @@ export default function ProjectBoard({ params }: { params: any }) {
     setLoading(true);
     setError(null);
 
-    // 1. Check local storage fail-safe store
     let localData: any = null;
     if (typeof window !== 'undefined') {
       const stored = localStorage.getItem(`accet_project_${targetId}`);
@@ -49,7 +48,6 @@ export default function ProjectBoard({ params }: { params: any }) {
         const data = await res.json();
         setProject(data);
       } else {
-        // Direct query to Supabase database
         const { data: dbProj } = await supabase
           .from('projects')
           .select('*, logical_frameworks(*), indicators(*)')
@@ -62,20 +60,19 @@ export default function ProjectBoard({ params }: { params: any }) {
             title: dbProj.title,
             description: dbProj.description,
             status: dbProj.status || 'ACTIVE',
-            devLevel: dbProj.dev_level || 2,
+            devLevel: dbProj.dev_level || 3,
             logicalFramework: dbProj.logical_frameworks?.[0] || null,
             indicators: dbProj.indicators || []
           });
         } else if (localData) {
           setProject(localData);
         } else {
-          // Dynamic fallback for newly created projects
           setProject({
             id: targetId,
             title: localData?.title || (targetId.startsWith('proj-') ? 'New Custom RWA Project' : 'Clean Biogas & Agroindustrial Facility'),
-            description: localData?.description || 'Active RWA project created via ACCET Onboarding wizard.',
+            description: localData?.description || 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
             status: 'ACTIVE',
-            devLevel: 2,
+            devLevel: 3,
             logicalFramework: {
               impact: 'Clean energy conversion & operational zero-defect targets.',
               outcomes: ['Continuous energy output', 'Certified food safety compliance'],
@@ -92,9 +89,9 @@ export default function ProjectBoard({ params }: { params: any }) {
         setProject({
           id: targetId,
           title: targetId.startsWith('proj-') ? 'New Custom RWA Project' : 'Clean Biogas & Agroindustrial Facility',
-          description: 'Active RWA project created via ACCET Onboarding wizard.',
+          description: 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
           status: 'ACTIVE',
-          devLevel: 2,
+          devLevel: 3,
           indicators: []
         });
       }
@@ -122,8 +119,6 @@ export default function ProjectBoard({ params }: { params: any }) {
     );
   }
 
-  const logframe = project?.logicalFramework;
-
   return (
     <div className="min-h-screen bg-[#020624] text-white flex">
       {/* Collapsible Left Navigation Sidebar */}
@@ -137,12 +132,12 @@ export default function ProjectBoard({ params }: { params: any }) {
 
       {/* Main Workspace Area */}
       <main className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl">
-        {/* Header */}
-        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8 pb-6 border-b border-white/10">
+        {/* Header Card in Onboarding Aesthetic */}
+        <header className="p-6 md:p-8 bg-[#020624]/60 border border-white/10 rounded-3xl backdrop-blur-2xl mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
             <div className="flex items-center gap-2 mb-3">
               <span className="px-3 py-1 bg-[#5EC8F2]/15 text-[#5EC8F2] border border-[#5EC8F2]/30 rounded-full text-xs font-mono font-bold">
-                READINESS STAGE {project?.devLevel || 2} / 5
+                READINESS STAGE {project?.devLevel || 3} / 5
               </span>
               <span className="px-3 py-1 bg-white/10 text-white/80 rounded-full text-xs font-mono font-bold uppercase">
                 {project?.status || 'ACTIVE'}
@@ -151,58 +146,66 @@ export default function ProjectBoard({ params }: { params: any }) {
             <h1 className="text-3xl md:text-4xl font-syne font-bold text-white tracking-tight">
               {project?.title}
             </h1>
-            <p className="text-slate-300 text-sm mt-2 max-w-2xl font-sans">{project?.description}</p>
+            <p className="text-slate-300 text-sm mt-2 max-w-2xl font-sans leading-relaxed">{project?.description}</p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 flex-shrink-0">
             <button
               onClick={fetchProject}
-              className="p-3 bg-black/40 hover:bg-white/10 rounded-xl text-slate-300 hover:text-white border border-white/15 transition-colors"
+              className="p-3 bg-white/[0.03] hover:bg-white/10 rounded-xl text-slate-300 hover:text-white border border-white/15 transition-colors"
             >
               <RefreshCw className="w-4 h-4" />
             </button>
             <a
               href={`/marketplace/${project?.id || 'demo-project-001'}`}
-              className="px-5 py-3 bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] font-mono text-xs font-bold uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(94,200,242,0.3)] hover:opacity-90 transition-all flex items-center gap-2 font-bold"
+              className="px-5 py-3 bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] font-mono text-xs font-bold uppercase tracking-wider rounded-xl shadow-[0_0_20px_rgba(94,200,242,0.3)] hover:shadow-[0_0_30px_rgba(94,200,242,0.5)] transition-all flex items-center gap-2 font-bold"
             >
               Marketplace Preview <ExternalLink className="w-4 h-4 text-[#020624]" />
             </a>
           </div>
         </header>
 
-        {/* VIEW 1: KANBAN BOARD VIEW (Default Trello / ClickUp PM Suite) */}
+        {/* VIEW 1: KANBAN BOARD VIEW */}
         {activeView === 'board' && (
           <div className="space-y-6">
-            {/* Top Sub-tabs */}
-            <div className="flex flex-wrap gap-2 bg-black/50 p-2 rounded-2xl border border-white/15 max-w-fit">
+            {/* Top Sub-tabs Bar in Minimalist Pill Container */}
+            <div className="flex flex-wrap items-center gap-2 bg-white/[0.03] p-1.5 rounded-2xl border border-white/10 backdrop-blur-xl max-w-fit font-mono text-xs">
               <button
                 onClick={() => setActiveTab('logframe')}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                  activeTab === 'logframe' ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-lg font-bold' : 'text-slate-400 hover:text-white'
+                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                  activeTab === 'logframe'
+                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.3)]'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 126 Interactive Kanban Stories
               </button>
               <button
                 onClick={() => setActiveTab('racer')}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                  activeTab === 'racer' ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-lg font-bold' : 'text-slate-400 hover:text-white'
+                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                  activeTab === 'racer'
+                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.3)]'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Performance Metrics & Milestones
               </button>
               <button
                 onClick={() => setActiveTab('governance')}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                  activeTab === 'governance' ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-lg font-bold' : 'text-slate-400 hover:text-white'
+                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                  activeTab === 'governance'
+                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.3)]'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 PRINCE2 Tolerances & 5-Whys
               </button>
               <button
                 onClick={() => setActiveTab('checklists')}
-                className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider transition-all ${
-                  activeTab === 'checklists' ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-lg font-bold' : 'text-slate-400 hover:text-white'
+                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                  activeTab === 'checklists'
+                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.3)]'
+                    : 'text-slate-400 hover:text-white'
                 }`}
               >
                 Quality & Telemetry Logs
@@ -218,7 +221,7 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 2: TASK LIST VIEW */}
         {activeView === 'list' && (
-          <div className="p-6 bg-[#020624]/60 border border-white/10 rounded-2xl backdrop-blur-xl space-y-4">
+          <div className="p-6 md:p-8 bg-[#020624]/60 border border-white/10 rounded-3xl backdrop-blur-2xl space-y-4">
             <h2 className="text-xl font-syne font-bold text-white">Project Task List View (126 Items)</h2>
             <p className="text-xs font-mono text-slate-400">Structured tabular list of project deliverables and milestone checks.</p>
             <KanbanBoard projectTitle={project?.title} />
@@ -227,11 +230,11 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 3: TIMELINE & ROADMAP */}
         {activeView === 'timeline' && (
-          <div className="p-6 bg-[#020624]/60 border border-white/10 rounded-2xl backdrop-blur-xl space-y-6">
+          <div className="p-6 md:p-8 bg-[#020624]/60 border border-white/10 rounded-3xl backdrop-blur-2xl space-y-6">
             <h2 className="text-xl font-syne font-bold text-white">Maturity Roadmap & Timeline (DEv-matrix 5x4)</h2>
             <div className="space-y-4">
               {['Stage 1: Concept & Identity', 'Stage 2: Results & Quality Layout', 'Stage 3: Telemetry & RACER Metrics', 'Stage 4: Auditor Verification & Escrow', 'Stage 5: Marketplace & Yield Release'].map((stg, i) => (
-                <div key={i} className="p-4 bg-black/40 border border-white/10 rounded-xl flex justify-between items-center text-xs font-mono">
+                <div key={i} className="p-4 bg-black/40 border border-white/10 rounded-2xl flex justify-between items-center text-xs font-mono">
                   <span className="font-bold text-white">{stg}</span>
                   <span className={i < 2 ? 'text-[#5EC8F2] font-bold' : i === 2 ? 'text-[#5ED7F2] font-bold' : 'text-slate-500'}>
                     {i < 2 ? '✓ Completed' : i === 2 ? '⚡ Active Sprint' : 'Upcoming'}
@@ -244,7 +247,7 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 4: AUDITOR QUEUE */}
         {activeView === 'audit' && (
-          <div className="p-6 bg-[#020624]/60 border border-white/10 rounded-2xl backdrop-blur-xl space-y-4">
+          <div className="p-6 md:p-8 bg-[#020624]/60 border border-white/10 rounded-3xl backdrop-blur-2xl space-y-4">
             <h2 className="text-xl font-syne font-bold text-white">Auditor Verification Queue</h2>
             <p className="text-xs font-mono text-slate-400">Auditor review queue for programmatic smart contract milestone releases.</p>
             <a href="/evaluator" className="inline-block px-5 py-2.5 bg-[#5EC8F2] text-[#020624] font-mono text-xs font-bold rounded-xl uppercase">
@@ -255,7 +258,7 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 5: MARKETPLACE PREVIEW */}
         {activeView === 'marketplace' && (
-          <div className="p-6 bg-[#020624]/60 border border-white/10 rounded-2xl backdrop-blur-xl space-y-4">
+          <div className="p-6 md:p-8 bg-[#020624]/60 border border-white/10 rounded-3xl backdrop-blur-2xl space-y-4">
             <h2 className="text-xl font-syne font-bold text-white">Public Marketplace Preview</h2>
             <p className="text-xs font-mono text-slate-400">Investor-facing summary fiche and 3-scenario yield simulator.</p>
             <a href={`/marketplace/${project?.id}`} className="inline-block px-5 py-2.5 bg-[#5EC8F2] text-[#020624] font-mono text-xs font-bold rounded-xl uppercase">
