@@ -14,22 +14,21 @@ export default function CinematicBackground() {
   }, [])
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#0D0D0D]">
+    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#1A1A2E]">
       <video
         ref={videoRef}
         autoPlay
         loop
         muted
         playsInline
-        className="w-full h-full object-cover opacity-35 blur-[3px] scale-105"
+        className="w-full h-full object-cover opacity-25 blur-sm scale-105 saturate-50"
       >
         <source src="/Marketplace-background.mp4" type="video/mp4" />
       </video>
       
-      {/* Cinematic Vignette & Netflix Dark Blur Overlays */}
-      <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-r from-[#0D0D0D] via-[#0D0D0D]/90 to-transparent backdrop-blur-[2px]" />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0D0D0D] via-transparent to-[#0D0D0D] opacity-80" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#0D0D0D_100%)]" />
+      {/* Cinematic Vignette & Netflix Dark Blur Overlays (Strict #1A1A2E) */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(26,26,46,1)] via-[rgba(26,26,46,0.8)] to-[rgba(26,26,46,0.6)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#1A1A2E_100%)] opacity-90" />
     </div>
   )
 }

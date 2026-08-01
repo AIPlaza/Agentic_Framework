@@ -41,7 +41,7 @@ export default function ProjectBoard({ params }: { params: any }) {
       const token = session?.access_token;
 
       const res = await fetch(`http://localhost:4001/api/projects/${targetId}`, {
-        headers: { Authorization: `Bearer ${token}` }
+        headers: { ...(token && { Authorization: `Bearer ${token}` }) }
       });
 
       if (res.ok) {
@@ -108,11 +108,11 @@ export default function ProjectBoard({ params }: { params: any }) {
 
   if (loading) {
     return (
-      <div className="min-h-[80vh] flex items-center justify-center bg-[#020624] relative">
+      <div className="min-h-screen flex items-center justify-center bg-[#1A1A2E] relative">
         <CinematicBackground />
         <div className="flex flex-col items-center gap-3 z-20">
-          <RefreshCw className="w-8 h-8 text-[#5EC8F2] animate-spin" />
-          <span className="font-mono text-xs text-[#5EC8F2] uppercase tracking-[0.3em]">
+          <RefreshCw className="w-6 h-6 text-[#5EC8F2] animate-spin" />
+          <span className="font-mono text-[11px] text-[#5EC8F2] uppercase tracking-widest font-medium">
             Loading Project Studio...
           </span>
         </div>
@@ -121,8 +121,7 @@ export default function ProjectBoard({ params }: { params: any }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#020624] text-white flex relative overflow-hidden">
-      {/* Cinematic Ambient Background Overlay matching Onboarding */}
+    <div className="min-h-screen bg-[#1A1A2E] text-white flex relative overflow-hidden font-sans">
       <CinematicBackground />
       <div className="fixed inset-0 vignette pointer-events-none z-10" />
       <div className="fixed inset-0 grain pointer-events-none z-0" />
@@ -137,86 +136,86 @@ export default function ProjectBoard({ params }: { params: any }) {
       />
 
       {/* Main Workspace Area */}
-      <main className="flex-1 p-6 md:p-10 overflow-y-auto max-w-7xl z-20 relative">
-        {/* Header Card matching Onboarding glass-platinum */}
-        <header className="p-8 sm:p-10 bg-[#020624]/80 border border-white/20 rounded-3xl backdrop-blur-2xl mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-2xl">
+      <main className="flex-1 p-6 md:p-12 overflow-y-auto max-w-7xl mx-auto z-20 relative">
+        {/* Header Section (Minimalist style) */}
+        <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="px-3 py-1 bg-[#5EC8F2]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 rounded-full text-xs font-mono font-bold">
-                READINESS STAGE {project?.devLevel || 3} / 5
+            <div className="flex items-center gap-3 mb-4">
+              <span className="px-3 py-1 bg-white/5 text-slate-300 border border-white/10 rounded-md text-[10px] font-mono uppercase tracking-wider">
+                Stage {project?.devLevel || 3} / 5
               </span>
-              <span className="px-3 py-1 bg-white/10 text-white/90 border border-white/20 rounded-full text-xs font-mono font-bold uppercase">
+              <span className="px-3 py-1 bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono uppercase tracking-wider">
                 {project?.status || 'ACTIVE'}
               </span>
             </div>
-            <h1 className="text-3xl md:text-4xl font-syne font-bold text-white tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-syne font-bold text-white tracking-tight">
               {project?.title}
             </h1>
-            <p className="text-slate-300 text-sm sm:text-base mt-2 max-w-2xl font-sans leading-relaxed">
+            <p className="text-slate-300 text-[15px] mt-4 max-w-2xl font-sans leading-relaxed">
               {project?.description}
             </p>
           </div>
 
-          <div className="flex items-center gap-3 flex-shrink-0">
+          <div className="flex items-center gap-4 flex-shrink-0 pb-1">
             <button
               onClick={fetchProject}
-              className="p-3.5 bg-black/40 hover:bg-white/10 rounded-2xl text-slate-300 hover:text-white border border-white/20 transition-colors"
+              className="p-3 bg-white/5 hover:bg-white/10 rounded-xl text-slate-400 hover:text-white border border-white/5 transition-colors"
             >
-              <RefreshCw className="w-5 h-5" />
+              <RefreshCw className="w-4 h-4" />
             </button>
             <a
               href={`/marketplace/${project?.id || 'demo-project-001'}`}
-              className="px-6 py-3.5 bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] font-mono text-xs font-bold uppercase tracking-wider rounded-2xl shadow-[0_0_25px_rgba(94,200,242,0.35)] hover:shadow-[0_0_35px_rgba(94,200,242,0.5)] transition-all flex items-center gap-2 font-bold"
+              className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/10 font-mono text-[11px] uppercase tracking-wider rounded-xl transition-all flex items-center gap-2"
             >
-              Marketplace Preview <ExternalLink className="w-4 h-4 text-[#020624]" />
+              Marketplace Preview <ExternalLink className="w-4 h-4 text-[#5EC8F2]" />
             </a>
           </div>
         </header>
 
         {/* VIEW 1: KANBAN BOARD VIEW */}
         {activeView === 'board' && (
-          <div className="space-y-6">
-            {/* Top Sub-tabs Bar in Onboarding Glass Capsule */}
-            <div className="flex flex-wrap items-center gap-2 bg-[#020624]/80 p-2 rounded-2xl border border-white/20 backdrop-blur-2xl max-w-fit font-mono text-xs shadow-2xl">
+          <div className="space-y-8">
+            {/* Top Sub-tabs Bar (12px radius, Mono font) */}
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
               <button
                 onClick={() => setActiveTab('logframe')}
-                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                className={`px-5 py-2.5 rounded-xl transition-all ${
                   activeTab === 'logframe'
-                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.35)]'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
+                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                126 Interactive Kanban Stories
+                126 Kanban Stories
               </button>
               <button
                 onClick={() => setActiveTab('racer')}
-                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                className={`px-5 py-2.5 rounded-xl transition-all ${
                   activeTab === 'racer'
-                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.35)]'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
+                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                Performance Metrics & Milestones
+                Performance Metrics
               </button>
               <button
                 onClick={() => setActiveTab('governance')}
-                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                className={`px-5 py-2.5 rounded-xl transition-all ${
                   activeTab === 'governance'
-                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.35)]'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
+                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                PRINCE2 Tolerances & 5-Whys
+                PRINCE2 Tolerances
               </button>
               <button
                 onClick={() => setActiveTab('checklists')}
-                className={`px-5 py-2.5 rounded-xl font-bold uppercase tracking-wider transition-all ${
+                className={`px-5 py-2.5 rounded-xl transition-all ${
                   activeTab === 'checklists'
-                    ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.35)]'
-                    : 'text-slate-300 hover:text-white'
+                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
+                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                Quality & Telemetry Logs
+                Quality Logs
               </button>
             </div>
 
@@ -229,23 +228,25 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 2: TASK LIST VIEW */}
         {activeView === 'list' && (
-          <div className="p-8 sm:p-10 bg-[#020624]/80 border border-white/20 rounded-3xl backdrop-blur-2xl space-y-4 shadow-2xl">
-            <h2 className="text-xl font-syne font-bold text-white">Project Task List View (126 Items)</h2>
-            <p className="text-xs font-mono text-slate-300">Structured tabular list of project deliverables and milestone checks.</p>
-            <KanbanBoard projectTitle={project?.title} />
+          <div className="p-10 glass-blue-card space-y-4">
+            <h2 className="text-2xl font-syne font-bold text-white">Project Task List View (126 Items)</h2>
+            <p className="text-[13px] font-sans text-slate-400">Structured tabular list of project deliverables and milestone checks.</p>
+            <div className="pt-4">
+              <KanbanBoard projectTitle={project?.title} />
+            </div>
           </div>
         )}
 
         {/* VIEW 3: TIMELINE & ROADMAP */}
         {activeView === 'timeline' && (
-          <div className="p-8 sm:p-10 bg-[#020624]/80 border border-white/20 rounded-3xl backdrop-blur-2xl space-y-6 shadow-2xl">
-            <h2 className="text-xl font-syne font-bold text-white">Maturity Roadmap & Timeline (DEv-matrix 5x4)</h2>
-            <div className="space-y-4">
+          <div className="p-10 glass-blue-card space-y-6">
+            <h2 className="text-2xl font-syne font-bold text-white">Maturity Roadmap & Timeline (DEv-matrix 5x4)</h2>
+            <div className="space-y-3">
               {['Stage 1: Concept & Identity', 'Stage 2: Results & Quality Layout', 'Stage 3: Telemetry & RACER Metrics', 'Stage 4: Auditor Verification & Escrow', 'Stage 5: Marketplace & Yield Release'].map((stg, i) => (
-                <div key={i} className="p-4 bg-black/40 border border-white/15 rounded-2xl flex justify-between items-center text-xs font-mono">
-                  <span className="font-bold text-white">{stg}</span>
-                  <span className={i < 2 ? 'text-[#5EC8F2] font-bold' : i === 2 ? 'text-[#5ED7F2] font-bold' : 'text-slate-500'}>
-                    {i < 2 ? '✓ Completed' : i === 2 ? '⚡ Active Sprint' : 'Upcoming'}
+                <div key={i} className="p-5 bg-white/5 border border-white/5 rounded-xl flex justify-between items-center text-[13px] font-sans font-medium">
+                  <span className="text-slate-200">{stg}</span>
+                  <span className={i < 2 ? 'text-white' : i === 2 ? 'text-[#5EC8F2]' : 'text-slate-500 font-mono text-[10px] uppercase'}>
+                    {i < 2 ? 'COMPLETED' : i === 2 ? 'ACTIVE SPRINT' : 'UPCOMING'}
                   </span>
                 </div>
               ))}
@@ -255,10 +256,10 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 4: AUDITOR QUEUE */}
         {activeView === 'audit' && (
-          <div className="p-8 sm:p-10 bg-[#020624]/80 border border-white/20 rounded-3xl backdrop-blur-2xl space-y-4 shadow-2xl">
-            <h2 className="text-xl font-syne font-bold text-white">Auditor Verification Queue</h2>
-            <p className="text-xs font-mono text-slate-300">Auditor review queue for programmatic smart contract milestone releases.</p>
-            <a href="/evaluator" className="inline-block px-6 py-3 bg-[#5EC8F2] text-[#020624] font-mono text-xs font-bold rounded-2xl uppercase shadow-lg">
+          <div className="p-10 glass-blue-card space-y-6">
+            <h2 className="text-2xl font-syne font-bold text-white">Auditor Verification Queue</h2>
+            <p className="text-[13px] font-sans text-slate-400">Auditor review queue for programmatic smart contract milestone releases.</p>
+            <a href="/evaluator" className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
               Open Independent Auditor Portal →
             </a>
           </div>
@@ -266,10 +267,10 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 5: MARKETPLACE PREVIEW */}
         {activeView === 'marketplace' && (
-          <div className="p-8 sm:p-10 bg-[#020624]/80 border border-white/20 rounded-3xl backdrop-blur-2xl space-y-4 shadow-2xl">
-            <h2 className="text-xl font-syne font-bold text-white">Public Marketplace Preview</h2>
-            <p className="text-xs font-mono text-slate-300">Investor-facing summary fiche and 3-scenario yield simulator.</p>
-            <a href={`/marketplace/${project?.id}`} className="inline-block px-6 py-3 bg-[#5EC8F2] text-[#020624] font-mono text-xs font-bold rounded-2xl uppercase shadow-lg">
+          <div className="p-10 glass-blue-card space-y-6">
+            <h2 className="text-2xl font-syne font-bold text-white">Public Marketplace Preview</h2>
+            <p className="text-[13px] font-sans text-slate-400">Investor-facing summary fiche and 3-scenario yield simulator.</p>
+            <a href={`/marketplace/${project?.id}`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
               View Public Marketplace Fiche →
             </a>
           </div>

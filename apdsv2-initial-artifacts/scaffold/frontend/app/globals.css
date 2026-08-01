@@ -6,94 +6,58 @@
   --ease-hero: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-drama: cubic-bezier(0.12, 0, 0.39, 0);
   --ease-comic: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --bg-avalanche: #1A1A2E;
+  --accent-sky: #5EC8F2;
+  --accent-ice: #5ED7F2;
+  --bg-light: #F0F9FF;
+  --bg-white: #F2F2F2;
 }
 
 html, body, #__next { height: 100%; }
 
 body {
-  background-color: #050505; /* Deep cinematic dark */
-  color: #F2F2F2;
+  background-color: var(--bg-avalanche); /* Avalanche Dark Blue */
+  color: #FFFFFF;
   font-family: var(--font-dm-sans), 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
-  /* Removed heavy matrix background, relying on CinematicBackground component for subtle gradient */
 }
 
 @layer utilities {
-  /* ── Sleek Minimalist Glassmorphism (2026 Standard) ── */
-  .glass {
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(40px) saturate(120%);
-    -webkit-backdrop-filter: blur(40px) saturate(120%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .glass-platinum {
-    background: rgba(10, 10, 10, 0.6) !important;
-    backdrop-filter: blur(40px) saturate(130%) !important;
-    -webkit-backdrop-filter: blur(40px) saturate(130%) !important;
-    border: 1px solid rgba(255, 255, 255, 0.08) !important;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), inset 0 1px 1px rgba(255, 255, 255, 0.1) !important;
-  }
-
-  .dark-section-card {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(40px) saturate(120%);
-    -webkit-backdrop-filter: blur(40px) saturate(120%);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 24px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
+  /* ── Official ACCET Design System v1.1 ── */
   .glass-blue-card {
-    background: rgba(94, 200, 242, 0.03);
-    backdrop-filter: blur(40px) saturate(120%);
-    -webkit-backdrop-filter: blur(40px) saturate(120%);
-    border: 1px solid rgba(94, 200, 242, 0.15);
-    border-radius: 24px;
-    box-shadow: 
-      inset 0 1px 1px rgba(255, 255, 255, 0.05),
-      0 10px 30px -10px rgba(0, 0, 0, 0.8),
-      0 0 20px -10px rgba(94, 200, 242, 0.1);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: rgba(255, 255, 255, 0.03); /* Transparencia muy tenue */
+    backdrop-filter: blur(20px) saturate(120%);
+    -webkit-backdrop-filter: blur(20px) saturate(120%);
+    border: 1px solid rgba(94, 200, 242, 0.12); /* Borde < 1px en Sky Blue */
+    border-radius: 12px; /* 🚨 Actualizado: Bordes a 12px según reglas globales */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* Sombra extremadamente sutil */
+    transition: all 0.3s ease;
   }
 
-  .glass-card {
-    @apply glass rounded-2xl p-6 transition-all duration-300 hover:bg-white/5;
+  .glass-blue-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(94, 200, 242, 0.25);
   }
 
-  /* ── Typography & Gradients ── */
+  /* ── Typography Roles ── */
   .font-syne {
     font-family: var(--font-syne), 'Syne', sans-serif;
+    letter-spacing: -0.05em; /* tracking-tight */
   }
 
   .font-mono {
     font-family: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+    letter-spacing: 0.1em; /* tracking-widest */
   }
 
   .font-sans {
-    font-family: var(--font-dm-sans), 'Inter', sans-serif;
-  }
-
-  .text-gradient {
-    background: linear-gradient(90deg, #5EC8F2, #377D8C);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .glow-primary {
-    /* Muted the glow for a more elegant 2026 look */
-    box-shadow: 0 0 15px rgba(94, 200, 242, 0.2);
-  }
-
-  .signature-line {
-    height: 1px; /* Thinner, more elegant */
-    background: linear-gradient(90deg, transparent, rgba(94, 200, 242, 0.5), transparent);
+    font-family: var(--font-dm-sans), 'DM Sans', sans-serif;
+    line-height: 1.75; /* leading-relaxed */
   }
 
   /* ── Cinematic Overlays ── */
   .vignette {
-    background: radial-gradient(circle at 50% 30%, transparent 20%, rgba(0,0,0,0.85) 100%);
+    background: radial-gradient(circle at 50% 30%, transparent 20%, rgba(26,26,46,0.95) 100%);
   }
 
   .grain {

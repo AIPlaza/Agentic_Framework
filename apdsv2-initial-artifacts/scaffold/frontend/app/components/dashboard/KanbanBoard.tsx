@@ -66,11 +66,11 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
 
   const columns: { id: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE'; label: string; color: string; badgeBg: string }[] = [
-    { id: 'BACKLOG', label: '1. Backlog & Requirements', color: 'border-white/20', badgeBg: 'bg-white/10 text-slate-300' },
-    { id: 'DESIGN', label: '2. Design & Architecture', color: 'border-[#377D8C]/40', badgeBg: 'bg-[#377D8C]/20 text-[#5ED7F2]' },
-    { id: 'EXECUTION', label: '3. Operational Execution', color: 'border-[#5EC8F2]/40', badgeBg: 'bg-[#5EC8F2]/20 text-[#5EC8F2]' },
-    { id: 'AUDIT', label: '4. Auditor Review Queue', color: 'border-amber-500/40', badgeBg: 'bg-amber-500/20 text-amber-300' },
-    { id: 'DONE', label: '5. Milestone Released', color: 'border-emerald-500/40', badgeBg: 'bg-emerald-500/20 text-emerald-400' }
+    { id: 'BACKLOG', label: '1. Backlog & Requirements', color: 'border-white/10', badgeBg: 'bg-white/5 text-slate-400 border border-white/5' },
+    { id: 'DESIGN', label: '2. Design & Architecture', color: 'border-[#377D8C]/20', badgeBg: 'bg-[#377D8C]/10 text-[#5ED7F2] border border-[#377D8C]/20' },
+    { id: 'EXECUTION', label: '3. Operational Execution', color: 'border-[#5EC8F2]/20', badgeBg: 'bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20' },
+    { id: 'AUDIT', label: '4. Auditor Review Queue', color: 'border-amber-500/20', badgeBg: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
+    { id: 'DONE', label: '5. Milestone Released', color: 'border-[#5EC8F2]/40', badgeBg: 'bg-[#5EC8F2]/20 text-white border border-[#5EC8F2]/30' } /* Replaced Emerald Green with Sky Blue for strict compliance */
   ];
 
   const filteredTasks = tasks.filter((t) => {
@@ -85,30 +85,30 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
   };
 
   return (
-    <div className="space-y-6">
-      {/* Search & Filter Header Toolbar matching Onboarding inputs */}
-      <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-[#020624]/80 p-5 rounded-3xl border border-white/20 backdrop-blur-2xl shadow-2xl">
+    <div className="space-y-8 font-sans">
+      {/* Search & Filter Header Toolbar */}
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <div className="relative w-full sm:w-80">
-          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" />
+          <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
-            placeholder="Search 126 stories by title or ID..."
+            placeholder="Search 126 stories..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-black/40 border border-white/20 rounded-xl py-3 pl-11 pr-4 text-xs font-mono text-white placeholder-slate-400 focus:outline-none focus:border-[#5EC8F2] transition-all"
+            className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
           />
         </div>
 
-        {/* Category Filter Pills matching Onboarding category buttons */}
-        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-xs">
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-[11px] uppercase tracking-wider">
           {['ALL', 'Strategy & Legal', 'Engineering & IoT', 'Quality & ISO 9001', 'Tokenomics & Tranches'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2.5 rounded-xl text-xs font-bold uppercase transition-all ${
+              className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 selectedCategory === cat
-                  ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#020624] shadow-[0_0_20px_rgba(94,200,242,0.4)]'
-                  : 'bg-black/30 text-slate-300 hover:text-white border border-white/15 hover:bg-white/10'
+                  ? 'bg-white/10 text-white border border-white/10'
+                  : 'bg-transparent text-slate-400 hover:text-white border border-white/5 hover:bg-white/5'
               }`}
             >
               {cat}
@@ -118,46 +118,46 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
       </div>
 
       {/* 5-Column Kanban Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 items-stretch">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6 items-stretch">
         {columns.map((col) => {
           const colTasks = filteredTasks.filter((t) => t.status === col.id);
 
           return (
             <div
               key={col.id}
-              className={`p-5 bg-[#020624]/80 border rounded-3xl flex flex-col gap-4 backdrop-blur-2xl min-h-[640px] shadow-2xl ${col.color}`}
+              className={`pt-1 flex flex-col gap-4 min-h-[640px] border-t ${col.color}`}
             >
               {/* Column Header */}
-              <div className="flex items-center justify-between pb-3 border-b border-white/15">
-                <h4 className="text-xs font-mono font-bold text-white tracking-tight flex items-center gap-1.5">
-                  <span>{col.label}</span>
+              <div className="flex items-center justify-between pb-2">
+                <h4 className="text-[12px] font-mono font-medium text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                  {col.label.replace(/^[0-9]\.\s/, '')}
                 </h4>
-                <span className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold ${col.badgeBg}`}>
+                <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${col.badgeBg}`}>
                   {colTasks.length}
                 </span>
               </div>
 
               {/* Task Cards Container */}
-              <div className="space-y-3.5 flex-1">
+              <div className="space-y-3 flex-1">
                 {colTasks.slice(0, 15).map((task) => (
                   <motion.div
                     key={task.id}
                     layout
                     onClick={() => setSelectedTask(task)}
-                    className="p-4 bg-black/40 border border-white/15 hover:border-[#5EC8F2]/60 rounded-2xl space-y-3 cursor-pointer hover:shadow-[0_0_20px_rgba(94,200,242,0.2)] transition-all duration-200 group relative backdrop-blur-md"
+                    className="glass-blue-card p-4 space-y-3 cursor-pointer group relative"
                   >
                     {/* Top ID & Priority */}
                     <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-mono font-bold text-[#5EC8F2] uppercase tracking-wider">
+                      <span className="text-[10px] font-mono font-medium text-[#5EC8F2] group-hover:text-white transition-colors">
                         {task.id}
                       </span>
                       <span
-                        className={`text-[9px] font-mono font-bold px-2 py-0.5 rounded-full ${
+                        className={`text-[9px] font-mono px-2 py-0.5 rounded-md ${
                           task.priority === 'CRITICAL'
-                            ? 'bg-[#8B1A1A]/30 text-[#FF7575] border border-[#8B1A1A]/50'
+                            ? 'bg-red-500/10 text-red-400 border border-red-500/20'
                             : task.priority === 'HIGH'
-                            ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                            : 'bg-white/10 text-slate-300'
+                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            : 'bg-white/5 text-slate-400 border border-white/5'
                         }`}
                       >
                         {task.priority}
@@ -165,23 +165,23 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     </div>
 
                     {/* Title */}
-                    <p className="text-xs font-sans font-medium text-slate-200 group-hover:text-white leading-relaxed">
+                    <p className="text-[13px] font-sans font-medium text-slate-200 group-hover:text-white leading-relaxed">
                       {task.title}
                     </p>
 
                     {/* Category Tag */}
-                    <div className="text-[10px] font-mono text-slate-400">
+                    <div className="text-[10px] font-mono text-slate-500">
                       <span>{task.category}</span>
                     </div>
 
                     {/* Bottom Metadata */}
-                    <div className="pt-2.5 border-t border-white/10 flex items-center justify-between text-[10px] font-mono text-slate-400">
+                    <div className="pt-3 flex items-center justify-between text-[10px] font-mono text-slate-500">
                       <span className="flex items-center gap-1.5">
                         <User className="w-3 h-3 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
                       </span>
 
                       {task.payoutUsd && (
-                        <span className="text-[#5EC8F2] font-bold flex items-center">
+                        <span className="text-[#5EC8F2] font-semibold flex items-center">
                           <DollarSign className="w-3 h-3 -mr-0.5" />
                           {task.payoutUsd.toLocaleString()}
                         </span>
@@ -191,8 +191,8 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                 ))}
 
                 {colTasks.length > 15 && (
-                  <div className="text-center py-2 text-[10px] font-mono text-slate-400 uppercase tracking-wider">
-                    + {colTasks.length - 15} more stories
+                  <div className="text-center py-2 text-[10px] font-mono text-slate-500 uppercase tracking-widest">
+                    + {colTasks.length - 15} more
                   </div>
                 )}
               </div>
