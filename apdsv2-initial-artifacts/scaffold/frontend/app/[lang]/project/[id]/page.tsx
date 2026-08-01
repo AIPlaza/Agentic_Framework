@@ -9,6 +9,7 @@ import { RACERTable } from '@/app/components/dashboard/RACERTable';
 import { GovernanceKanban } from '@/app/components/dashboard/GovernanceKanban';
 import { ChecklistBuilder } from '@/app/components/dashboard/ChecklistBuilder';
 import CinematicBackground from '@/app/components/auth/CinematicBackground';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 export default function ProjectBoard({ params }: { params: any }) {
   const resolvedParams = typeof params?.then === 'function' ? use(params) : params;
@@ -19,6 +20,8 @@ export default function ProjectBoard({ params }: { params: any }) {
   const [error, setError] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<'board' | 'list' | 'timeline' | 'audit' | 'marketplace'>('board');
   const [activeTab, setActiveTab] = useState<'logframe' | 'racer' | 'governance' | 'checklists'>('logframe');
+
+  const { dict, lang } = useDictionary();
 
   async function fetchProject() {
     setLoading(true);
@@ -113,7 +116,7 @@ export default function ProjectBoard({ params }: { params: any }) {
         <div className="flex flex-col items-center gap-3 z-20">
           <RefreshCw className="w-6 h-6 text-[#5EC8F2] animate-spin" />
           <span className="font-mono text-[11px] text-[#5EC8F2] uppercase tracking-widest font-medium">
-            Loading Project Studio...
+            {dict?.common?.loading || 'Loading...'}
           </span>
         </div>
       </div>
@@ -142,10 +145,10 @@ export default function ProjectBoard({ params }: { params: any }) {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 bg-white/5 text-slate-300 border border-white/10 rounded-md text-[10px] font-mono uppercase tracking-wider">
-                Stage {project?.devLevel || 3} / 5
+                {dict?.project?.stage || 'Stage'} {project?.devLevel || 3} / 5
               </span>
               <span className="px-3 py-1 bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono uppercase tracking-wider">
-                {project?.status || 'ACTIVE'}
+                {project?.status === 'ACTIVE' ? (dict?.project?.active || 'ACTIVE') : project?.status}
               </span>
             </div>
             <h1 className="text-3xl md:text-5xl font-syne font-bold text-white tracking-tight">
@@ -164,10 +167,10 @@ export default function ProjectBoard({ params }: { params: any }) {
               <RefreshCw className="w-4 h-4" />
             </button>
             <a
-              href={`/marketplace/${project?.id || 'demo-project-001'}`}
+              href={`/${lang}/marketplace/${project?.id || 'demo-project-001'}`}
               className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/10 font-mono text-[11px] uppercase tracking-wider rounded-xl transition-all flex items-center gap-2"
             >
-              Marketplace Preview <ExternalLink className="w-4 h-4 text-[#5EC8F2]" />
+              {dict?.project?.marketplacePreview || 'Marketplace Preview'} <ExternalLink className="w-4 h-4 text-[#5EC8F2]" />
             </a>
           </div>
         </header>
@@ -185,7 +188,7 @@ export default function ProjectBoard({ params }: { params: any }) {
                     : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                126 Kanban Stories
+                {dict?.project?.stories126 || '126 Kanban Stories'}
               </button>
               <button
                 onClick={() => setActiveTab('racer')}
@@ -195,7 +198,7 @@ export default function ProjectBoard({ params }: { params: any }) {
                     : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                Performance Metrics
+                {dict?.project?.performanceMetrics || 'Performance Metrics'}
               </button>
               <button
                 onClick={() => setActiveTab('governance')}
@@ -205,7 +208,7 @@ export default function ProjectBoard({ params }: { params: any }) {
                     : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                PRINCE2 Tolerances
+                {dict?.project?.prince2Tolerances || 'PRINCE2 Tolerances'}
               </button>
               <button
                 onClick={() => setActiveTab('checklists')}
@@ -215,7 +218,7 @@ export default function ProjectBoard({ params }: { params: any }) {
                     : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                 }`}
               >
-                Quality Logs
+                {dict?.project?.qualityLogs || 'Quality Logs'}
               </button>
             </div>
 
@@ -230,26 +233,8 @@ export default function ProjectBoard({ params }: { params: any }) {
         {activeView === 'list' && (
           <div className="p-10 glass-blue-card space-y-4">
             <h2 className="text-2xl font-syne font-bold text-white">Project Task List View (126 Items)</h2>
-            <p className="text-[13px] font-sans text-slate-400">Structured tabular list of project deliverables and milestone checks.</p>
             <div className="pt-4">
               <KanbanBoard projectTitle={project?.title} />
-            </div>
-          </div>
-        )}
-
-        {/* VIEW 3: TIMELINE & ROADMAP */}
-        {activeView === 'timeline' && (
-          <div className="p-10 glass-blue-card space-y-6">
-            <h2 className="text-2xl font-syne font-bold text-white">Maturity Roadmap & Timeline (DEv-matrix 5x4)</h2>
-            <div className="space-y-3">
-              {['Stage 1: Concept & Identity', 'Stage 2: Results & Quality Layout', 'Stage 3: Telemetry & RACER Metrics', 'Stage 4: Auditor Verification & Escrow', 'Stage 5: Marketplace & Yield Release'].map((stg, i) => (
-                <div key={i} className="p-5 bg-white/5 border border-white/5 rounded-xl flex justify-between items-center text-[13px] font-sans font-medium">
-                  <span className="text-slate-200">{stg}</span>
-                  <span className={i < 2 ? 'text-white' : i === 2 ? 'text-[#5EC8F2]' : 'text-slate-500 font-mono text-[10px] uppercase'}>
-                    {i < 2 ? 'COMPLETED' : i === 2 ? 'ACTIVE SPRINT' : 'UPCOMING'}
-                  </span>
-                </div>
-              ))}
             </div>
           </div>
         )}
@@ -257,10 +242,9 @@ export default function ProjectBoard({ params }: { params: any }) {
         {/* VIEW 4: AUDITOR QUEUE */}
         {activeView === 'audit' && (
           <div className="p-10 glass-blue-card space-y-6">
-            <h2 className="text-2xl font-syne font-bold text-white">Auditor Verification Queue</h2>
-            <p className="text-[13px] font-sans text-slate-400">Auditor review queue for programmatic smart contract milestone releases.</p>
-            <a href="/evaluator" className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
-              Open Independent Auditor Portal →
+            <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.auditQueue || 'Auditor Review Queue'}</h2>
+            <a href={`/${lang}/evaluator`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
+              {dict?.evaluator?.auditorPortal || 'INDEPENDENT QUALITY AUDITOR PORTAL'} →
             </a>
           </div>
         )}
@@ -268,10 +252,9 @@ export default function ProjectBoard({ params }: { params: any }) {
         {/* VIEW 5: MARKETPLACE PREVIEW */}
         {activeView === 'marketplace' && (
           <div className="p-10 glass-blue-card space-y-6">
-            <h2 className="text-2xl font-syne font-bold text-white">Public Marketplace Preview</h2>
-            <p className="text-[13px] font-sans text-slate-400">Investor-facing summary fiche and 3-scenario yield simulator.</p>
-            <a href={`/marketplace/${project?.id}`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
-              View Public Marketplace Fiche →
+            <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.marketplace || 'Public Marketplace Preview'}</h2>
+            <a href={`/${lang}/marketplace/${project?.id}`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
+              {dict?.project?.marketplacePreview || 'Marketplace Preview'} →
             </a>
           </div>
         )}

@@ -4,26 +4,28 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 export default function HeaderNav() {
   const pathname = usePathname();
+  const { dict, lang } = useDictionary();
 
   const navItems = [
     {
-      name: 'Onboarding',
-      href: '/onboarding',
+      name: dict?.nav?.onboarding || 'Onboarding',
+      href: `/${lang}/onboarding`,
     },
     {
-      name: 'Project Studio',
-      href: '/project/demo-project-001',
+      name: dict?.nav?.projectStudio || 'Project Studio',
+      href: `/${lang}/project/demo-project-001`,
     },
     {
-      name: 'Auditor Portal',
-      href: '/evaluator',
+      name: dict?.nav?.auditorPortal || 'Auditor Portal',
+      href: `/${lang}/evaluator`,
     },
     {
-      name: 'Marketplace',
-      href: '/marketplace/demo-project-001',
+      name: dict?.nav?.marketplace || 'Marketplace',
+      href: `/${lang}/marketplace/demo-project-001`,
     }
   ];
 
@@ -34,7 +36,7 @@ export default function HeaderNav() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with Official ACCET Asset */}
-        <Link href="/project/demo-project-001" className="flex items-center gap-4 group">
+        <Link href={`/${lang}/project/demo-project-001`} className="flex items-center gap-4 group">
           <div className="relative w-8 h-8 flex items-center justify-center">
             <Image
               src="/logo.png"
@@ -54,7 +56,7 @@ export default function HeaderNav() {
               </span>
             </div>
             <p className="text-[10px] text-slate-400 font-sans tracking-widest uppercase">
-              Active Management Suite
+              {dict?.nav?.activeManagementSuite || 'Active Management Suite'}
             </p>
           </div>
         </Link>
@@ -62,7 +64,7 @@ export default function HeaderNav() {
         {/* Center Navigation Menu - Minimalist Pills */}
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== '/onboarding' && pathname?.startsWith(item.href));
+            const isActive = pathname === item.href || (item.href !== `/${lang}/onboarding` && pathname?.startsWith(item.href));
 
             return (
               <Link
@@ -82,16 +84,16 @@ export default function HeaderNav() {
 
         {/* Right Status / Auth */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-emerald-400 text-[11px] font-sans tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Node Active</span>
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
+            <span>{dict?.nav?.nodeActive || 'Node Active'}</span>
           </div>
 
           <Link
-            href="/login"
+            href={`/${lang}/login`}
             className="flex items-center px-5 py-2 rounded-full text-[13px] font-sans font-medium text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-opacity"
           >
-            Sign In
+            {dict?.nav?.signIn || 'Sign In'}
           </Link>
         </div>
       </div>

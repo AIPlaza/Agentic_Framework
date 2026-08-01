@@ -103,7 +103,7 @@ export default function OnboardingPage() {
 
       <motion.div
         layout
-        className="glass-platinum w-full max-w-3xl relative overflow-hidden p-10 sm:p-14 rounded-[32px] z-20"
+        className="glass-blue-card w-full max-w-3xl relative overflow-hidden p-10 sm:p-14 rounded-[32px] z-20"
       >
         <AnimatePresence mode="wait">
           {/* STEP 1: Project Identity */}

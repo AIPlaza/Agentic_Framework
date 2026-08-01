@@ -1,5 +1,12 @@
 # initial context Jul 28th 2026
 
+> **Continual Improvement & LLM Contextualization Update** (July 31, 2026):
+> Established the strict **"Brain vs. Body" Architecture**:
+> - **The Brain (Agentic_Framework):** This repository acts as the continuous scaffolding and LLM methodology context. It holds all `history.md`, `.agents/` skills, and `context.md` files used to direct autonomous agent interactions.
+> - **The Body (accet-app/apps/marketplace):** The isolated, highly optimized Next.js 16 production codebase deployed directly to Render.
+> - **Philosophy:** By strictly separating AI methodology/prompts from the production container, we ensure a clean deployment pipeline while maintaining a rich, historical "Agentic Brain" that continually learns and improves the ecosystem across multiple apps.
+
+
 Repository navigation
 
 

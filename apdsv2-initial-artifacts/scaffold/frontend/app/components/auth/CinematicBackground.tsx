@@ -14,7 +14,7 @@ export default function CinematicBackground() {
   }, [])
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#1A1A2E]">
+    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#3866B3]">
       <video
         ref={videoRef}
         autoPlay
@@ -23,12 +23,12 @@ export default function CinematicBackground() {
         playsInline
         className="w-full h-full object-cover opacity-25 blur-sm scale-105 saturate-50"
       >
-        <source src="/Marketplace-background.mp4" type="video/mp4" />
+        <source src="/background-video.mp4" type="video/mp4" />
       </video>
       
-      {/* Cinematic Vignette & Netflix Dark Blur Overlays (Strict #1A1A2E) */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(26,26,46,1)] via-[rgba(26,26,46,0.8)] to-[rgba(26,26,46,0.6)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#1A1A2E_100%)] opacity-90" />
+      {/* Cinematic Vignette & Netflix Blur Overlays (Left-to-Right #3866B3) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90" />
     </div>
   )
 }

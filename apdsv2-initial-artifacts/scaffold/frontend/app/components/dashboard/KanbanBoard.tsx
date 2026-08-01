@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Search, DollarSign, User } from 'lucide-react';
 import { TaskItem, TaskDetailModal } from './TaskDetailModal';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 function generateInitialStories(projectTitle: string): TaskItem[] {
   const categories = ['Strategy & Legal', 'Engineering & IoT', 'Quality & ISO 9001', 'Tokenomics & Tranches', 'Operations & Field'];
@@ -64,13 +65,15 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
+  
+  const { dict } = useDictionary();
 
   const columns: { id: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE'; label: string; color: string; badgeBg: string }[] = [
-    { id: 'BACKLOG', label: '1. Backlog & Requirements', color: 'border-white/10', badgeBg: 'bg-white/5 text-slate-400 border border-white/5' },
-    { id: 'DESIGN', label: '2. Design & Architecture', color: 'border-[#377D8C]/20', badgeBg: 'bg-[#377D8C]/10 text-[#5ED7F2] border border-[#377D8C]/20' },
-    { id: 'EXECUTION', label: '3. Operational Execution', color: 'border-[#5EC8F2]/20', badgeBg: 'bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20' },
-    { id: 'AUDIT', label: '4. Auditor Review Queue', color: 'border-amber-500/20', badgeBg: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
-    { id: 'DONE', label: '5. Milestone Released', color: 'border-[#5EC8F2]/40', badgeBg: 'bg-[#5EC8F2]/20 text-white border border-[#5EC8F2]/30' } /* Replaced Emerald Green with Sky Blue for strict compliance */
+    { id: 'BACKLOG', label: dict?.kanban?.col1 || '1. Backlog & Requirements', color: 'border-white/10', badgeBg: 'bg-white/5 text-slate-400 border border-white/5' },
+    { id: 'DESIGN', label: dict?.kanban?.col2 || '2. Design & Architecture', color: 'border-[#377D8C]/20', badgeBg: 'bg-[#377D8C]/10 text-[#5ED7F2] border border-[#377D8C]/20' },
+    { id: 'EXECUTION', label: dict?.kanban?.col3 || '3. Operational Execution', color: 'border-[#5EC8F2]/20', badgeBg: 'bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20' },
+    { id: 'AUDIT', label: dict?.kanban?.col4 || '4. Auditor Review Queue', color: 'border-amber-500/20', badgeBg: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
+    { id: 'DONE', label: dict?.kanban?.col5 || '5. Milestone Released', color: 'border-[#5EC8F2]/40', badgeBg: 'bg-[#5EC8F2]/20 text-white border border-[#5EC8F2]/30' }
   ];
 
   const filteredTasks = tasks.filter((t) => {
@@ -92,7 +95,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
           <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
-            placeholder="Search 126 stories..."
+            placeholder={dict?.kanban?.search || 'Search 126 stories...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
@@ -111,7 +114,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                   : 'bg-transparent text-slate-400 hover:text-white border border-white/5 hover:bg-white/5'
               }`}
             >
-              {cat}
+              {cat === 'ALL' ? (dict?.kanban?.all || 'ALL') : cat}
             </button>
           ))}
         </div>

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, Download, Activity, PieChart, RefreshCw } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import CinematicBackground from '@/app/components/auth/CinematicBackground';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 export default function MarketplaceFiche({ params }: { params: any }) {
   const resolvedParams = typeof params?.then === 'function' ? use(params) : params;
@@ -13,6 +14,7 @@ export default function MarketplaceFiche({ params }: { params: any }) {
   const [project, setProject] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [scenario, setScenario] = useState<'conservative' | 'base' | 'optimistic'>('base');
+  const { dict } = useDictionary();
 
   useEffect(() => {
     async function loadFiche() {
@@ -50,9 +52,9 @@ export default function MarketplaceFiche({ params }: { params: any }) {
   }, [targetSlug]);
 
   const scenarioData = {
-    conservative: { apy: '11.5%', payoutTime: 'Quarterly', confidence: '99.2% (Low Volatility Baseline)' },
-    base: { apy: '16.8%', payoutTime: 'Quarterly', confidence: '94.5% (AI Projected Target)' },
-    optimistic: { apy: '22.4%', payoutTime: 'Quarterly', confidence: '82.0% (Max Operational Capacity)' }
+    conservative: { apy: '11.5%', payoutTime: 'Quarterly', confidence: '99.2% (Low Volatility)' },
+    base: { apy: '16.8%', payoutTime: 'Quarterly', confidence: '94.5% (Baseline)' },
+    optimistic: { apy: '22.4%', payoutTime: 'Quarterly', confidence: '82.0% (Max Capacity)' }
   };
 
   const transparencyFeed = [
@@ -69,7 +71,7 @@ export default function MarketplaceFiche({ params }: { params: any }) {
         <div className="flex flex-col items-center gap-3 z-20">
           <RefreshCw className="w-6 h-6 text-[#5EC8F2] animate-spin" />
           <span className="font-mono text-[11px] text-[#5EC8F2] uppercase tracking-widest font-bold">
-            Loading Marketplace Fiche...
+            {dict?.common?.loading || 'Loading...'}
           </span>
         </div>
       </div>
@@ -86,7 +88,7 @@ export default function MarketplaceFiche({ params }: { params: any }) {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 bg-[#5EC8F2]/10 text-white border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider">
-                Milestone-Based Asset Disbursement
+                Milestone-Based Asset
               </span>
               <span className="px-3 py-1 bg-white/10 text-white border border-white/10 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider">
                 ACCET Verified RWA
@@ -96,13 +98,13 @@ export default function MarketplaceFiche({ params }: { params: any }) {
               {project?.title || 'ACCET Real World Asset Project'}
             </h1>
             <p className="text-slate-300 text-[16px] mt-4 max-w-2xl font-sans leading-relaxed">
-              {project?.description || 'Sustainable project with certified operational quality standards and IoT telemetry oracles.'}
+              {project?.description}
             </p>
           </div>
 
           <div className="flex items-center gap-3 pb-1">
             <button className="px-6 py-3.5 bg-white/5 hover:bg-white/10 text-white border border-white/10 font-mono text-[11px] uppercase tracking-widest font-bold rounded-xl transition-all flex items-center gap-2">
-              <Download className="w-4 h-4 text-[#5EC8F2]" /> Legal Summary Sheet
+              <Download className="w-4 h-4 text-[#5EC8F2]" /> {dict?.marketplace?.legalSummary || 'Legal Summary Sheet'}
             </button>
           </div>
         </header>
@@ -116,12 +118,12 @@ export default function MarketplaceFiche({ params }: { params: any }) {
               <div className="flex justify-between items-start">
                 <div>
                   <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold mb-3 block">
-                    Active Asset Funding
+                    {dict?.marketplace?.activeFunding || 'Active Asset Funding'}
                   </span>
                   <div className="text-4xl md:text-5xl font-bold text-white font-mono">$45,000 <span className="text-slate-500 text-3xl font-medium">/ $120,000 USD</span></div>
                 </div>
                 <span className="px-3 py-1 bg-white/10 text-white border border-white/10 rounded-md text-[10px] font-mono font-bold tracking-wider">
-                  37.5% Funded
+                  37.5%
                 </span>
               </div>
 
@@ -135,11 +137,6 @@ export default function MarketplaceFiche({ params }: { params: any }) {
                     className="h-full bg-[#5EC8F2] rounded-full"
                   />
                 </div>
-                <div className="flex justify-between text-[11px] text-slate-500 font-mono font-bold uppercase tracking-wider">
-                  <span>0% (Launch)</span>
-                  <span className="text-white">Milestone #1 Achieved</span>
-                  <span>100% (Target Cap)</span>
-                </div>
               </div>
             </div>
 
@@ -147,10 +144,10 @@ export default function MarketplaceFiche({ params }: { params: any }) {
             <div className="glass-blue-card p-8 md:p-10 space-y-8">
               <div>
                 <h2 className="text-2xl font-syne font-bold text-white flex items-center gap-2 mb-2">
-                  <PieChart className="w-6 h-6 text-[#5EC8F2]" /> Yield Simulator
+                  <PieChart className="w-6 h-6 text-[#5EC8F2]" /> {dict?.marketplace?.yieldSimulator || 'Yield Simulator'}
                 </h2>
                 <p className="text-[14px] font-sans text-slate-400">
-                  Predictive financial modeling derived from verified project RACER metrics
+                  {dict?.marketplace?.predictiveModeling || 'Predictive financial modeling'}
                 </p>
               </div>
 
@@ -162,7 +159,7 @@ export default function MarketplaceFiche({ params }: { params: any }) {
                     scenario === 'conservative' ? 'bg-white/10 text-white border border-white/10' : 'text-slate-500 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                   }`}
                 >
-                  Conservative
+                  {dict?.marketplace?.conservative || 'Conservative'}
                 </button>
                 <button
                   onClick={() => setScenario('base')}
@@ -170,7 +167,7 @@ export default function MarketplaceFiche({ params }: { params: any }) {
                     scenario === 'base' ? 'bg-[#5EC8F2]/10 text-white border border-[#5EC8F2]/20' : 'text-slate-500 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                   }`}
                 >
-                  Base Case
+                  {dict?.marketplace?.baseCase || 'Base Case'}
                 </button>
                 <button
                   onClick={() => setScenario('optimistic')}
@@ -178,22 +175,22 @@ export default function MarketplaceFiche({ params }: { params: any }) {
                     scenario === 'optimistic' ? 'bg-white/10 text-white border border-white/10' : 'text-slate-500 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
                   }`}
                 >
-                  Optimistic
+                  {dict?.marketplace?.optimistic || 'Optimistic'}
                 </button>
               </div>
 
               {/* Scenario Metrics */}
               <motion.div key={scenario} initial={{ opacity: 0, y: 5 }} animate={{ opacity: 1, y: 0 }} className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="p-6 bg-white/5 border border-white/5 rounded-xl space-y-3">
-                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">Estimated APY</span>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">{dict?.marketplace?.estimatedApy || 'Estimated APY'}</span>
                   <div className="text-3xl font-bold text-white font-mono">{scenarioData[scenario].apy}</div>
                 </div>
                 <div className="p-6 bg-white/5 border border-white/5 rounded-xl space-y-3">
-                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">Payout Frequency</span>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">{dict?.marketplace?.payoutFrequency || 'Payout Frequency'}</span>
                   <div className="text-[16px] font-syne font-bold text-slate-200 mt-1">{scenarioData[scenario].payoutTime}</div>
                 </div>
                 <div className="p-6 bg-white/5 border border-white/5 rounded-xl space-y-3">
-                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">AI Confidence</span>
+                  <span className="text-[10px] text-slate-500 uppercase tracking-widest font-mono font-bold">{dict?.marketplace?.aiConfidence || 'AI Confidence'}</span>
                   <div className="text-[13px] font-mono font-bold text-[#5EC8F2] mt-1">{scenarioData[scenario].confidence}</div>
                 </div>
               </motion.div>
@@ -203,12 +200,12 @@ export default function MarketplaceFiche({ params }: { params: any }) {
           {/* Right Sidebar: Transparency Feed */}
           <div className="space-y-8">
             <h2 className="text-2xl font-syne font-bold text-white flex items-center gap-2">
-              <Activity className="w-5 h-5 text-[#5EC8F2]" /> Transparency Audit
+              <Activity className="w-5 h-5 text-[#5EC8F2]" /> {dict?.marketplace?.transparencyAudit || 'Transparency Audit'}
             </h2>
 
             <div className="glass-blue-card p-8 space-y-6">
               <span className="text-[11px] font-mono font-bold text-slate-500 uppercase tracking-widest block border-b border-white/5 pb-4">
-                Real-Time Audit Stream
+                {dict?.marketplace?.realTimeStream || 'Real-Time Audit Stream'}
               </span>
 
               <div className="space-y-4 pt-2">

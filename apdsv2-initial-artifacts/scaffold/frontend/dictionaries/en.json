@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "onboarding": "Onboarding",
+    "projectStudio": "Project Studio",
+    "auditorPortal": "Auditor Portal",
+    "marketplace": "Marketplace",
+    "activeManagementSuite": "Active Management Suite",
+    "signIn": "Sign In",
+    "nodeActive": "Node Active",
+    "viewsAndPanels": "VIEWS & PANELS",
+    "newProject": "New Project",
+    "kanbanBoard": "Kanban Board",
+    "taskList": "Task List View",
+    "timeline": "Timeline & Roadmap",
+    "auditQueue": "Auditor Review Queue"
+  },
+  "sidebar": {
+    "activeWorkspace": "ACTIVE WORKSPACE",
+    "completion": "Completion",
+    "done": "Done",
+    "total": "Total"
+  },
+  "kanban": {
+    "search": "Search 126 stories...",
+    "col1": "1. Backlog & Requirements",
+    "col2": "2. Design & Architecture",
+    "col3": "3. Operational Execution",
+    "col4": "4. Auditor Review Queue",
+    "col5": "5. Milestone Released",
+    "all": "ALL"
+  },
+  "project": {
+    "stage": "Stage",
+    "active": "ACTIVE",
+    "marketplacePreview": "Marketplace Preview",
+    "stories126": "126 Kanban Stories",
+    "performanceMetrics": "Performance Metrics",
+    "prince2Tolerances": "PRINCE2 Tolerances",
+    "qualityLogs": "Quality Logs"
+  },
+  "evaluator": {
+    "title": "Milestone Audit & Payout Approval",
+    "subtitle": "Independent verification of project field telemetry and performance milestone achievements.",
+    "auditorPortal": "INDEPENDENT QUALITY AUDITOR PORTAL",
+    "pendingVerifications": "Pending Milestone Verifications",
+    "approveAndRelease": "Approve & Release",
+    "released": "Released",
+    "trancheAmount": "Tranche Amount",
+    "performanceMetric": "Performance Metric",
+    "verificationSource": "Verification Source"
+  },
+  "marketplace": {
+    "yieldSimulator": "Yield Simulator",
+    "predictiveModeling": "Predictive financial modeling derived from verified project RACER metrics",
+    "conservative": "Conservative",
+    "baseCase": "Base Case",
+    "optimistic": "Optimistic",
+    "transparencyAudit": "Transparency Audit",
+    "realTimeStream": "Real-Time Audit Stream",
+    "activeFunding": "Active Asset Funding",
+    "estimatedApy": "Estimated APY",
+    "payoutFrequency": "Payout Frequency",
+    "aiConfidence": "AI Confidence",
+    "legalSummary": "Legal Summary Sheet"
+  }
+}

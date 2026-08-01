@@ -5,6 +5,12 @@
 > **Target Repository:** `AIPlaza/Agentic_Framework`  
 > **Active Branch / Tag:** `v1.0.7-test` (Mirrors `v1.0.7`)  
 
+> **Continual Improvement & Methodology (July 31, 2026):**
+> We enforce a strict **"Brain vs. Body"** separation of concerns. `Agentic_Framework` acts as the "Brain", a pure LLM contextualization and methodology environment that never deploys to production. It holds `.agents` skills, histories, and prompts. The compiled Next.js applications (the "Body") are safely injected into deployment paths (e.g., Render pipelines) completely free of AI-specific scaffolding. This guarantees lean production environments while maximizing agent contextual awareness.
+
+> **Production Deployment Synchronization (July 31, 2026):**
+> The `accet-app` repository (The Body) has been strictly synchronized with `Agentic_Framework` version `v1.0.7-test.1.2` (The Brain). The APDSv2 architecture was merged to `main` in `accet-app` via branch `release/v2.0-marketplace-refactor` and successfully pushed to trigger the Render production deployment.
+
 ---
 
 ## 1. System Vision & Core Objectives
@@ -67,7 +73,7 @@ Every AI agent operating within this codebase MUST adhere strictly to the follow
 - **Safe Additive SQL Migrations**: NEVER run `prisma db push --accept-data-loss`. Existing tables (`auth.users`, `User`, `Tenant`, `Document`, `Signature`, `Transaction`, `profiles`) must remain intact.
 - **Migration File**: Execute safe additive DDL scripts like `prisma/apds_v2_migration.sql` with `CREATE TABLE IF NOT EXISTS` and `ALTER TABLE ADD COLUMN IF NOT EXISTS`.
 
-### C. ACCET Design System & Aesthetics (Brand Manual v1.0)
+### C. ACCET Design System & Aesthetics (Brand Manual v1.1)
 - **Typography DNA**:
   - **Display / Headlines**: `Syne` (700–900 weight, `font-syne`).
   - **System / Badges / Buttons**: `JetBrains Mono` (uppercase, tracking-widest, `font-mono`).
@@ -80,11 +86,12 @@ Every AI agent operating within this codebase MUST adhere strictly to the follow
   - `Light Text`: `#F2F2F2` (Text - 12%)
   - `Pass Status`: `#1A7A4A` / `#10B981`
   - `Fail Status`: `#8B1A1A` / `#FF7575`
+  - `Prohibited Colors`: Pure Green (e.g., `#0e7c5a`, `#10B981` unless strict status marker) is banned in UI.
 - **Glassmorphism Spec**:
-  - `.glass-platinum`: `rgba(255, 255, 255, 0.07)` background fill, `backdrop-filter: blur(24px) saturate(140%)`, `border: 1px solid rgba(255, 255, 255, 0.18)`, `inset 0 1px 1px rgba(255, 255, 255, 0.15)`.
-  - `.dark-section-card`: `rgba(8, 12, 30, 0.35)` background fill, `backdrop-filter: blur(24px) saturate(150%)`, `border: 1px solid rgba(255, 255, 255, 0.12)`.
+  - `.glass-blue-card`: `rgba(255, 255, 255, 0.03)` background fill, `backdrop-filter: blur(20px) saturate(120%)`, `border: 1px solid rgba(94, 200, 242, 0.12)`, `border-radius: 12px`.
   - `.signature-line`: Top gradient decorator line (`linear-gradient(90deg, #5EC8F2, #5ED7F2, #377D8C)`).
   - `CinematicBackground`: Video engine (`Marketplace-background.mp4`) with `vignette` and `grain` overlays for high-contrast frosted glass refracion.
+- **Rules Learned**: Never use legacy classes (e.g., `.glass-platinum`) that break the Firme Digital v1.1 standard.
 
 ---
 
@@ -121,16 +128,18 @@ Agentic_Framework/
 │   └── scaffold/
 │       ├── frontend/               # Next.js 16 App Router Client
 │       │   ├── app/
+│       │   │   ├── [lang]/         # Native Multilingual Dynamic Routing (en, es, pt)
+│       │   │   │   ├── evaluator/      # TPA Independent Auditor Portal
+│       │   │   │   ├── login/          # Cinematic Glassmorphic Login
+│       │   │   │   ├── marketplace/    # Public Fiche & Scenario Simulator
+│       │   │   │   ├── onboarding/     # 4-Step AI Wizard & Analysis Modal
+│       │   │   │   ├── project/[id]/   # Live PM Board & Maturity Studio
+│       │   │   │   └── layout.tsx      # Root Layout & Typography Loader
 │       │   │   ├── auth/callback/  # SSR Auth Callback Handler
 │       │   │   ├── components/     # UI, Auth, and Dashboard Components
-│       │   │   ├── evaluator/      # TPA Independent Auditor Portal
-│       │   │   ├── login/          # Cinematic Glassmorphic Login
-│       │   │   ├── marketplace/    # Public Fiche & Scenario Simulator
-│       │   │   ├── onboarding/     # 4-Step AI Wizard & Analysis Modal
-│       │   │   ├── project/[id]/   # Live PM Board & Maturity Studio
 │       │   │   ├── globals.css     # Brand Design System Tokens & Glass Utilities
-│       │   │   ├── layout.tsx      # Root Layout & Typography Loader
-│       │   │   └── middleware.ts   # SSR Auth Route Protection
+│       │   │   └── middleware.ts   # SSR Auth Route Protection & Locale Negotiation
+│       │   ├── dictionaries/       # i18n JSON translation files
 │       │   ├── lib/
 │       │   │   └── supabase.ts     # @supabase/ssr Browser Client Provider
 │       │   └── tailwind.config.js  # ACCET Theme Colors & Font Families
@@ -156,8 +165,9 @@ Agentic_Framework/
 - **Local Dev Servers**:
   - Frontend: `http://localhost:3003` (or `3000`)
   - Backend API: `http://localhost:4001`
-- **When creating new UI components**: Always inspect `.agents/skills/branding/SKILL.md` and use `font-syne`, `font-mono`, `font-sans`, `#5EC8F2` Sky Blue accents, and `.glass-platinum` frosted glass translucency.
+- **When creating new UI components**: Always inspect `.agents/skills/branding/SKILL.md` and use `font-syne`, `font-mono`, `font-sans`, `#5EC8F2` Sky Blue accents, and `.glass-blue-card` frosted glass translucency. Do NOT use legacy classes like `.glass-platinum`.
 - **When editing DB schemas**: Never run destructive migrations. Add new tables using `apds_v2_migration.sql` with `IF NOT EXISTS`.
+- **Client Component i18n**: Wrap layout with `DictionaryProvider.tsx` and use the `useDictionary()` hook rather than prop drilling from `page.tsx`.
 
 ---
 
@@ -171,7 +181,7 @@ A thorough audit comparing the **July 30 Context Log Export** (`context.md` line
 | :--- | :--- | :--- | :--- |
 | **Authentication Engine** | Generic `@supabase/supabase-js` `createClient` without cookie persistence. | `@supabase/ssr` `createBrowserClient` with explicit cookie propagation and `await cookies()` in Next.js 16 server handlers. | **Resolved**: Eliminated infinite auth loading spinner; aligned middleware session checks across Next.js 16 App Router. |
 | **Database Migration Strategy** | Direct `prisma db push` / raw migrations that risk dropping existing schema tables. | Safe additive PostgreSQL migration script (`apds_v2_migration.sql`) using `IF NOT EXISTS`. | **Resolved**: Protected existing `auth.users`, `User`, `Tenant`, `Document`, `Signature`, `Transaction`, and `profiles` tables. |
-| **Brand & Design System** | Generic UI placeholders and generic styling. | Full ACCET Brand Manual v1.0 (`Syne` headlines, `JetBrains Mono` badges, `DM Sans` body, `#5EC8F2` Sky Blue palette, `.glass-platinum` frosted glass, `CinematicBackground`). | **Resolved**: Replicated exact high-contrast glassmorphic design system from `accet-app` marketplace. |
+| **Brand & Design System** | Generic UI placeholders and generic styling. | Full ACCET Brand Manual v1.1 (`Syne`, `JetBrains Mono`, `DM Sans`, `#5EC8F2`, `.glass-blue-card`, `CinematicBackground`). | **Resolved**: Replicated exact high-contrast glassmorphic design system from `accet-app` marketplace. Purged legacy `.glass-platinum` classes. |
 | **Project Management Architecture** | High-level theoretical review of 14 open-source PM repositories (Focalboard, Wekan, OpenProject, Taiga, etc.). | Native Next.js 16 PM suite (`GovernanceKanban`, `RACERTable`, `ChecklistBuilder`) integrated with Supabase and REST API. | **Benchmarked**: Core patterns (Focalboard DnD, Wekan WebSockets, OpenProject tolerance tracking) integrated into APDS v2.0 roadmap. |
 
 ### Open-Source PM Repository Benchmarking Summary (14 Repos)
@@ -184,3 +194,23 @@ The 14 open-source PM repositories evaluated in the July 30 update serve as func
 4. **Taiga**: Benchmark for REST API serialization and clean backend/frontend separation.
 5. **Odoo / GitLab CE**: Benchmark for marketplace listing metadatos, fine-grained RBAC permissions, and approval workflows.
 
+---
+
+## 8. Key Work Accomplished & Milestones (`v1.0.7-test.1.2`)
+
+1. **Native Next.js 16 Multilingual Implementation**:
+   - Refactored routing structure into `app/[lang]/` dynamic segments.
+   - Handled `getDictionary(lang)` fetching on the server.
+   - **Rule Learned**: Use `Promise<{ lang: string }>` for Next.js 15+ async `params` in layout files.
+2. **Middleware Dual-Negotiation Engine**:
+   - Combined Supabase Auth (`supabase.auth.getUser()`) session protection with language header negotiation (`negotiator` + `@formatjs/intl-localematcher`) in a single `middleware.ts`.
+3. **24-Story UI Translation Expansion**:
+   - Translated 24 dashboard, login, onboarding, and marketplace components into `en`, `es`, and `pt` JSON dictionaries.
+   - **Rule Learned**: Prevented prop-drilling in Client Components by injecting a `DictionaryProvider` Context hook at the `RootLayout` level, keeping the Server/Client boundary clean.
+4. **Firme Digital v1.1 Design Enforcement**:
+   - Identified and resolved legacy classes (`.glass-platinum`) stripping out the requested UI styles.
+   - Standardized `globals.css` to the singular `.glass-blue-card` (12px radius, `#5EC8F2` borders, blur 20px).
+   - Moved `globals.css` back to `app/globals.css` to prevent Next.js dev server cache issues with the `Module not found` error during active route refactoring.
+5. **Cinematic Netflix Blur Integration**:
+   - Replaced strict dark backgrounds with a vibrant `#3866B3` (derived from sculptural art assets).
+   - Applied a Netflix-style left-to-right gradient fade (`bg-gradient-to-r`) to smoothly bridge solid UI backgrounds into transparent cinematic video backdrops.

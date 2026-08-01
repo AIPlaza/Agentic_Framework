@@ -14,6 +14,7 @@ import {
   PlusCircle,
   BarChart3
 } from 'lucide-react';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 interface SidebarNavProps {
   activeView: 'board' | 'list' | 'timeline' | 'audit' | 'marketplace';
@@ -31,13 +32,14 @@ export function SidebarNav({
   completedTasks = 48
 }: SidebarNavProps) {
   const [collapsed, setCollapsed] = useState(false);
+  const { dict, lang } = useDictionary();
 
   const viewItems: { id: 'board' | 'list' | 'timeline' | 'audit' | 'marketplace'; label: string; icon: any }[] = [
-    { id: 'board', label: 'Kanban Board', icon: LayoutGrid },
-    { id: 'list', label: 'Task List View', icon: ListTodo },
-    { id: 'timeline', label: 'Timeline & Roadmap', icon: Calendar },
-    { id: 'audit', label: 'Auditor Review Queue', icon: ShieldCheck },
-    { id: 'marketplace', label: 'Public Marketplace', icon: Store }
+    { id: 'board', label: dict?.nav?.kanbanBoard || 'Kanban Board', icon: LayoutGrid },
+    { id: 'list', label: dict?.nav?.taskList || 'Task List View', icon: ListTodo },
+    { id: 'timeline', label: dict?.nav?.timeline || 'Timeline & Roadmap', icon: Calendar },
+    { id: 'audit', label: dict?.nav?.auditQueue || 'Auditor Review Queue', icon: ShieldCheck },
+    { id: 'marketplace', label: dict?.nav?.marketplace || 'Public Marketplace', icon: Store }
   ];
 
   return (
@@ -56,7 +58,7 @@ export function SidebarNav({
             </div>
             <div className="truncate">
               <span className="text-[10px] font-mono text-slate-400 font-medium">
-                ACTIVE WORKSPACE
+                {dict?.sidebar?.activeWorkspace || 'ACTIVE WORKSPACE'}
               </span>
               <h3 className="text-[14px] font-syne font-bold text-white truncate mt-0.5">{projectTitle}</h3>
             </div>
@@ -75,10 +77,10 @@ export function SidebarNav({
       {!collapsed && (
         <div className="p-4 pb-2">
           <Link
-            href="/onboarding"
+            href={`/${lang}/onboarding`}
             className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/5 font-mono text-[11px] font-medium transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
           >
-            <PlusCircle className="w-4 h-4 text-[#5EC8F2]" /> New Project
+            <PlusCircle className="w-4 h-4 text-[#5EC8F2]" /> {dict?.nav?.newProject || 'New Project'}
           </Link>
         </div>
       )}
@@ -87,7 +89,7 @@ export function SidebarNav({
       <div className="p-3 flex-1 space-y-1 overflow-y-auto">
         {!collapsed && (
           <span className="px-3 text-[10px] font-mono text-slate-500 font-medium my-3 block">
-            VIEWS & PANELS
+            {dict?.nav?.viewsAndPanels || 'VIEWS & PANELS'}
           </span>
         )}
 
@@ -117,7 +119,7 @@ export function SidebarNav({
         <div className="p-5 border-t border-white/5 bg-black/20">
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3 uppercase tracking-wider">
             <span className="flex items-center gap-1.5 font-medium">
-              <BarChart3 className="w-3.5 h-3.5 text-slate-500" /> Completion
+              <BarChart3 className="w-3.5 h-3.5 text-slate-500" /> {dict?.sidebar?.completion || 'Completion'}
             </span>
             <span className="text-white font-medium">
               {Math.round((completedTasks / totalTasks) * 100)}%
@@ -132,8 +134,8 @@ export function SidebarNav({
           </div>
 
           <div className="flex justify-between text-[10px] font-mono text-slate-500 uppercase tracking-widest">
-            <span>{completedTasks} Done</span>
-            <span>{totalTasks} Total</span>
+            <span>{completedTasks} {dict?.sidebar?.done || 'Done'}</span>
+            <span>{totalTasks} {dict?.sidebar?.total || 'Total'}</span>
           </div>
         </div>
       )}

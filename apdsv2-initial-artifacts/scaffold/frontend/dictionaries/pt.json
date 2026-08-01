@@ -1,0 +1,66 @@
+{
+  "nav": {
+    "onboarding": "Integração",
+    "projectStudio": "Estúdio de Projeto",
+    "auditorPortal": "Portal do Auditor",
+    "marketplace": "Mercado",
+    "activeManagementSuite": "Suíte de Gestão Ativa",
+    "signIn": "Entrar",
+    "nodeActive": "Nó Ativo",
+    "viewsAndPanels": "VISTAS E PAINÉIS",
+    "newProject": "Novo Projeto",
+    "kanbanBoard": "Quadro Kanban",
+    "taskList": "Lista de Tarefas",
+    "timeline": "Cronograma",
+    "auditQueue": "Fila de Auditoria"
+  },
+  "sidebar": {
+    "activeWorkspace": "ESPAÇO ATIVO",
+    "completion": "Progresso",
+    "done": "Concluído",
+    "total": "Total"
+  },
+  "kanban": {
+    "search": "Buscar 126 histórias...",
+    "col1": "1. Backlog e Requisitos",
+    "col2": "2. Design e Arquitetura",
+    "col3": "3. Execução Operacional",
+    "col4": "4. Revisão de Auditoria",
+    "col5": "5. Marco Liberado",
+    "all": "TODOS"
+  },
+  "project": {
+    "stage": "Fase",
+    "active": "ATIVO",
+    "marketplacePreview": "Pré-visualização do Mercado",
+    "stories126": "126 Histórias Kanban",
+    "performanceMetrics": "Métricas de Desempenho",
+    "prince2Tolerances": "Tolerâncias PRINCE2",
+    "qualityLogs": "Registros de Qualidade"
+  },
+  "evaluator": {
+    "title": "Auditoria de Marcos e Aprovação de Pagamentos",
+    "subtitle": "Verificação independente de telemetria de campo e conquistas de desempenho.",
+    "auditorPortal": "PORTAL DE AUDITOR DE QUALIDADE INDEPENDENTE",
+    "pendingVerifications": "Verificações de Marcos Pendentes",
+    "approveAndRelease": "Aprovar e Liberar",
+    "released": "Liberado",
+    "trancheAmount": "Valor da Parcela",
+    "performanceMetric": "Métrica de Desempenho",
+    "verificationSource": "Fonte de Verificação"
+  },
+  "marketplace": {
+    "yieldSimulator": "Simulador de Rendimento",
+    "predictiveModeling": "Modelagem financeira preditiva derivada de métricas RACER verificadas",
+    "conservative": "Conservador",
+    "baseCase": "Caso Base",
+    "optimistic": "Otimista",
+    "transparencyAudit": "Auditoria de Transparência",
+    "realTimeStream": "Fluxo de Auditoria em Tempo Real",
+    "activeFunding": "Financiamento Ativo de Ativos",
+    "estimatedApy": "APY Estimado",
+    "payoutFrequency": "Frequência de Pagamento",
+    "aiConfidence": "Confiança de IA",
+    "legalSummary": "Folha de Resumo Legal"
+  }
+}

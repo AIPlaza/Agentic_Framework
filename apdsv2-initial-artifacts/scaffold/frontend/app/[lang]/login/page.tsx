@@ -86,7 +86,7 @@ export default function LoginPage() {
             <motion.div 
               animate={error ? { x: [-4, 4, -4, 4, 0] } : {}}
               transition={{ duration: 0.4 }}
-              className="glass-platinum p-8 rounded-3xl relative overflow-hidden"
+              className="glass-blue-card p-8 rounded-3xl relative overflow-hidden"
             >
               <h2 className="text-xl font-syne font-bold text-white mb-6 uppercase tracking-tight">
                 Iniciar Sesión
