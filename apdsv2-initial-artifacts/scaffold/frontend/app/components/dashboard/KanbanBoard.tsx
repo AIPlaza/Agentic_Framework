@@ -7,53 +7,78 @@ import { TaskItem, TaskDetailModal } from './TaskDetailModal';
 import { useDictionary } from '@/app/components/DictionaryProvider';
 
 function generateInitialStories(projectTitle: string): TaskItem[] {
-  const categories = ['Strategy & Legal', 'Engineering & IoT', 'Quality & ISO 9001', 'Tokenomics & Tranches', 'Operations & Field'];
+  const categories = ['Grid & Structure', 'Typography', 'Chiaroscuro & Contrast', 'Visual Experience'];
   const priorities: ('CRITICAL' | 'HIGH' | 'NORMAL')[] = ['CRITICAL', 'HIGH', 'NORMAL'];
-  const assignees = ['Lead Architect', 'Field Operator #1', 'Independent Auditor (TPA)', 'Smart Contract Dev', 'Project Manager'];
+  const assignees = ['Lead Designer', 'UI Architect', 'UX Engineer', 'Motion Specialist'];
 
-  const baseTemplates = [
-    { title: 'Draft Project Brief & Executive Summary', cat: 'Strategy & Legal', status: 'DONE', p: 'HIGH' },
-    { title: 'Incorporate SPV Vehicle & Legal Ownership Structure', cat: 'Strategy & Legal', status: 'DONE', p: 'CRITICAL' },
-    { title: 'Map Logical Framework Impact -> Outcome -> Output Tree', cat: 'Strategy & Legal', status: 'DONE', p: 'CRITICAL' },
-    { title: 'Define RACER Performance Indicators & Verification Sources', cat: 'Tokenomics & Tranches', status: 'DONE', p: 'HIGH' },
-    { title: 'Deploy Smart Contract Escrow Vault for Tranche Disbursement', cat: 'Tokenomics & Tranches', status: 'EXECUTION', p: 'CRITICAL', usd: 45000 },
-    { title: 'Configure IoT Telemetry Sensor Gateways (MQTT / TLS)', cat: 'Engineering & IoT', status: 'EXECUTION', p: 'CRITICAL' },
-    { title: 'Establish Cold Chain & Storage Temperature Baseline (<4°C)', cat: 'Quality & ISO 9001', status: 'EXECUTION', p: 'HIGH' },
-    { title: 'Set Up PRINCE2 Budget Tolerance Alerting Threshold (+10%)', cat: 'Strategy & Legal', status: 'DESIGN', p: 'NORMAL' },
-    { title: 'Set Up PRINCE2 Schedule Deviation Alerting Threshold (+15%)', cat: 'Strategy & Legal', status: 'DESIGN', p: 'NORMAL' },
-    { title: 'Implement Daily Operational Quality Log Schema (ISO 9001)', cat: 'Quality & ISO 9001', status: 'DESIGN', p: 'HIGH' },
-    { title: 'Independent Auditor Verification of Milestone #1 Deliverables', cat: 'Quality & ISO 9001', status: 'AUDIT', p: 'CRITICAL', usd: 25000 },
-    { title: 'Publish Glassmorphism Public Marketplace Fiche & Return Simulator', cat: 'Tokenomics & Tranches', status: 'DONE', p: 'HIGH' },
-    { title: 'Connect Real-Time Audit Stream to Investor Transparency Portal', cat: 'Engineering & IoT', status: 'EXECUTION', p: 'HIGH' },
-    { title: 'Conduct 5-Why Root Cause Analysis for Relay Transfer Variance', cat: 'Quality & ISO 9001', status: 'AUDIT', p: 'CRITICAL' },
-    { title: 'Finalize Tranche #2 Payout Rules with Independent TPA Auditor', cat: 'Tokenomics & Tranches', status: 'BACKLOG', p: 'HIGH', usd: 35000 }
+  const vignelliStories = [
+    { title: "Define the 12-Column Modular Swiss Grid Layout System", cat: "Grid & Structure" },
+    { title: "Establish Baseline Grid for Vertical Rhythm & Harmony", cat: "Grid & Structure" },
+    { title: "Configure Primary Typography Scales (Modular Scale Ratio 1.250)", cat: "Typography" },
+    { title: "Select 'Syne' as Display Font for Bold Hero Statements", cat: "Typography" },
+    { title: "Implement 'JetBrains Mono' for Data Tables and Code Snippets", cat: "Typography" },
+    { title: "Design the 'Chiaroscuro Sandwich' Layout Architecture", cat: "Chiaroscuro & Contrast" },
+    { title: "Create Pure White (#FFFFFF) Diffuminated Workspace Gradient", cat: "Chiaroscuro & Contrast" },
+    { title: "Build Deep Blue Cinematic Background Overlay (#0a1128)", cat: "Chiaroscuro & Contrast" },
+    { title: "Add Subtle Grain Overlay for Cinematic Texture Depth", cat: "Visual Experience" },
+    { title: "Implement 3D Drop Shadows on Hover States (0_20px_50px)", cat: "Visual Experience" },
+    { title: "Design Glassmorphic Transparent Cards for Dark Modes", cat: "Chiaroscuro & Contrast" },
+    { title: "Configure CSS Container Queries for Fluid Grid Adaptation", cat: "Grid & Structure" },
+    { title: "Apply Vignelli's Principle of Semantic Structural Alignment", cat: "Grid & Structure" },
+    { title: "Set Optimal Line-Height (1.5 - 1.7) for Reading Ergonomics", cat: "Typography" },
+    { title: "Ensure WCAG AAA Contrast Ratio for All Text on Light Cards", cat: "Typography" },
+    { title: "Develop Horizontal Gradient Fade on the Left Navigation Bar", cat: "Chiaroscuro & Contrast" },
+    { title: "Design Micro-Interactions for Button Hover States", cat: "Visual Experience" },
+    { title: "Implement Scroll-Driven Parallax Animations on Hero Section", cat: "Visual Experience" },
+    { title: "Create the 'Archetype Silhouette' Grayscale Watermark", cat: "Visual Experience" },
+    { title: "Anchor Typography to the Baseline Grid Structurally", cat: "Grid & Structure" },
+    { title: "Remove Extraneous Borders to Embrace White Space", cat: "Grid & Structure" },
+    { title: "Design Minimalist Pill-Shaped Navigation Menus", cat: "Grid & Structure" },
+    { title: "Configure Dynamic Color Tokens in globals.css", cat: "Chiaroscuro & Contrast" },
+    { title: "Implement Backdrop-Filter Blurs (20px) on Dark Overlays", cat: "Chiaroscuro & Contrast" },
+    { title: "Optimize Web Fonts Loading with Preload and Display Swap", cat: "Typography" },
+    { title: "Adjust Tracking (Letter-Spacing) for Uppercase Headers", cat: "Typography" },
+    { title: "Establish Visual Hierarchy using Size and Weight", cat: "Typography" },
+    { title: "Refine Transition Timings (duration-300, ease-out)", cat: "Visual Experience" },
+    { title: "Design Skeleton Loading States for Data Fetching", cat: "Visual Experience" },
+    { title: "Ensure Responsive Typography (Clamp functions)", cat: "Typography" },
+    { title: "Structure the 'Z-Pattern' Reading Flow on Dashboards", cat: "Grid & Structure" },
+    { title: "Implement 'F-Pattern' Scanning for Data Tables", cat: "Grid & Structure" },
+    { title: "Balance Positive and Negative Space (Vignelli Canon)", cat: "Grid & Structure" },
+    { title: "Define the Corporate Ink Color Palette (Teal, Amber, Slate)", cat: "Chiaroscuro & Contrast" },
+    { title: "Create High-Contrast Focus Rings for Accessibility", cat: "Chiaroscuro & Contrast" },
+    { title: "Develop View Transitions API for Seamless Page Loads", cat: "Visual Experience" },
+    { title: "Design Contextual Tooltips with Micro-Delays", cat: "Visual Experience" },
+    { title: "Implement Sticky Headers with Blur Backgrounds", cat: "Visual Experience" },
+    { title: "Define Max-Width Constraints for Optimal Line Length (65 chars)", cat: "Typography" },
+    { title: "Align all Elements to the Left (No Centered Body Text)", cat: "Grid & Structure" },
+    { title: "Implement Alternating Odd/Even Card Aesthethics", cat: "Chiaroscuro & Contrast" },
+    { title: "Finalize Polish of the '42 Visual Stories' Implementation", cat: "Visual Experience" }
   ];
 
   const stories: TaskItem[] = [];
 
-  for (let i = 1; i <= 126; i++) {
-    const base = baseTemplates[(i - 1) % baseTemplates.length];
-    const cat = categories[(i - 1) % categories.length];
-    const priority = (base.p || priorities[i % 3]) as 'CRITICAL' | 'HIGH' | 'NORMAL';
+  for (let i = 0; i < 42; i++) {
+    const base = vignelliStories[i];
+    const priority = priorities[i % 3];
     const assignee = assignees[i % assignees.length];
 
     let status: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE' = 'BACKLOG';
-    if (i <= 48) status = 'DONE';
-    else if (i <= 78) status = 'EXECUTION';
-    else if (i <= 96) status = 'AUDIT';
-    else if (i <= 112) status = 'DESIGN';
+    if (i < 12) status = 'DONE';
+    else if (i < 24) status = 'EXECUTION';
+    else if (i < 34) status = 'AUDIT';
+    else if (i < 38) status = 'DESIGN';
 
     stories.push({
-      id: `TASK-${String(i).padStart(3, '0')}`,
-      title: `${base.title}`,
-      category: cat,
+      id: `DESIGN-${String(i + 1).padStart(3, '0')}`,
+      title: base.title,
+      category: base.cat,
       priority,
       status,
       assignee,
-      payoutUsd: i % 7 === 0 ? 15000 + i * 250 : undefined,
-      description: `Operational story requirement for ${projectTitle}. Ensures full ISO 9001 quality standards and milestone disbursement compliance.`,
-      racerMetric: i % 7 === 0 ? `Metric #${i} Audit Standard` : undefined,
-      whyAnalysis: i % 15 === 0 ? [`Why 1: Variance in telemetry pulse #${i}`, `Why 2: Scheduled sensor recalibration required.`] : undefined
+      payoutUsd: i % 5 === 0 ? 1200 + i * 50 : undefined,
+      description: `Implementation of the Vignelli Canon design principle: ${base.title}.`,
+      racerMetric: i % 4 === 0 ? `Visual Standard #${i + 1}` : undefined
     });
   }
 
@@ -95,7 +120,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
           <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
-            placeholder={dict?.kanban?.search || 'Search 126 stories...'}
+            placeholder={dict?.kanban?.search || 'Search 42 stories...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
@@ -104,7 +129,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-[11px] uppercase tracking-wider">
-          {['ALL', 'Strategy & Legal', 'Engineering & IoT', 'Quality & ISO 9001', 'Tokenomics & Tranches'].map((cat) => (
+          {['ALL', 'Grid & Structure', 'Typography', 'Chiaroscuro & Contrast', 'Visual Experience'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -147,20 +172,20 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     key={task.id}
                     layout
                     onClick={() => setSelectedTask(task)}
-                    className="glass-blue-card p-4 space-y-3 cursor-pointer group relative"
+                    className="glass-blue-gradient-card p-5 space-y-4 cursor-pointer group relative overflow-hidden"
                   >
                     {/* Top ID & Priority */}
-                    <div className="flex justify-between items-center">
-                      <span className="text-[10px] font-mono font-medium text-[#5EC8F2] group-hover:text-white transition-colors">
+                    <div className="flex justify-between items-center relative z-10">
+                      <span className="text-[11px] font-mono font-semibold text-[#5EC8F2] group-hover:text-white transition-colors tracking-wide">
                         {task.id}
                       </span>
                       <span
-                        className={`text-[9px] font-mono px-2 py-0.5 rounded-md ${
+                        className={`text-[9px] font-mono px-2.5 py-1 rounded-md tracking-wider font-semibold ${
                           task.priority === 'CRITICAL'
-                            ? 'bg-red-500/10 text-red-400 border border-red-500/20'
+                            ? 'bg-red-500/20 text-red-300 border border-red-500/30'
                             : task.priority === 'HIGH'
-                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-                            : 'bg-white/5 text-slate-400 border border-white/5'
+                            ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
+                            : 'bg-white/10 text-slate-300 border border-white/10'
                         }`}
                       >
                         {task.priority}
@@ -168,24 +193,24 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     </div>
 
                     {/* Title */}
-                    <p className="text-[13px] font-sans font-medium text-slate-200 group-hover:text-white leading-relaxed">
+                    <p className="text-[14px] font-sans font-medium text-white group-hover:text-[#5ED7F2] leading-relaxed relative z-10 transition-colors">
                       {task.title}
                     </p>
 
                     {/* Category Tag */}
-                    <div className="text-[10px] font-mono text-slate-500">
+                    <div className="text-[10px] font-mono text-slate-400 relative z-10 uppercase tracking-widest">
                       <span>{task.category}</span>
                     </div>
 
                     {/* Bottom Metadata */}
-                    <div className="pt-3 flex items-center justify-between text-[10px] font-mono text-slate-500">
-                      <span className="flex items-center gap-1.5">
-                        <User className="w-3 h-3 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
+                    <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-slate-300 relative z-10 border-t border-white/10">
+                      <span className="flex items-center gap-1.5 font-medium">
+                        <User className="w-3.5 h-3.5 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
                       </span>
 
                       {task.payoutUsd && (
-                        <span className="text-[#5EC8F2] font-semibold flex items-center">
-                          <DollarSign className="w-3 h-3 -mr-0.5" />
+                        <span className="text-[#5EC8F2] font-bold flex items-center bg-[#5EC8F2]/10 px-2 py-0.5 rounded">
+                          <DollarSign className="w-3.5 h-3.5 -mr-0.5" />
                           {task.payoutUsd.toLocaleString()}
                         </span>
                       )}

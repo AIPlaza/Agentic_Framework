@@ -30,7 +30,7 @@ export default function HeaderNav() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-3xl bg-black/40 border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-3xl bg-gradient-to-r from-[#0a1128] via-[#0a1128]/80 to-transparent border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-shadow duration-500">
       {/* Signature Decorator Line - Subtle */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#5EC8F2]/30 to-transparent" />
 

@@ -139,39 +139,40 @@ export default function ProjectBoard({ params }: { params: any }) {
       />
 
       {/* Main Workspace Area */}
-      <main className="flex-1 p-6 md:p-12 overflow-y-auto max-w-7xl mx-auto z-20 relative">
-        {/* Header Section (Minimalist style) */}
-        <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div>
-            <div className="flex items-center gap-3 mb-4">
-              <span className="px-3 py-1 bg-white/5 text-slate-300 border border-white/10 rounded-md text-[10px] font-mono uppercase tracking-wider">
-                {dict?.project?.stage || 'Stage'} {project?.devLevel || 3} / 5
-              </span>
-              <span className="px-3 py-1 bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono uppercase tracking-wider">
-                {project?.status === 'ACTIVE' ? (dict?.project?.active || 'ACTIVE') : project?.status}
-              </span>
+      <main className="flex-1 p-6 md:p-12 overflow-y-auto w-full z-20 relative bg-gradient-to-br from-white to-slate-100">
+        <div className="max-w-7xl mx-auto">
+          {/* Header Section (Minimalist style) */}
+          <header className="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+            <div>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="px-3 py-1 bg-slate-100 text-slate-500 border border-slate-200 rounded-md text-[10px] font-mono uppercase tracking-wider">
+                  {dict?.project?.stage || 'Stage'} {project?.devLevel || 3} / 5
+                </span>
+                <span className="px-3 py-1 bg-amber-50 text-amber-600 border border-amber-200 rounded-md text-[10px] font-mono uppercase tracking-wider">
+                  {project?.status === 'ACTIVE' ? (dict?.project?.active || 'ACTIVE') : project?.status}
+                </span>
+              </div>
+              <h1 className="text-3xl md:text-5xl font-syne font-bold text-[#5EC8F2] tracking-tight">
+                {project?.title}
+              </h1>
+              <p className="text-slate-600 text-[15px] mt-4 max-w-2xl font-sans leading-relaxed">
+                {project?.description}
+              </p>
             </div>
-            <h1 className="text-3xl md:text-5xl font-syne font-bold text-white tracking-tight">
-              {project?.title}
-            </h1>
-            <p className="text-slate-300 text-[15px] mt-4 max-w-2xl font-sans leading-relaxed">
-              {project?.description}
-            </p>
-          </div>
 
-          <div className="flex items-center gap-4 flex-shrink-0 pb-1">
-            <button
-              onClick={fetchProject}
-              className="p-3 bg-white/5 hover:bg-white/10 rounded-xl text-slate-400 hover:text-white border border-white/5 transition-colors"
-            >
+            <div className="flex items-center gap-4 flex-shrink-0 pb-1">
+              <button
+                onClick={fetchProject}
+                className="p-3 bg-white hover:bg-slate-50 rounded-full text-slate-500 hover:text-slate-900 border border-slate-200 transition-colors shadow-sm"
+              >
               <RefreshCw className="w-4 h-4" />
             </button>
-            <a
-              href={`/${lang}/marketplace/${project?.id || 'demo-project-001'}`}
-              className="px-6 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/10 font-mono text-[11px] uppercase tracking-wider rounded-xl transition-all flex items-center gap-2"
-            >
-              {dict?.project?.marketplacePreview || 'Marketplace Preview'} <ExternalLink className="w-4 h-4 text-[#5EC8F2]" />
-            </a>
+              <a
+                href={`/${lang}/marketplace/${project?.id || 'demo-project-001'}`}
+                className="px-6 py-2.5 rounded-full text-[12px] font-sans font-semibold text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-all flex items-center gap-2 shadow-md"
+              >
+                {dict?.project?.marketplacePreview || 'Marketplace Preview'} <ExternalLink className="w-4 h-4 text-[#050505]" />
+              </a>
           </div>
         </header>
 
@@ -181,45 +182,45 @@ export default function ProjectBoard({ params }: { params: any }) {
             {/* Top Sub-tabs Bar (12px radius, Mono font) */}
             <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-wider">
               <button
-                onClick={() => setActiveTab('logframe')}
-                className={`px-5 py-2.5 rounded-xl transition-all ${
-                  activeTab === 'logframe'
-                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
-                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
-                }`}
-              >
-                {dict?.project?.stories126 || '126 Kanban Stories'}
-              </button>
-              <button
-                onClick={() => setActiveTab('racer')}
-                className={`px-5 py-2.5 rounded-xl transition-all ${
-                  activeTab === 'racer'
-                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
-                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
-                }`}
-              >
-                {dict?.project?.performanceMetrics || 'Performance Metrics'}
-              </button>
-              <button
-                onClick={() => setActiveTab('governance')}
-                className={`px-5 py-2.5 rounded-xl transition-all ${
-                  activeTab === 'governance'
-                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
-                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
-                }`}
-              >
-                {dict?.project?.prince2Tolerances || 'PRINCE2 Tolerances'}
-              </button>
-              <button
-                onClick={() => setActiveTab('checklists')}
-                className={`px-5 py-2.5 rounded-xl transition-all ${
-                  activeTab === 'checklists'
-                    ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
-                    : 'text-slate-400 hover:text-white bg-transparent border border-white/5 hover:bg-white/5'
-                }`}
-              >
-                {dict?.project?.qualityLogs || 'Quality Logs'}
-              </button>
+                  onClick={() => setActiveTab('logframe')}
+                  className={`px-5 py-2.5 rounded-full transition-all font-medium ${
+                    activeTab === 'logframe'
+                      ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] shadow-md border border-transparent'
+                      : 'text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  {dict?.project?.stories126 || '126 Kanban Stories'}
+                </button>
+                <button
+                  onClick={() => setActiveTab('racer')}
+                  className={`px-5 py-2.5 rounded-full transition-all font-medium ${
+                    activeTab === 'racer'
+                      ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] shadow-md border border-transparent'
+                      : 'text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  {dict?.project?.performanceMetrics || 'Performance Metrics'}
+                </button>
+                <button
+                  onClick={() => setActiveTab('governance')}
+                  className={`px-5 py-2.5 rounded-full transition-all font-medium ${
+                    activeTab === 'governance'
+                      ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] shadow-md border border-transparent'
+                      : 'text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  {dict?.project?.prince2Tolerances || 'PRINCE2 Tolerances'}
+                </button>
+                <button
+                  onClick={() => setActiveTab('checklists')}
+                  className={`px-5 py-2.5 rounded-full transition-all font-medium ${
+                    activeTab === 'checklists'
+                      ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] shadow-md border border-transparent'
+                      : 'text-slate-500 hover:text-slate-900 bg-white border border-slate-200 hover:bg-slate-50'
+                  }`}
+                >
+                  {dict?.project?.qualityLogs || 'Quality Logs'}
+                </button>
             </div>
 
             {activeTab === 'logframe' && <KanbanBoard projectTitle={project?.title} />}
@@ -243,7 +244,7 @@ export default function ProjectBoard({ params }: { params: any }) {
         {activeView === 'audit' && (
           <div className="p-10 glass-blue-card space-y-6">
             <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.auditQueue || 'Auditor Review Queue'}</h2>
-            <a href={`/${lang}/evaluator`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
+            <a href={`/${lang}/evaluator`} className="inline-block px-8 py-3 rounded-full text-[13px] font-sans font-semibold text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-all shadow-md">
               {dict?.evaluator?.auditorPortal || 'INDEPENDENT QUALITY AUDITOR PORTAL'} →
             </a>
           </div>
@@ -253,11 +254,12 @@ export default function ProjectBoard({ params }: { params: any }) {
         {activeView === 'marketplace' && (
           <div className="p-10 glass-blue-card space-y-6">
             <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.marketplace || 'Public Marketplace Preview'}</h2>
-            <a href={`/${lang}/marketplace/${project?.id}`} className="inline-block px-8 py-3.5 bg-white/10 hover:bg-white/20 text-white font-mono text-[11px] uppercase tracking-widest rounded-xl border border-white/10 transition-all">
+            <a href={`/${lang}/marketplace/${project?.id}`} className="inline-block px-8 py-3 rounded-full text-[13px] font-sans font-semibold text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-all shadow-md">
               {dict?.project?.marketplacePreview || 'Marketplace Preview'} →
             </a>
           </div>
         )}
+        </div>
       </main>
     </div>
   );

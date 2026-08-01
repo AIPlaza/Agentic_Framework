@@ -44,7 +44,7 @@ export function SidebarNav({
 
   return (
     <aside
-      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col glass-blue-card border-none border-r border-white/5 ${
+      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col bg-gradient-to-r from-[#0a1128] via-[#0a1128]/60 to-transparent border-none ${
         collapsed ? 'w-20' : 'w-72'
       }`}
       style={{ borderRadius: '0' }}
