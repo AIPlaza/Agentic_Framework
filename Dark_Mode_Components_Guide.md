@@ -5,15 +5,15 @@ This document is the hyper-detailed technical reference for constructing **Dark 
 ---
 
 ## 1. Backgrounds & "The Netflix Effect"
-**Rule:** Deep backgrounds use **Avalanche Dark Blue (`#1A1A2E`)**. Do NOT use pure black (`#000000`).
+**Rule:** Deep backgrounds use **Avalanche Dark Blue (`#3866B3`)**. Do NOT use pure black (`#000000`).
 
 **CRITICAL COMPONENT RULE (Added Aug 2, 2026):** 
-**NEVER** manually write out Tailwind classes to construct the "Netflix Effect" background (the `#1A1A2E` gradient overlay, vignettes, or grains) on a page. You **MUST** import and use the `<CinematicBackground />` component. This prevents LLM hallucinations and drift in gradient tokens. 
+**NEVER** manually write out Tailwind classes to construct the "Netflix Effect" background (the `#3866B3` gradient overlay, vignettes, or grains) on a page. You **MUST** import and use the `<CinematicBackground />` component. This prevents LLM hallucinations and drift in gradient tokens. 
 Example usage: `<CinematicBackground mediaType="video" src="/hero-video.mov" />` or `<CinematicBackground />`.
 
 ### Layer 1: Base & Image
 ```tsx
-<div className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#1A1A2E]">
+<div className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#3866B3]">
   <img 
     src="/images/accet-arq-main-1.JPG"
     alt="Background"
@@ -21,13 +21,13 @@ Example usage: `<CinematicBackground mediaType="video" src="/hero-video.mov" />`
   />
 </div>
 ```
-- **Base Color:** `#1A1A2E`
+- **Base Color:** `#3866B3`
 - **Image Treatment:** Dropped to `25%` opacity, slight `blur-sm`, desaturated by `50%`, and scaled to `105%` to prevent edge bleeding on blur.
 
 ### Layer 2: Netflix Gradients
 ```tsx
 {/* Left-to-Right Fade */}
-<div className="absolute inset-0 bg-gradient-to-r from-[#1A1A2E] via-[#1A1A2E]/80 to-transparent" />
+<div className="absolute inset-0 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent" />
 {/* Radial Vignette */}
 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90" />
 ```
