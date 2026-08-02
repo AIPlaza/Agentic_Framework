@@ -6,6 +6,7 @@ export function createClient() {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookieOptions: {
+        domain: process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.accet.com',
         maxAge: 60 * 60 * 24 * 7, // 7 days
         path: '/',
         sameSite: 'lax',

@@ -36,17 +36,17 @@ export default function HeaderNav() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Brand Logo with Official ACCET Asset */}
-        <Link href={`/${lang}/project/demo-project-001`} className="flex items-center gap-4 group">
-          <div className="relative w-8 h-8 flex items-center justify-center">
+        <div className="flex items-center gap-4">
+          <a href={process.env.NEXT_PUBLIC_LANDING_URL || 'http://localhost:3000'} className="relative w-8 h-8 flex items-center justify-center cursor-pointer group">
             <Image
               src="/logo.png"
               alt="ACCET Logo"
               width={32}
               height={32}
-              className="object-contain filter drop-shadow opacity-90 group-hover:opacity-100 transition-opacity"
+              className="object-contain filter drop-shadow opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all"
             />
-          </div>
-          <div>
+          </a>
+          <Link href={`/${lang}`} className="block group cursor-pointer">
             <div className="flex items-center gap-2">
               <span className="font-sans text-lg font-semibold tracking-wide text-white group-hover:text-[#5EC8F2] transition-colors">
                 ACCET
@@ -55,11 +55,11 @@ export default function HeaderNav() {
                 v1.0.7
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 font-sans tracking-widest uppercase">
+            <p className="text-[10px] text-slate-400 font-sans tracking-widest uppercase group-hover:text-slate-300 transition-colors">
               {dict?.nav?.activeManagementSuite || 'Active Management Suite'}
             </p>
-          </div>
-        </Link>
+          </Link>
+        </div>
 
         {/* Center Navigation Menu - Minimalist Pills */}
         <nav className="hidden md:flex items-center gap-1">

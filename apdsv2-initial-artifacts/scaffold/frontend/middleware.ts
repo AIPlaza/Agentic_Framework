@@ -68,14 +68,16 @@ export async function middleware(request: NextRequest) {
             return request.cookies.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            request.cookies.set({ name, value, ...options })
+            const domain = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.accet.com'
+            request.cookies.set({ name, value, ...options, domain })
             response = NextResponse.next({ request: { headers: request.headers } })
-            response.cookies.set({ name, value, ...options })
+            response.cookies.set({ name, value, ...options, domain })
           },
           remove(name: string, options: CookieOptions) {
-            request.cookies.set({ name, value: '', ...options })
+            const domain = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.accet.com'
+            request.cookies.set({ name, value: '', ...options, domain })
             response = NextResponse.next({ request: { headers: request.headers } })
-            response.cookies.set({ name, value: '', ...options })
+            response.cookies.set({ name, value: '', ...options, domain })
           },
         },
       }
