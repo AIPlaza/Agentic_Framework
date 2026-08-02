@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { CinematicBackground } from '@/app/components/auth/CinematicBackground';
+import CinematicBackground from '@/app/components/auth/CinematicBackground';
 
 export function MarketplaceHero() {
   const containerRef = useRef<HTMLDivElement>(null);
