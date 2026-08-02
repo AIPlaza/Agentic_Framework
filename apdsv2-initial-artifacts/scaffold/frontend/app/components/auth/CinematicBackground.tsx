@@ -35,7 +35,7 @@ export default function CinematicBackground({
   }, [mediaType]);
 
   return (
-    <div className={`${position} inset-0 z-0 pointer-events-none parallax-layer bg-[#3866B3] ${className}`} data-parallax-speed="0.15">
+    <div className={`${position} inset-0 z-0 pointer-events-none parallax-layer bg-[#1A1A2E] ${className}`} data-parallax-speed="0.15">
       {mediaType === 'video' ? (
         <video 
           ref={videoRef}
@@ -57,11 +57,11 @@ export default function CinematicBackground({
         />
       )}
       
-      {/* Netflix Left Blur & Cinematic Blue Gradient Overlay */}
-      <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent backdrop-blur-[4px] z-10"></div>
+      {/* Netflix Left Blur & Cinematic Gradient Overlay */}
+      <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-r from-[#1A1A2E] via-[#1A1A2E]/80 to-transparent backdrop-blur-[4px] z-10"></div>
       
       {/* Overlays for blend and readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#3866B3]/90 via-transparent to-[#1A1A2E]/20 z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#1A1A2E]/90 via-transparent to-[#1A1A2E]/20 z-10"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90 z-10"></div>
       <div className="absolute inset-0 vignette z-10"></div>
       <div className="absolute inset-0 grain z-10"></div>
