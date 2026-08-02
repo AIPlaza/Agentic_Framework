@@ -25,12 +25,12 @@ export default function HeaderNav() {
     },
     {
       name: dict?.nav?.marketplace || 'Marketplace',
-      href: `/${lang}/marketplace/demo-project-001`,
+      href: `/${lang}/marketplace`,
     }
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full backdrop-blur-3xl bg-gradient-to-r from-[#0a1128] via-[#0a1128]/80 to-transparent border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.8)] transition-shadow duration-500">
+    <header className="sticky top-0 z-50 w-full backdrop-blur-3xl bg-black/40 border-b border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.5)]">
       {/* Signature Decorator Line - Subtle */}
       <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-[#5EC8F2]/30 to-transparent" />
 
@@ -84,7 +84,7 @@ export default function HeaderNav() {
 
         {/* Right Status / Auth */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A1A2E]/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
             <span>{dict?.nav?.nodeActive || 'Node Active'}</span>
           </div>
