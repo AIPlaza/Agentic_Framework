@@ -5,9 +5,16 @@ interface CinematicBackgroundProps {
   src?: string;
   className?: string;
   opacity?: number;
+  position?: 'fixed' | 'absolute';
 }
 
-export default function CinematicBackground({ mediaType = 'image', src = '/images/accet-arq-main-1.JPG', className = '', opacity = 25 }: CinematicBackgroundProps) {
+export default function CinematicBackground({ 
+  mediaType = 'image', 
+  src = '/images/accet-arq-main-1.JPG', 
+  className = '', 
+  opacity = 25,
+  position = 'fixed'
+}: CinematicBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -28,7 +35,7 @@ export default function CinematicBackground({ mediaType = 'image', src = '/image
   }, [mediaType]);
 
   return (
-    <div className={`fixed inset-0 z-0 pointer-events-none parallax-layer bg-[#3866B3] ${className}`} data-parallax-speed="0.15">
+    <div className={`${position} inset-0 z-0 pointer-events-none parallax-layer bg-[#3866B3] ${className}`} data-parallax-speed="0.15">
       {mediaType === 'video' ? (
         <video 
           ref={videoRef}
