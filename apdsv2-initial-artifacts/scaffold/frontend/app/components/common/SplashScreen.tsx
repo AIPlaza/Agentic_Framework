@@ -80,7 +80,7 @@ export default function SplashScreen() {
       </div>
 
       {/* Status caption */}
-      <div className="absolute bottom-16 px-8 py-3 bg-black/60 backdrop-blur-xl border border-white/5 rounded-full text-white/40 font-mono text-[9px] tracking-widest uppercase"
+      <div className="absolute bottom-16 px-8 py-3 bg-[#1A1A2E]/60 backdrop-blur-xl border border-white/5 rounded-full text-white/40 font-mono text-[9px] tracking-widest uppercase"
         style={{ animation: 'fade-in 1.5s ease-out 1s both' }}>
         <span className="text-[#5EC8F2]/60 mr-2">Status:</span> INITIALIZING COMPLIANCE PROTOCOL [APDS-v2.0]...
       </div>

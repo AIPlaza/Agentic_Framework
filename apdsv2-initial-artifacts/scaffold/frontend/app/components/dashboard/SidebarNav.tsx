@@ -116,7 +116,7 @@ export function SidebarNav({
 
       {/* Bottom Progress Widget */}
       {!collapsed && (
-        <div className="p-5 border-t border-white/5 bg-black/20">
+        <div className="p-5 border-t border-white/5 bg-[#1A1A2E]/20">
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-400 mb-3 uppercase tracking-wider">
             <span className="flex items-center gap-1.5 font-medium">
               <BarChart3 className="w-3.5 h-3.5 text-slate-500" /> {dict?.sidebar?.completion || 'Completion'}

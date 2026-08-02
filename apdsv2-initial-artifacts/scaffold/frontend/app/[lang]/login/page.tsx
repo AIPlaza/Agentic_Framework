@@ -47,7 +47,7 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center p-4 bg-[#020624] overflow-hidden">
+    <div className="relative min-h-screen flex flex-col items-center justify-center p-4 bg-[#1A1A2E] overflow-hidden">
       {/* Cinematic Background Engine */}
       <CinematicBackground />
 
@@ -72,7 +72,7 @@ export default function LoginPage() {
                 alt="ACCET Logo" 
                 width={80} 
                 height={80} 
-                className="mb-5 rounded-2xl bg-[#5EC8F2]/20 p-2 shadow-[0_0_30px_rgba(94,200,242,0.25)] border border-[#5EC8F2]/30"
+                className="mb-5 rounded-xl bg-[#5EC8F2]/20 p-2 shadow-[0_0_30px_rgba(94,200,242,0.25)] border border-[#5EC8F2]/30"
                 priority
               />
               <h1 className="text-4xl font-syne font-black text-white tracking-tight mb-1 uppercase">
@@ -86,7 +86,7 @@ export default function LoginPage() {
             <motion.div 
               animate={error ? { x: [-4, 4, -4, 4, 0] } : {}}
               transition={{ duration: 0.4 }}
-              className="glass-blue-card p-8 rounded-3xl relative overflow-hidden"
+              className="glass-blue-card p-8 rounded-xl relative overflow-hidden"
             >
               <h2 className="text-xl font-syne font-bold text-white mb-6 uppercase tracking-tight">
                 Iniciar Sesión
@@ -101,7 +101,7 @@ export default function LoginPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
+                    className="w-full bg-[#1A1A2E]/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
                     placeholder="accet.project@gmail.com"
                     required
                   />
@@ -115,7 +115,7 @@ export default function LoginPage() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="w-full bg-black/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
+                    className="w-full bg-[#1A1A2E]/50 border border-white/15 rounded-xl px-4 py-3.5 text-white focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all font-sans outline-none font-medium placeholder-slate-500"
                     placeholder="••••••••"
                     required
                   />

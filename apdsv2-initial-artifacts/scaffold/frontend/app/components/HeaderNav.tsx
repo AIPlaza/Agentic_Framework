@@ -84,7 +84,7 @@ export default function HeaderNav() {
 
         {/* Right Status / Auth */}
         <div className="flex items-center gap-4">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#1A1A2E]/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
             <span>{dict?.nav?.nodeActive || 'Node Active'}</span>
           </div>

@@ -123,7 +123,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
             placeholder={dict?.kanban?.search || 'Search 42 stories...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-black/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
+            className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
           />
         </div>
 

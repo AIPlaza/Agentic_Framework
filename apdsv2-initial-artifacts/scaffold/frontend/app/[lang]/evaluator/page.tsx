@@ -105,12 +105,12 @@ export default function EvaluatorPortal() {
           </h2>
 
           {loading ? (
-            <div className="p-16 text-center text-slate-400 bg-black/20 border border-white/5 rounded-xl backdrop-blur-xl">
+            <div className="p-16 text-center text-slate-400 bg-[#1A1A2E]/20 border border-white/5 rounded-xl backdrop-blur-xl">
               <RefreshCw className="w-6 h-6 text-[#5EC8F2] animate-spin mx-auto mb-4" />
               <p className="text-[13px] font-mono uppercase tracking-widest">{dict?.common?.loading || 'Loading...'}</p>
             </div>
           ) : reports.length === 0 ? (
-            <div className="p-16 text-center text-slate-500 bg-black/20 border border-white/5 rounded-xl backdrop-blur-xl text-[13px] font-mono uppercase tracking-widest">
+            <div className="p-16 text-center text-slate-500 bg-[#1A1A2E]/20 border border-white/5 rounded-xl backdrop-blur-xl text-[13px] font-mono uppercase tracking-widest">
               No milestone verification requests pending audit.
             </div>
           ) : (

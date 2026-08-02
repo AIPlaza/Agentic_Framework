@@ -130,7 +130,7 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <FileText className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
@@ -152,7 +152,7 @@ export default function OnboardingPage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-black/20 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
+                    className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
                     placeholder="e.g. Clean Biogas & Agroindustrial Facility"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -175,7 +175,7 @@ export default function OnboardingPage() {
                         className={`py-4 px-4 rounded-xl font-sans text-[12px] uppercase tracking-wide font-medium transition-all border ${
                           formData.vertical === v.id
                             ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] border-transparent shadow-[0_0_20px_rgba(94,200,242,0.3)]'
-                            : 'bg-black/20 text-slate-300 border-white/5 hover:border-white/10 hover:bg-white/5'
+                            : 'bg-[#1A1A2E]/20 text-slate-300 border-white/5 hover:border-white/10 hover:bg-white/5'
                         }`}
                       >
                         {v.label}
@@ -207,7 +207,7 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <Cpu className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
@@ -231,7 +231,7 @@ export default function OnboardingPage() {
                   </label>
                   <textarea
                     rows={7}
-                    className="w-full bg-black/20 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
+                    className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
                     placeholder="Describe the asset, target production goals, quality standards, and milestone targets..."
                     value={formData.brief}
                     onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
@@ -242,7 +242,7 @@ export default function OnboardingPage() {
                   <label className="block text-[11px] font-sans text-slate-400 uppercase tracking-widest mb-3 font-medium">
                     Supporting Documents
                   </label>
-                  <div className="border border-dashed border-white/20 hover:border-white/40 rounded-xl p-8 flex flex-col items-center justify-center text-center bg-black/20 hover:bg-white/5 transition-all relative group cursor-pointer">
+                  <div className="border border-dashed border-white/20 hover:border-white/40 rounded-xl p-8 flex flex-col items-center justify-center text-center bg-[#1A1A2E]/20 hover:bg-white/5 transition-all relative group cursor-pointer">
                     <input
                       type="file"
                       className="absolute inset-0 opacity-0 cursor-pointer"
@@ -261,7 +261,7 @@ export default function OnboardingPage() {
                       {documents.map((d, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-3 bg-black/40 border border-white/5 p-3 rounded-xl text-[13px] text-slate-300"
+                          className="flex items-center gap-3 bg-[#1A1A2E]/40 border border-white/5 p-3 rounded-xl text-[13px] text-slate-300"
                         >
                           <File className="w-4 h-4 text-slate-400" />
                           <span className="truncate flex-1 font-sans">{d.name}</span>
@@ -276,7 +276,7 @@ export default function OnboardingPage() {
               </div>
 
               {/* Token Context Manager */}
-              <div className="bg-black/20 border border-white/5 rounded-xl p-5">
+              <div className="bg-[#1A1A2E]/20 border border-white/5 rounded-xl p-5">
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="text-[11px] font-sans uppercase tracking-widest text-slate-400 font-medium">
                     Context Window Usage
@@ -323,7 +323,7 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <Settings className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
@@ -341,10 +341,10 @@ export default function OnboardingPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <button
                   onClick={() => setFormData({ ...formData, model: 'claude-3-haiku-20240307' })}
-                  className={`p-6 text-left rounded-2xl transition-all border ${
+                  className={`p-6 text-left rounded-xl transition-all border ${
                     formData.model === 'claude-3-haiku-20240307'
                       ? 'bg-white/10 border-white/20'
-                      : 'bg-black/20 border-white/5 hover:bg-white/5'
+                      : 'bg-[#1A1A2E]/20 border-white/5 hover:bg-white/5'
                   }`}
                 >
                   <h3 className="text-[15px] font-sans font-medium text-white mb-2 flex items-center justify-between">
@@ -358,10 +358,10 @@ export default function OnboardingPage() {
 
                 <button
                   onClick={() => setFormData({ ...formData, model: 'claude-3-5-sonnet-20240620' })}
-                  className={`p-6 text-left rounded-2xl transition-all border ${
+                  className={`p-6 text-left rounded-xl transition-all border ${
                     formData.model === 'claude-3-5-sonnet-20240620'
                       ? 'bg-white/10 border-white/20'
-                      : 'bg-black/20 border-white/5 hover:bg-white/5'
+                      : 'bg-[#1A1A2E]/20 border-white/5 hover:bg-white/5'
                   }`}
                 >
                   <h3 className="text-[15px] font-sans font-medium text-white mb-2 flex items-center justify-between">

@@ -27,13 +27,13 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
   if (!task) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-end bg-black/70 backdrop-blur-md p-4 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-end bg-[#1A1A2E]/70 backdrop-blur-md p-4 sm:p-6">
       <motion.div
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="w-full max-w-xl h-full bg-[#020624] border border-white/20 rounded-3xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto shadow-2xl relative"
+        className="w-full max-w-xl h-full bg-[#1A1A2E] border border-white/20 rounded-xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto shadow-sm relative"
       >
         <div className="space-y-6">
           {/* Header */}
@@ -57,7 +57,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-black/40 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors"
+              className="p-2 rounded-xl bg-[#1A1A2E]/40 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -78,19 +78,19 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
 
           {/* Metadata Grid */}
           <div className="grid grid-cols-2 gap-4 text-xs font-mono">
-            <div className="p-3 bg-black/40 border border-white/10 rounded-xl space-y-1">
+            <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-1">
               <span className="text-slate-400 uppercase tracking-wider text-[10px] block font-bold">Assignee</span>
               <div className="text-white flex items-center gap-1.5 font-sans font-medium">
                 <User className="w-3.5 h-3.5 text-[#5EC8F2]" /> {task.assignee}
               </div>
             </div>
 
-            <div className="p-3 bg-black/40 border border-white/10 rounded-xl space-y-1">
+            <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-1">
               <span className="text-slate-400 uppercase tracking-wider text-[10px] block font-bold">Column Status</span>
               <select
                 value={task.status}
                 onChange={(e) => onUpdate({ ...task, status: e.target.value as any })}
-                className="bg-black/60 text-[#5EC8F2] font-mono font-bold text-xs rounded-lg px-2 py-1 border border-white/15 focus:outline-none focus:border-[#5EC8F2]"
+                className="bg-[#1A1A2E]/60 text-[#5EC8F2] font-mono font-bold text-xs rounded-lg px-2 py-1 border border-white/15 focus:outline-none focus:border-[#5EC8F2]"
               >
                 <option value="BACKLOG">1. Backlog & Requirements</option>
                 <option value="DESIGN">2. Design & Architecture</option>
@@ -113,13 +113,13 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
                 'Executive task details, standard operational checks, and deliverables required for milestone approval.'
               }
               onChange={(e) => onUpdate({ ...task, description: e.target.value })}
-              className="w-full bg-black/40 border border-white/15 rounded-xl p-3 text-xs text-slate-200 font-sans focus:outline-none focus:border-[#5EC8F2] resize-none leading-relaxed"
+              className="w-full bg-[#1A1A2E]/40 border border-white/15 rounded-xl p-3 text-xs text-slate-200 font-sans focus:outline-none focus:border-[#5EC8F2] resize-none leading-relaxed"
             />
           </div>
 
           {/* RACER & Tranche Link */}
           {task.payoutUsd && (
-            <div className="p-4 bg-[#5EC8F2]/10 border border-[#5EC8F2]/30 rounded-2xl flex items-center justify-between">
+            <div className="p-4 bg-[#5EC8F2]/10 border border-[#5EC8F2]/30 rounded-xl flex items-center justify-between">
               <div>
                 <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block font-bold">
                   Linked Performance Metric
@@ -146,7 +146,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
               <label className="text-xs font-mono text-slate-300 uppercase tracking-widest block font-bold flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-[#5EC8F2]" /> Root-Cause Analysis (5 Whys)
               </label>
-              <div className="p-3 bg-black/40 border border-white/10 rounded-xl space-y-2 text-xs font-mono text-slate-300">
+              <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-2 text-xs font-mono text-slate-300">
                 {task.whyAnalysis.map((why, idx) => (
                   <div key={idx} className="flex items-start gap-2">
                     <span className="text-[#5EC8F2] font-bold">{idx + 1}.</span>
@@ -162,7 +162,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
         <div className="pt-6 border-t border-white/10 flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-black/40 border border-white/15"
+            className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-[#1A1A2E]/40 border border-white/15"
           >
             Close
           </button>

@@ -72,7 +72,7 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
     <div className="space-y-6">
       {/* Tolerances Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-5 bg-[#020624]/60 border border-white/10 rounded-2xl flex justify-between items-center border-l-4 border-l-[#5EC8F2]">
+        <div className="p-5 bg-[#1A1A2E]/60 border border-white/10 rounded-xl flex justify-between items-center border-l-4 border-l-[#5EC8F2]">
           <div>
             <span className="text-[10px] uppercase text-slate-400 font-mono tracking-wider font-bold">
               Budget Tolerance Variance
@@ -84,7 +84,7 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
           <Shield className="w-8 h-8 text-[#5EC8F2]/40" />
         </div>
 
-        <div className="p-5 bg-[#020624]/60 border border-white/10 rounded-2xl flex justify-between items-center border-l-4 border-l-[#377D8C]">
+        <div className="p-5 bg-[#1A1A2E]/60 border border-white/10 rounded-xl flex justify-between items-center border-l-4 border-l-[#377D8C]">
           <div>
             <span className="text-[10px] uppercase text-slate-400 font-mono tracking-wider font-bold">
               Schedule Tolerance Variance
@@ -116,13 +116,13 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
 
       {/* Add Modal */}
       {showAddModal && (
-        <div className="p-5 bg-[#020624] border border-white/15 rounded-2xl space-y-3 shadow-2xl">
+        <div className="p-5 bg-[#1A1A2E] border border-white/15 rounded-xl space-y-3 shadow-sm">
           <input
             type="text"
             placeholder="Enter issue or quality deviation description..."
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            className="w-full bg-black/40 border border-white/15 text-white rounded-xl p-3 text-sm focus:outline-none focus:border-[#5EC8F2] font-sans"
+            className="w-full bg-[#1A1A2E]/40 border border-white/15 text-white rounded-xl p-3 text-sm focus:outline-none focus:border-[#5EC8F2] font-sans"
           />
           <div className="flex justify-end gap-2">
             <button
@@ -147,7 +147,7 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
           const colItems = items.filter((i) => i.status === col.key);
           const Icon = col.icon;
           return (
-            <div key={col.key} className="p-5 bg-[#020624]/40 border border-white/10 rounded-2xl flex flex-col space-y-4 backdrop-blur-xl">
+            <div key={col.key} className="p-5 bg-[#1A1A2E]/40 border border-white/10 rounded-xl flex flex-col space-y-4 backdrop-blur-xl">
               <div className="flex items-center justify-between border-b border-white/10 pb-3">
                 <span className="text-xs font-mono font-bold text-white flex items-center gap-2">
                   <Icon className="w-4 h-4 text-[#5EC8F2]" /> {col.label}
@@ -162,7 +162,7 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
                   <motion.div
                     key={item.id}
                     layout
-                    className="p-4 bg-black/50 border border-white/10 rounded-xl space-y-2 hover:border-[#5EC8F2]/30 transition-all"
+                    className="p-4 bg-[#1A1A2E]/50 border border-white/10 rounded-xl space-y-2 hover:border-[#5EC8F2]/30 transition-all"
                   >
                     <div className="flex justify-between items-start">
                       <span className="text-[10px] text-[#5EC8F2] uppercase tracking-wider font-mono font-bold">
@@ -172,7 +172,7 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
                     <p className="text-xs font-sans font-medium text-slate-200">{item.title}</p>
 
                     {item.whyAnalysis && item.whyAnalysis.length > 0 && (
-                      <div className="p-2.5 bg-black/40 border border-white/5 rounded-lg text-[11px] text-slate-400 space-y-1 font-mono">
+                      <div className="p-2.5 bg-[#1A1A2E]/40 border border-white/5 rounded-lg text-[11px] text-slate-400 space-y-1 font-mono">
                         {item.whyAnalysis.map((w, idx) => (
                           <div key={idx}>{w}</div>
                         ))}
