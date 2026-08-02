@@ -72,24 +72,24 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
     <div className="space-y-6">
       {/* Tolerances Header Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="p-5 bg-[#1A1A2E]/60 border border-white/10 rounded-xl flex justify-between items-center border-l-4 border-l-[#5EC8F2]">
+        <div className="p-5 vignelli-clean-card border border-slate-200 rounded-xl flex justify-between items-center border-l-4 border-l-[#5EC8F2]">
           <div>
-            <span className="text-[10px] uppercase text-slate-400 font-mono tracking-wider font-bold">
+            <span className="text-[10px] uppercase text-slate-500 font-mono tracking-wider font-bold">
               Budget Tolerance Variance
             </span>
-            <div className="text-xl font-bold font-mono text-white mt-1">
+            <div className="text-xl font-bold font-mono text-slate-900 mt-1">
               +3.2% <span className="text-xs text-[#5EC8F2] font-normal">(Max Limit: +10%)</span>
             </div>
           </div>
           <Shield className="w-8 h-8 text-[#5EC8F2]/40" />
         </div>
 
-        <div className="p-5 bg-[#1A1A2E]/60 border border-white/10 rounded-xl flex justify-between items-center border-l-4 border-l-[#377D8C]">
+        <div className="p-5 vignelli-clean-card border border-slate-200 rounded-xl flex justify-between items-center border-l-4 border-l-[#377D8C]">
           <div>
-            <span className="text-[10px] uppercase text-slate-400 font-mono tracking-wider font-bold">
+            <span className="text-[10px] uppercase text-slate-500 font-mono tracking-wider font-bold">
               Schedule Tolerance Variance
             </span>
-            <div className="text-xl font-bold font-mono text-white mt-1">
+            <div className="text-xl font-bold font-mono text-slate-900 mt-1">
               +8.0% <span className="text-xs text-[#377D8C] font-normal">(Max Limit: +15%)</span>
             </div>
           </div>
@@ -100,11 +100,11 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
       {/* Kanban Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h3 className="text-xl font-syne font-bold text-white flex items-center gap-2">
+          <h3 className="text-xl font-syne font-bold text-slate-900 flex items-center gap-2">
             <Activity className="w-5 h-5 text-[#5EC8F2]" />
             Quality Improvement & Issue Tracking
           </h3>
-          <p className="text-xs font-mono text-slate-400">Root Cause Analysis & Zero-Defect Operational Control</p>
+          <p className="text-xs font-mono text-slate-500">Root Cause Analysis & Zero-Defect Operational Control</p>
         </div>
         <button
           onClick={() => setShowAddModal(true)}
@@ -116,18 +116,18 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
 
       {/* Add Modal */}
       {showAddModal && (
-        <div className="p-5 bg-[#1A1A2E] border border-white/15 rounded-xl space-y-3 shadow-sm">
+        <div className="p-5 bg-white border border-slate-200 rounded-xl space-y-3 shadow-sm">
           <input
             type="text"
             placeholder="Enter issue or quality deviation description..."
             value={newTitle}
             onChange={(e) => setNewTitle(e.target.value)}
-            className="w-full bg-[#1A1A2E]/40 border border-white/15 text-white rounded-xl p-3 text-sm focus:outline-none focus:border-[#5EC8F2] font-sans"
+            className="w-full bg-white shadow-sm border border-slate-200 text-slate-900 rounded-xl p-3 text-sm focus:outline-none focus:border-[#5EC8F2] font-sans"
           />
           <div className="flex justify-end gap-2">
             <button
               onClick={() => setShowAddModal(false)}
-              className="px-3 py-1.5 text-xs font-mono text-slate-400 hover:text-white"
+              className="px-3 py-1.5 text-xs font-mono text-slate-500 hover:text-slate-900"
             >
               Cancel
             </button>
@@ -147,12 +147,12 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
           const colItems = items.filter((i) => i.status === col.key);
           const Icon = col.icon;
           return (
-            <div key={col.key} className="p-5 bg-[#1A1A2E]/40 border border-white/10 rounded-xl flex flex-col space-y-4 backdrop-blur-xl">
-              <div className="flex items-center justify-between border-b border-white/10 pb-3">
-                <span className="text-xs font-mono font-bold text-white flex items-center gap-2">
+            <div key={col.key} className="p-5 bg-white shadow-sm border border-slate-200 rounded-xl flex flex-col space-y-4 backdrop-blur-xl">
+              <div className="flex items-center justify-between border-b border-slate-200 pb-3">
+                <span className="text-xs font-mono font-bold text-slate-900 flex items-center gap-2">
                   <Icon className="w-4 h-4 text-[#5EC8F2]" /> {col.label}
                 </span>
-                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-white/10 text-[#5EC8F2]">
+                <span className="text-xs font-mono font-bold px-2.5 py-0.5 rounded-full bg-slate-100 text-[#5EC8F2]">
                   {colItems.length}
                 </span>
               </div>
@@ -162,24 +162,24 @@ export function GovernanceKanban({ projectId }: { projectId: string }) {
                   <motion.div
                     key={item.id}
                     layout
-                    className="p-4 bg-[#1A1A2E]/50 border border-white/10 rounded-xl space-y-2 hover:border-[#5EC8F2]/30 transition-all"
+                    className="p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-2 hover:border-[#5EC8F2]/30 transition-all"
                   >
                     <div className="flex justify-between items-start">
                       <span className="text-[10px] text-[#5EC8F2] uppercase tracking-wider font-mono font-bold">
                         {item.category}
                       </span>
                     </div>
-                    <p className="text-xs font-sans font-medium text-slate-200">{item.title}</p>
+                    <p className="text-xs font-sans font-medium text-slate-700">{item.title}</p>
 
                     {item.whyAnalysis && item.whyAnalysis.length > 0 && (
-                      <div className="p-2.5 bg-[#1A1A2E]/40 border border-white/5 rounded-lg text-[11px] text-slate-400 space-y-1 font-mono">
+                      <div className="p-2.5 bg-white shadow-sm border border-slate-100 rounded-lg text-[11px] text-slate-500 space-y-1 font-mono">
                         {item.whyAnalysis.map((w, idx) => (
                           <div key={idx}>{w}</div>
                         ))}
                       </div>
                     )}
 
-                    <div className="flex justify-end gap-1 pt-2 border-t border-white/5">
+                    <div className="flex justify-end gap-1 pt-2 border-t border-slate-100">
                       {col.key === 'OPEN' && (
                         <button
                           onClick={() => moveStatus(item.id, 'IN_ANALYSIS')}

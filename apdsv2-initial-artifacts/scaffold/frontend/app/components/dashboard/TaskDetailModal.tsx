@@ -27,17 +27,17 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
   if (!task) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-end bg-[#1A1A2E]/70 backdrop-blur-md p-4 sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-end bg-white/70 backdrop-blur-md p-4 sm:p-6">
       <motion.div
         initial={{ x: '100%' }}
         animate={{ x: 0 }}
         exit={{ x: '100%' }}
         transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-        className="w-full max-w-xl h-full bg-[#1A1A2E] border border-white/20 rounded-xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto shadow-sm relative"
+        className="w-full max-w-xl h-full bg-white border border-slate-200 rounded-xl p-6 sm:p-8 flex flex-col justify-between overflow-y-auto shadow-sm relative"
       >
         <div className="space-y-6">
           {/* Header */}
-          <div className="flex items-center justify-between border-b border-white/10 pb-4">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-4">
             <div className="flex items-center gap-2">
               <span className="px-3 py-1 bg-[#5EC8F2]/15 text-[#5EC8F2] border border-[#5EC8F2]/30 rounded-full text-xs font-mono font-bold uppercase">
                 {task.id}
@@ -57,7 +57,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
 
             <button
               onClick={onClose}
-              className="p-2 rounded-xl bg-[#1A1A2E]/40 hover:bg-white/10 text-slate-400 hover:text-white border border-white/10 transition-colors"
+              className="p-2 rounded-xl bg-white shadow-sm hover:bg-slate-100 text-slate-500 hover:text-slate-900 border border-slate-200 transition-colors"
             >
               <X className="w-5 h-5" />
             </button>
@@ -72,25 +72,25 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
               type="text"
               value={task.title}
               onChange={(e) => onUpdate({ ...task, title: e.target.value })}
-              className="text-xl sm:text-2xl font-syne font-bold text-white bg-transparent border-b border-transparent hover:border-white/20 focus:border-[#5EC8F2] focus:outline-none w-full py-1 transition-all"
+              className="text-xl sm:text-2xl font-syne font-bold text-slate-900 bg-transparent border-b border-transparent hover:border-slate-200 focus:border-[#5EC8F2] focus:outline-none w-full py-1 transition-all"
             />
           </div>
 
           {/* Metadata Grid */}
           <div className="grid grid-cols-2 gap-4 text-xs font-mono">
-            <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-1">
-              <span className="text-slate-400 uppercase tracking-wider text-[10px] block font-bold">Assignee</span>
-              <div className="text-white flex items-center gap-1.5 font-sans font-medium">
+            <div className="p-3 bg-white shadow-sm border border-slate-200 rounded-xl space-y-1">
+              <span className="text-slate-500 uppercase tracking-wider text-[10px] block font-bold">Assignee</span>
+              <div className="text-slate-900 flex items-center gap-1.5 font-sans font-medium">
                 <User className="w-3.5 h-3.5 text-[#5EC8F2]" /> {task.assignee}
               </div>
             </div>
 
-            <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-1">
-              <span className="text-slate-400 uppercase tracking-wider text-[10px] block font-bold">Column Status</span>
+            <div className="p-3 bg-white shadow-sm border border-slate-200 rounded-xl space-y-1">
+              <span className="text-slate-500 uppercase tracking-wider text-[10px] block font-bold">Column Status</span>
               <select
                 value={task.status}
                 onChange={(e) => onUpdate({ ...task, status: e.target.value as any })}
-                className="bg-[#1A1A2E]/60 text-[#5EC8F2] font-mono font-bold text-xs rounded-lg px-2 py-1 border border-white/15 focus:outline-none focus:border-[#5EC8F2]"
+                className="vignelli-clean-card text-[#5EC8F2] font-mono font-bold text-xs rounded-lg px-2 py-1 border border-slate-200 focus:outline-none focus:border-[#5EC8F2]"
               >
                 <option value="BACKLOG">1. Backlog & Requirements</option>
                 <option value="DESIGN">2. Design & Architecture</option>
@@ -103,7 +103,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
 
           {/* Description */}
           <div className="space-y-2">
-            <label className="text-xs font-mono text-slate-300 uppercase tracking-widest block font-bold flex items-center gap-1.5">
+            <label className="text-xs font-mono text-slate-600 uppercase tracking-widest block font-bold flex items-center gap-1.5">
               <FileText className="w-3.5 h-3.5 text-[#5EC8F2]" /> Task Description
             </label>
             <textarea
@@ -113,7 +113,7 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
                 'Executive task details, standard operational checks, and deliverables required for milestone approval.'
               }
               onChange={(e) => onUpdate({ ...task, description: e.target.value })}
-              className="w-full bg-[#1A1A2E]/40 border border-white/15 rounded-xl p-3 text-xs text-slate-200 font-sans focus:outline-none focus:border-[#5EC8F2] resize-none leading-relaxed"
+              className="w-full bg-white shadow-sm border border-slate-200 rounded-xl p-3 text-xs text-slate-700 font-sans focus:outline-none focus:border-[#5EC8F2] resize-none leading-relaxed"
             />
           </div>
 
@@ -121,15 +121,15 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
           {task.payoutUsd && (
             <div className="p-4 bg-[#5EC8F2]/10 border border-[#5EC8F2]/30 rounded-xl flex items-center justify-between">
               <div>
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block font-bold">
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block font-bold">
                   Linked Performance Metric
                 </span>
-                <span className="text-xs font-mono font-bold text-white">
+                <span className="text-xs font-mono font-bold text-slate-900">
                   {task.racerMetric || 'Operational Standards Audit'}
                 </span>
               </div>
               <div className="text-right">
-                <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider block font-bold">
+                <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider block font-bold">
                   Tranche Release
                 </span>
                 <span className="text-base font-mono font-bold text-[#5EC8F2] flex items-center justify-end">
@@ -143,10 +143,10 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
           {/* 5-Why Analysis */}
           {task.whyAnalysis && task.whyAnalysis.length > 0 && (
             <div className="space-y-2">
-              <label className="text-xs font-mono text-slate-300 uppercase tracking-widest block font-bold flex items-center gap-1.5">
+              <label className="text-xs font-mono text-slate-600 uppercase tracking-widest block font-bold flex items-center gap-1.5">
                 <Activity className="w-3.5 h-3.5 text-[#5EC8F2]" /> Root-Cause Analysis (5 Whys)
               </label>
-              <div className="p-3 bg-[#1A1A2E]/40 border border-white/10 rounded-xl space-y-2 text-xs font-mono text-slate-300">
+              <div className="p-3 bg-white shadow-sm border border-slate-200 rounded-xl space-y-2 text-xs font-mono text-slate-600">
                 {task.whyAnalysis.map((why, idx) => (
                   <div key={idx} className="flex items-start gap-2">
                     <span className="text-[#5EC8F2] font-bold">{idx + 1}.</span>
@@ -159,10 +159,10 @@ export function TaskDetailModal({ task, onClose, onUpdate }: TaskDetailModalProp
         </div>
 
         {/* Footer Action */}
-        <div className="pt-6 border-t border-white/10 flex justify-end gap-3">
+        <div className="pt-6 border-t border-slate-200 flex justify-end gap-3">
           <button
             onClick={onClose}
-            className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-300 hover:text-white bg-[#1A1A2E]/40 border border-white/15"
+            className="px-5 py-2.5 rounded-xl font-mono text-xs text-slate-600 hover:text-slate-900 bg-white shadow-sm border border-slate-200"
           >
             Close
           </button>

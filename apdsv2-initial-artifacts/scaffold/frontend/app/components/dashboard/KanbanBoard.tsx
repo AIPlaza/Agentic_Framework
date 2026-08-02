@@ -94,7 +94,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
   const { dict } = useDictionary();
 
   const columns: { id: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE'; label: string; color: string; badgeBg: string }[] = [
-    { id: 'BACKLOG', label: dict?.kanban?.col1 || '1. Backlog & Requirements', color: 'border-white/10', badgeBg: 'bg-white/5 text-slate-400 border border-white/5' },
+    { id: 'BACKLOG', label: dict?.kanban?.col1 || '1. Backlog & Requirements', color: 'border-slate-200', badgeBg: 'bg-slate-50 text-slate-500 border border-slate-100' },
     { id: 'DESIGN', label: dict?.kanban?.col2 || '2. Design & Architecture', color: 'border-[#377D8C]/20', badgeBg: 'bg-[#377D8C]/10 text-[#5ED7F2] border border-[#377D8C]/20' },
     { id: 'EXECUTION', label: dict?.kanban?.col3 || '3. Operational Execution', color: 'border-[#5EC8F2]/20', badgeBg: 'bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20' },
     { id: 'AUDIT', label: dict?.kanban?.col4 || '4. Auditor Review Queue', color: 'border-amber-500/20', badgeBg: 'bg-amber-500/10 text-amber-300 border border-amber-500/20' },
@@ -123,7 +123,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
             placeholder={dict?.kanban?.search || 'Search 42 stories...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
+            className="w-full bg-white/20 border border-slate-200 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
           />
         </div>
 
@@ -205,7 +205,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     {/* Bottom Metadata */}
                     <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-slate-500 relative z-10 border-t border-slate-100">
                       <span className="flex items-center gap-1.5 font-medium">
-                        <User className="w-3.5 h-3.5 text-slate-400" /> {task.assignee.split(' ')[0]}
+                        <User className="w-3.5 h-3.5 text-slate-500" /> {task.assignee.split(' ')[0]}
                       </span>
 
                       {task.payoutUsd && (
