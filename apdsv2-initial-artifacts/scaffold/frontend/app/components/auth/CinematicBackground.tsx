@@ -61,7 +61,7 @@ export default function CinematicBackground({
       <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent backdrop-blur-[4px] z-10"></div>
       
       {/* Overlays for blend and readability */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#3866B3]/90 via-transparent to-[#1A1A2E] z-10"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-[#3866B3]/90 via-transparent to-[#1A1A2E]/20 z-10"></div>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90 z-10"></div>
       <div className="absolute inset-0 vignette z-10"></div>
       <div className="absolute inset-0 grain z-10"></div>
