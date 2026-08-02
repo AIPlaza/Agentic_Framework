@@ -3,8 +3,11 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import CinematicBackground from '@/app/components/auth/CinematicBackground';
+import { useDictionary } from '@/app/components/DictionaryProvider';
+import { ShieldCheck } from 'lucide-react';
 
 export function MarketplaceHero() {
+  const { dict } = useDictionary();
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const metricRef = useRef<HTMLDivElement>(null);
@@ -37,17 +40,18 @@ export function MarketplaceHero() {
       </div>
       
       <div className="relative z-20 max-w-4xl mx-auto px-6 text-center" ref={textRef}>
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#5EC8F2] text-[10px] font-sans tracking-widest uppercase mb-6 backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
-          Active Management Suite
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <span className="px-3 py-1 bg-[#5EC8F2]/10 text-[#5EC8F2] border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
+            <ShieldCheck className="w-3 h-3" /> {dict?.publicMarketplace?.heroSubtitle || 'Active Management Suite'}
+          </span>
         </div>
         
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-syne font-bold text-white tracking-tight leading-tight mb-6">
-          Institutional-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5EC8F2] to-white">Transparency</span>.
+        <h1 className="text-5xl md:text-7xl font-syne font-bold text-white tracking-tight leading-[1.1] mb-6">
+          {dict?.publicMarketplace?.heroTitle || 'Institutional-Grade Transparency'}
         </h1>
         
-        <p className="max-w-2xl mx-auto text-[15px] md:text-[17px] font-sans text-slate-300 leading-relaxed mb-10">
-          Move beyond opaque tokenization. ACCET mitigates investor risk through continuous, autonomous auditing. Every asset is backed by up to 126 granular, verified operational stories.
+        <p className="text-slate-300 text-lg md:text-xl mt-6 max-w-2xl mx-auto font-sans leading-relaxed mb-10">
+          {dict?.publicMarketplace?.heroDesc || 'Move beyond opaque tokenization. ACCET mitigates investor risk through continuous, autonomous auditing. Every asset is backed by up to 126 granular, verified operational stories.'}
         </p>
       </div>
 

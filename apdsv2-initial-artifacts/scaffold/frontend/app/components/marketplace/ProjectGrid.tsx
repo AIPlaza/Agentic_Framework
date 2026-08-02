@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ProjectCard } from './ProjectCard';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -51,6 +52,7 @@ const MOCK_PROJECTS = [
 ];
 
 export function ProjectGrid() {
+  const { dict } = useDictionary();
   const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -76,22 +78,22 @@ export function ProjectGrid() {
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
             <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-4">
-              Active Offerings
+              {dict?.publicMarketplace?.activeOfferings || 'Active Offerings'}
             </h2>
             <p className="text-[15px] font-sans text-slate-600 max-w-xl">
-              Explore our curated selection of high-yield, autonomously managed real-world assets. Every project is continuously audited by AI agents against strict PRINCE2 methodologies.
+              {dict?.publicMarketplace?.activeOfferingsDesc || 'Explore our curated selection of high-yield, autonomously managed real-world assets. Every project is continuously audited by AI agents against strict PRINCE2 methodologies.'}
             </p>
           </div>
           
           <div className="flex items-center gap-2">
             <button className="px-5 py-2.5 rounded-full bg-slate-900 text-white font-sans text-[11px] uppercase tracking-widest font-medium hover:bg-slate-800 transition-colors shadow-sm">
-              All Assets
+              {dict?.publicMarketplace?.allClasses || 'All Assets'}
             </button>
             <button className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-500 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-slate-900 hover:border-slate-300 transition-colors shadow-sm">
-              Energy
+              {dict?.publicMarketplace?.energy || 'Energy'}
             </button>
             <button className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-500 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-slate-900 hover:border-slate-300 transition-colors shadow-sm">
-              Real Estate
+              {dict?.publicMarketplace?.realEstate || 'Real Estate'}
             </button>
           </div>
         </div>

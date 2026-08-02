@@ -5,8 +5,10 @@ import { motion } from 'framer-motion';
 import { ShieldCheck, Download, Activity, CheckCircle2, Lock, FileText, Cpu } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import CinematicBackground from '@/app/components/auth/CinematicBackground';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 export default function PublicAssetFiche({ params }: { params: any }) {
+  const { dict } = useDictionary();
   const resolvedParams = typeof params?.then === 'function' ? use(params) : params;
   const targetSlug = (resolvedParams as any)?.slug || '';
 
@@ -102,10 +104,10 @@ export default function PublicAssetFiche({ params }: { params: any }) {
           <div className="lg:col-span-2 space-y-10">
             <div>
               <h2 className="text-2xl md:text-3xl font-syne font-bold text-slate-900 mb-3">
-                The 126-Story Moat
+                {dict?.publicMarketplace?.moatTitle || 'The 126-Story Moat'}
               </h2>
               <p className="text-[15px] text-slate-600 leading-relaxed max-w-2xl">
-                Traditional tokenization offers tokens but hides the execution. ACCET eliminates opacity. This asset is governed by 126 autonomous audit stories, continuously verifying legal, financial, and operational health before distributions occur.
+                {dict?.publicMarketplace?.moatSubtitle || 'Invest with absolute clarity.'}
               </p>
             </div>
 
@@ -154,13 +156,13 @@ export default function PublicAssetFiche({ params }: { params: any }) {
           <div className="lg:col-span-1">
             <div className="sticky top-24 bg-white rounded-2xl border border-slate-200 shadow-[0_10px_40px_rgba(0,0,0,0.04)] p-8">
               <div className="text-center mb-8 pb-8 border-b border-slate-100">
-                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-2">Asset Valuation</p>
+                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-2">{dict?.publicMarketplace?.totalValue || 'Asset Valuation'}</p>
                 <p className="text-4xl font-mono font-bold text-slate-900">{project.value || '$12,500,000'}</p>
               </div>
 
               <div className="flex justify-between items-center mb-8">
                 <div>
-                  <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">Target APY</p>
+                  <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">{dict?.publicMarketplace?.targetYield || 'Target APY'}</p>
                   <p className="text-2xl font-mono font-bold text-[#3866B3]">{project.apy || '14.5%'}</p>
                 </div>
                 <div className="text-right">

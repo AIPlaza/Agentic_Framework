@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 interface ProjectCardProps {
   id: string;
@@ -26,6 +27,7 @@ export function ProjectCard({
   value,
   apy
 }: ProjectCardProps) {
+  const { dict } = useDictionary();
   const progressPercent = Math.round((verifiedStories / totalStories) * 100);
 
   return (
@@ -63,7 +65,7 @@ export function ProjectCard({
             <div className="flex items-center justify-between mb-2.5">
               <span className="flex items-center gap-1.5 text-[10px] font-sans text-slate-500 uppercase tracking-widest">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#5EC8F2]" />
-                Audited Stories
+                {dict?.publicMarketplace?.auditStatus || 'Audited Stories'}
               </span>
               <span className="text-[12px] font-mono text-slate-900 font-bold">{verifiedStories}/{totalStories}</span>
             </div>
@@ -79,11 +81,11 @@ export function ProjectCard({
 
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">Valuation</p>
+                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">{dict?.publicMarketplace?.totalValue || 'Valuation'}</p>
                 <p className="text-[13px] font-mono text-slate-800 font-medium">{value}</p>
               </div>
               <div className="text-right">
-                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">Target APY</p>
+                <p className="text-[10px] font-sans text-slate-500 uppercase tracking-widest mb-1">{dict?.publicMarketplace?.targetYield || 'Target APY'}</p>
                 <p className="text-[13px] font-mono text-[#3866B3] font-bold">{apy}</p>
               </div>
             </div>
@@ -93,7 +95,7 @@ export function ProjectCard({
         {/* Hover Footer Reveal */}
         <div className="h-0 overflow-hidden group-hover:h-12 transition-all duration-300 bg-slate-50 flex items-center justify-center border-t border-transparent group-hover:border-slate-100">
           <span className="text-[11px] font-sans font-bold text-[#3866B3] uppercase tracking-widest flex items-center gap-2">
-            View Audit Trail <ArrowRight className="w-3.5 h-3.5" />
+            {dict?.publicMarketplace?.viewAsset || 'View Audit Trail'} <ArrowRight className="w-3.5 h-3.5" />
           </span>
         </div>
       </div>
