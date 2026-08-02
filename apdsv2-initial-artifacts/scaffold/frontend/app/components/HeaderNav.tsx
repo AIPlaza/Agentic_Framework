@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useDictionary } from '@/app/components/DictionaryProvider';
+import { LogOut, LayoutDashboard, Terminal } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function HeaderNav() {
   const pathname = usePathname();
@@ -84,6 +86,12 @@ export default function HeaderNav() {
 
         {/* Right Status / Auth */}
         <div className="flex items-center gap-4">
+          
+          {/* Custom Language Switcher */}
+          <LanguageSwitcher />
+
+          {/* User & Sign Out */}
+          <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
             <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
             <span>{dict?.nav?.nodeActive || 'Node Active'}</span>
@@ -95,6 +103,7 @@ export default function HeaderNav() {
           >
             {dict?.nav?.signIn || 'Sign In'}
           </Link>
+          </div>
         </div>
       </div>
     </header>
