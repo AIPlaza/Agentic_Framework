@@ -25,7 +25,7 @@ export default function HeaderNav() {
     },
     {
       name: dict?.nav?.marketplace || 'Marketplace',
-      href: `/${lang}/marketplace/demo-project-001`,
+      href: `/${lang}/project/demo-project-001/marketplace`,
     }
   ];
 
