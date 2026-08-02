@@ -50,7 +50,7 @@ export function SidebarNav({
       style={{ borderRadius: '0' }}
     >
       {/* Sidebar Header & Workspace Selector */}
-      <div className="p-5 border-b border-slate-100 flex items-center justify-between">
+      <div className="p-5 border-b border-white/5 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">
@@ -67,7 +67,7 @@ export function SidebarNav({
 
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-xl text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors mx-auto"
+          className="p-1.5 rounded-xl text-slate-500 hover:text-white hover:bg-white/5 transition-colors mx-auto"
         >
           {collapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
@@ -78,7 +78,7 @@ export function SidebarNav({
         <div className="p-4 pb-2">
           <Link
             href={`/${lang}/onboarding`}
-            className="w-full py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-slate-100 text-white border border-slate-100 font-mono text-[11px] font-medium transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
+            className="w-full py-2.5 px-3 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/5 font-mono text-[11px] font-medium transition-all flex items-center justify-center gap-2 uppercase tracking-wider"
           >
             <PlusCircle className="w-4 h-4 text-[#5EC8F2]" /> {dict?.nav?.newProject || 'New Project'}
           </Link>
@@ -103,8 +103,8 @@ export function SidebarNav({
               onClick={() => onViewChange(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-sans font-medium transition-all ${
                 isActive
-                  ? 'bg-slate-100 text-[#5EC8F2] border border-[#5EC8F2]/20'
-                  : 'text-slate-500 hover:text-slate-900 hover:bg-slate-50 border border-transparent'
+                  ? 'bg-white/10 text-[#5EC8F2] border border-[#5EC8F2]/20'
+                  : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
               } ${collapsed ? 'justify-center' : ''}`}
             >
               <Icon className={`w-4 h-4 flex-shrink-0 ${isActive ? 'text-[#5EC8F2]' : 'text-slate-500'}`} />
@@ -116,7 +116,7 @@ export function SidebarNav({
 
       {/* Bottom Progress Widget */}
       {!collapsed && (
-        <div className="p-5 border-t border-slate-100 bg-white/20">
+        <div className="p-5 border-t border-white/5 bg-[#1A1A2E]/20">
           <div className="flex items-center justify-between text-[11px] font-mono text-slate-500 mb-3 uppercase tracking-wider">
             <span className="flex items-center gap-1.5 font-medium">
               <BarChart3 className="w-3.5 h-3.5 text-slate-500" /> {dict?.sidebar?.completion || 'Completion'}
@@ -126,7 +126,7 @@ export function SidebarNav({
             </span>
           </div>
 
-          <div className="w-full bg-slate-50 rounded-full h-1 overflow-hidden mb-2">
+          <div className="w-full bg-white/5 rounded-full h-1 overflow-hidden mb-2">
             <div
               className="h-full bg-gradient-to-r from-[#5EC8F2] to-[#377D8C]"
               style={{ width: `${(completedTasks / totalTasks) * 100}%` }}
