@@ -50,6 +50,21 @@ body {
     transform: translateY(-2px);
   }
 
+  .vignelli-clean-card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease-out;
+  }
+  .vignelli-clean-card:hover {
+    border-color: rgba(94, 200, 242, 0.3);
+    box-shadow: 0 8px 30px -4px rgba(94, 200, 242, 0.1);
+    transform: translateY(-2px);
+  }
+
   .glass-blue-card:hover {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(94, 200, 242, 0.25);

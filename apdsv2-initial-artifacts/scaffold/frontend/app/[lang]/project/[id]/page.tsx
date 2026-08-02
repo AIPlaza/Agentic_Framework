@@ -232,8 +232,8 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 2: TASK LIST VIEW */}
         {activeView === 'list' && (
-          <div className="p-10 glass-blue-card space-y-4">
-            <h2 className="text-2xl font-syne font-bold text-white">Project Task List View (126 Items)</h2>
+          <div className="p-10 vignelli-clean-card space-y-4">
+            <h2 className="text-2xl font-syne font-bold text-slate-900">Project Task List View (126 Items)</h2>
             <div className="pt-4">
               <KanbanBoard projectTitle={project?.title} />
             </div>
@@ -242,8 +242,8 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 4: AUDITOR QUEUE */}
         {activeView === 'audit' && (
-          <div className="p-10 glass-blue-card space-y-6">
-            <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.auditQueue || 'Auditor Review Queue'}</h2>
+          <div className="p-10 vignelli-clean-card space-y-6">
+            <h2 className="text-2xl font-syne font-bold text-slate-900">{dict?.nav?.auditQueue || 'Auditor Review Queue'}</h2>
             <a href={`/${lang}/evaluator`} className="inline-block px-8 py-3 rounded-full text-[13px] font-sans font-semibold text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-all shadow-md">
               {dict?.evaluator?.auditorPortal || 'INDEPENDENT QUALITY AUDITOR PORTAL'} →
             </a>
@@ -252,8 +252,8 @@ export default function ProjectBoard({ params }: { params: any }) {
 
         {/* VIEW 5: MARKETPLACE PREVIEW */}
         {activeView === 'marketplace' && (
-          <div className="p-10 glass-blue-card space-y-6">
-            <h2 className="text-2xl font-syne font-bold text-white">{dict?.nav?.marketplace || 'Public Marketplace Preview'}</h2>
+          <div className="p-10 vignelli-clean-card space-y-6">
+            <h2 className="text-2xl font-syne font-bold text-slate-900">{dict?.nav?.marketplace || 'Public Marketplace Preview'}</h2>
             <a href={`/${lang}/marketplace/${project?.id}`} className="inline-block px-8 py-3 rounded-full text-[13px] font-sans font-semibold text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-all shadow-md">
               {dict?.project?.marketplacePreview || 'Marketplace Preview'} →
             </a>

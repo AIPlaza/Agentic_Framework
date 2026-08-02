@@ -7,53 +7,53 @@ import { TaskItem, TaskDetailModal } from './TaskDetailModal';
 import { useDictionary } from '@/app/components/DictionaryProvider';
 
 function generateInitialStories(projectTitle: string): TaskItem[] {
-  const categories = ['Grid & Structure', 'Typography', 'Chiaroscuro & Contrast', 'Visual Experience'];
+  const categories = ['White Space Distribution', 'Typography', 'Desaturation & Clarity', 'Visual Hierarchy'];
   const priorities: ('CRITICAL' | 'HIGH' | 'NORMAL')[] = ['CRITICAL', 'HIGH', 'NORMAL'];
   const assignees = ['Lead Designer', 'UI Architect', 'UX Engineer', 'Motion Specialist'];
 
   const vignelliStories = [
-    { title: "Define the 12-Column Modular Swiss Grid Layout System", cat: "Grid & Structure" },
-    { title: "Establish Baseline Grid for Vertical Rhythm & Harmony", cat: "Grid & Structure" },
-    { title: "Configure Primary Typography Scales (Modular Scale Ratio 1.250)", cat: "Typography" },
-    { title: "Select 'Syne' as Display Font for Bold Hero Statements", cat: "Typography" },
-    { title: "Implement 'JetBrains Mono' for Data Tables and Code Snippets", cat: "Typography" },
-    { title: "Design the 'Chiaroscuro Sandwich' Layout Architecture", cat: "Chiaroscuro & Contrast" },
-    { title: "Create Pure White (#FFFFFF) Diffuminated Workspace Gradient", cat: "Chiaroscuro & Contrast" },
-    { title: "Build Deep Blue Cinematic Background Overlay (#0a1128)", cat: "Chiaroscuro & Contrast" },
-    { title: "Add Subtle Grain Overlay for Cinematic Texture Depth", cat: "Visual Experience" },
-    { title: "Implement 3D Drop Shadows on Hover States (0_20px_50px)", cat: "Visual Experience" },
-    { title: "Design Glassmorphic Transparent Cards for Dark Modes", cat: "Chiaroscuro & Contrast" },
-    { title: "Configure CSS Container Queries for Fluid Grid Adaptation", cat: "Grid & Structure" },
-    { title: "Apply Vignelli's Principle of Semantic Structural Alignment", cat: "Grid & Structure" },
-    { title: "Set Optimal Line-Height (1.5 - 1.7) for Reading Ergonomics", cat: "Typography" },
-    { title: "Ensure WCAG AAA Contrast Ratio for All Text on Light Cards", cat: "Typography" },
-    { title: "Develop Horizontal Gradient Fade on the Left Navigation Bar", cat: "Chiaroscuro & Contrast" },
-    { title: "Design Micro-Interactions for Button Hover States", cat: "Visual Experience" },
-    { title: "Implement Scroll-Driven Parallax Animations on Hero Section", cat: "Visual Experience" },
-    { title: "Create the 'Archetype Silhouette' Grayscale Watermark", cat: "Visual Experience" },
-    { title: "Anchor Typography to the Baseline Grid Structurally", cat: "Grid & Structure" },
-    { title: "Remove Extraneous Borders to Embrace White Space", cat: "Grid & Structure" },
-    { title: "Design Minimalist Pill-Shaped Navigation Menus", cat: "Grid & Structure" },
-    { title: "Configure Dynamic Color Tokens in globals.css", cat: "Chiaroscuro & Contrast" },
-    { title: "Implement Backdrop-Filter Blurs (20px) on Dark Overlays", cat: "Chiaroscuro & Contrast" },
-    { title: "Optimize Web Fonts Loading with Preload and Display Swap", cat: "Typography" },
-    { title: "Adjust Tracking (Letter-Spacing) for Uppercase Headers", cat: "Typography" },
-    { title: "Establish Visual Hierarchy using Size and Weight", cat: "Typography" },
-    { title: "Refine Transition Timings (duration-300, ease-out)", cat: "Visual Experience" },
-    { title: "Design Skeleton Loading States for Data Fetching", cat: "Visual Experience" },
-    { title: "Ensure Responsive Typography (Clamp functions)", cat: "Typography" },
-    { title: "Structure the 'Z-Pattern' Reading Flow on Dashboards", cat: "Grid & Structure" },
-    { title: "Implement 'F-Pattern' Scanning for Data Tables", cat: "Grid & Structure" },
-    { title: "Balance Positive and Negative Space (Vignelli Canon)", cat: "Grid & Structure" },
-    { title: "Define the Corporate Ink Color Palette (Teal, Amber, Slate)", cat: "Chiaroscuro & Contrast" },
-    { title: "Create High-Contrast Focus Rings for Accessibility", cat: "Chiaroscuro & Contrast" },
-    { title: "Develop View Transitions API for Seamless Page Loads", cat: "Visual Experience" },
-    { title: "Design Contextual Tooltips with Micro-Delays", cat: "Visual Experience" },
-    { title: "Implement Sticky Headers with Blur Backgrounds", cat: "Visual Experience" },
-    { title: "Define Max-Width Constraints for Optimal Line Length (65 chars)", cat: "Typography" },
-    { title: "Align all Elements to the Left (No Centered Body Text)", cat: "Grid & Structure" },
-    { title: "Implement Alternating Odd/Even Card Aesthethics", cat: "Chiaroscuro & Contrast" },
-    { title: "Finalize Polish of the '42 Visual Stories' Implementation", cat: "Visual Experience" }
+    { title: "Replace heavy gradient cards with crisp white #FFFFFF surfaces", cat: "Desaturation & Clarity" },
+    { title: "Implement subtle 1px slate borders for structural definition", cat: "Visual Hierarchy" },
+    { title: "Increase padding to 24px in cards for better cognitive distribution", cat: "White Space Distribution" },
+    { title: "Remove muddy transparency overlays from primary content areas", cat: "Desaturation & Clarity" },
+    { title: "Transition typography to dark slate for high legibility", cat: "Typography" },
+    { title: "Apply soft Apple-style drop shadows (0 4px 20px) to cards", cat: "Visual Hierarchy" },
+    { title: "Use solid sky blue (#5EC8F2) for primary accents instead of gradients", cat: "Desaturation & Clarity" },
+    { title: "Standardize corner radius to 12px for consistent pill shapes", cat: "Visual Hierarchy" },
+    { title: "Ensure WCAG AAA contrast ratio on all gray text elements", cat: "Typography" },
+    { title: "Introduce generous margins between dashboard sections", cat: "White Space Distribution" },
+    { title: "Convert saturated priority badges to light pastel tints", cat: "Desaturation & Clarity" },
+    { title: "Enhance column headers with bolder, darker slate colors", cat: "Typography" },
+    { title: "Implement the Vignelli baseline grid for vertical rhythm", cat: "White Space Distribution" },
+    { title: "Reduce UI noise by eliminating unnecessary borders", cat: "White Space Distribution" },
+    { title: "Simplify hover states to gentle Y-axis translations", cat: "Visual Hierarchy" },
+    { title: "Establish 'Syne' font weights for clear header hierarchy", cat: "Typography" },
+    { title: "Align all text strictly left to create a clean ragged edge", cat: "White Space Distribution" },
+    { title: "Remove background blurs that conflict with solid layouts", cat: "Desaturation & Clarity" },
+    { title: "Use JetBrains Mono exclusively for data and IDs", cat: "Typography" },
+    { title: "Increase line-height to 1.6 for improved reading stamina", cat: "Typography" },
+    { title: "Desaturate secondary icons to slate-400 for balance", cat: "Desaturation & Clarity" },
+    { title: "Group related information visually using Gestalt proximity", cat: "White Space Distribution" },
+    { title: "Design minimalist button states without heavy borders", cat: "Visual Hierarchy" },
+    { title: "Ensure white space represents 40% of the active canvas", cat: "White Space Distribution" },
+    { title: "Audit the Auditor Review Queue for clean aesthetics", cat: "Desaturation & Clarity" },
+    { title: "Refactor the Marketplace Preview container backgrounds", cat: "Desaturation & Clarity" },
+    { title: "Establish a clear Z-index architecture for modals and overlays", cat: "Visual Hierarchy" },
+    { title: "Harmonize the 'Chiaroscuro' transition to favor light modes", cat: "Desaturation & Clarity" },
+    { title: "Optimize font loading to prevent layout shifts (FOUT)", cat: "Typography" },
+    { title: "Implement semantic HTML5 tags for accessibility structure", cat: "Visual Hierarchy" },
+    { title: "Refine form inputs to use clean lines and light backgrounds", cat: "Desaturation & Clarity" },
+    { title: "Balance the visual weight of the sidebar navigation", cat: "Visual Hierarchy" },
+    { title: "Use negative space to draw attention to primary CTAs", cat: "White Space Distribution" },
+    { title: "Standardize letter-spacing for uppercase metadata tags", cat: "Typography" },
+    { title: "Eliminate color-banding in background transitions", cat: "Desaturation & Clarity" },
+    { title: "Create focus states that are visible but not overwhelming", cat: "Visual Hierarchy" },
+    { title: "Apply Vignelli's minimalist philosophy to dashboard metrics", cat: "White Space Distribution" },
+    { title: "Ensure text color contrast passes accessibility on white cards", cat: "Typography" },
+    { title: "Design empty states that feel intentional and spacious", cat: "White Space Distribution" },
+    { title: "Reduce the number of brand colors used simultaneously to 2", cat: "Desaturation & Clarity" },
+    { title: "Streamline the visual experience for first-time users", cat: "Visual Hierarchy" },
+    { title: "Conduct a final visual QA on the 42-story implementation", cat: "White Space Distribution" }
   ];
 
   const stories: TaskItem[] = [];
@@ -129,14 +129,14 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-[11px] uppercase tracking-wider">
-          {['ALL', 'Grid & Structure', 'Typography', 'Chiaroscuro & Contrast', 'Visual Experience'].map((cat) => (
+          {['ALL', 'White Space Distribution', 'Typography', 'Desaturation & Clarity', 'Visual Hierarchy'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 selectedCategory === cat
-                  ? 'bg-white/10 text-white border border-white/10'
-                  : 'bg-transparent text-slate-400 hover:text-white border border-white/5 hover:bg-white/5'
+                  ? 'bg-slate-900 text-white shadow-md'
+                  : 'bg-transparent text-slate-500 hover:text-slate-900 border border-slate-200 hover:bg-slate-50'
               }`}
             >
               {cat === 'ALL' ? (dict?.kanban?.all || 'ALL') : cat}
@@ -157,7 +157,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
             >
               {/* Column Header */}
               <div className="flex items-center justify-between pb-2">
-                <h4 className="text-[12px] font-mono font-medium text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="text-[12px] font-mono font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
                   {col.label.replace(/^[0-9]\.\s/, '')}
                 </h4>
                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${col.badgeBg}`}>
@@ -172,20 +172,20 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     key={task.id}
                     layout
                     onClick={() => setSelectedTask(task)}
-                    className="glass-blue-gradient-card p-5 space-y-4 cursor-pointer group relative overflow-hidden"
+                    className="vignelli-clean-card p-5 space-y-4 cursor-pointer group relative overflow-hidden"
                   >
                     {/* Top ID & Priority */}
                     <div className="flex justify-between items-center relative z-10">
-                      <span className="text-[11px] font-mono font-semibold text-[#5EC8F2] group-hover:text-white transition-colors tracking-wide">
+                      <span className="text-[11px] font-mono font-semibold text-[#5EC8F2] group-hover:text-[#377D8C] transition-colors tracking-wide">
                         {task.id}
                       </span>
                       <span
-                        className={`text-[9px] font-mono px-2.5 py-1 rounded-md tracking-wider font-semibold ${
+                        className={`text-[9px] font-mono px-2.5 py-1 rounded-full tracking-wider font-semibold ${
                           task.priority === 'CRITICAL'
-                            ? 'bg-red-500/20 text-red-300 border border-red-500/30'
+                            ? 'bg-red-50 text-red-600 border border-red-100'
                             : task.priority === 'HIGH'
-                            ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                            : 'bg-white/10 text-slate-300 border border-white/10'
+                            ? 'bg-amber-50 text-amber-600 border border-amber-100'
+                            : 'bg-slate-50 text-slate-500 border border-slate-200'
                         }`}
                       >
                         {task.priority}
@@ -193,23 +193,23 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     </div>
 
                     {/* Title */}
-                    <p className="text-[14px] font-sans font-medium text-white group-hover:text-[#5ED7F2] leading-relaxed relative z-10 transition-colors">
+                    <p className="text-[14px] font-sans font-medium text-slate-800 group-hover:text-black leading-relaxed relative z-10 transition-colors">
                       {task.title}
                     </p>
 
                     {/* Category Tag */}
-                    <div className="text-[10px] font-mono text-slate-400 relative z-10 uppercase tracking-widest">
+                    <div className="text-[10px] font-mono text-slate-500 relative z-10 uppercase tracking-widest font-medium">
                       <span>{task.category}</span>
                     </div>
 
                     {/* Bottom Metadata */}
-                    <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-slate-300 relative z-10 border-t border-white/10">
+                    <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-slate-500 relative z-10 border-t border-slate-100">
                       <span className="flex items-center gap-1.5 font-medium">
-                        <User className="w-3.5 h-3.5 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
+                        <User className="w-3.5 h-3.5 text-slate-400" /> {task.assignee.split(' ')[0]}
                       </span>
 
                       {task.payoutUsd && (
-                        <span className="text-[#5EC8F2] font-bold flex items-center bg-[#5EC8F2]/10 px-2 py-0.5 rounded">
+                        <span className="text-[#5EC8F2] font-bold flex items-center bg-[#5EC8F2]/10 px-2 py-0.5 rounded-md">
                           <DollarSign className="w-3.5 h-3.5 -mr-0.5" />
                           {task.payoutUsd.toLocaleString()}
                         </span>

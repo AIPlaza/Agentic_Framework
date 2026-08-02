@@ -96,10 +96,24 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center p-4 sm:p-8 relative overflow-hidden font-sans">
-      <CinematicBackground />
+    <div className="min-h-screen bg-[#1A1A2E] text-white flex items-center justify-center p-4 sm:p-8 relative overflow-hidden font-sans">
+      {/* Base Background Image */}
+      <div 
+        className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#3866B3]"
+      >
+        <img 
+          src="/images/accet-arq-main-1.JPG"
+          alt="Archetype Background"
+          className="w-full h-full object-cover opacity-25 blur-sm scale-105 saturate-50"
+        />
+        
+        {/* Cinematic Vignette & Netflix Blur Overlays (Left-to-Right #3866B3) */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90" />
+      </div>
+
       <div className="fixed inset-0 vignette pointer-events-none z-10" />
-      <div className="fixed inset-0 grain pointer-events-none z-0" />
+      <div className="fixed inset-0 grain pointer-events-none z-10" />
 
       <motion.div
         layout
@@ -123,7 +137,7 @@ export default function OnboardingPage() {
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 01 / 03
                   </span>
-                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">Project Identity</h2>
+                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">Project Identity</h2>
                 </div>
               </div>
 
@@ -138,7 +152,7 @@ export default function OnboardingPage() {
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
+                    className="w-full bg-black/20 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
                     placeholder="e.g. Clean Biogas & Agroindustrial Facility"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
@@ -200,7 +214,7 @@ export default function OnboardingPage() {
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 02 / 03
                   </span>
-                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">
+                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">
                     AI Context & Documents
                   </h2>
                 </div>
@@ -217,7 +231,7 @@ export default function OnboardingPage() {
                   </label>
                   <textarea
                     rows={7}
-                    className="w-full bg-black/40 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
+                    className="w-full bg-black/20 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
                     placeholder="Describe the asset, target production goals, quality standards, and milestone targets..."
                     value={formData.brief}
                     onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
@@ -316,7 +330,7 @@ export default function OnboardingPage() {
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 03 / 03
                   </span>
-                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">AI Engine Selection</h2>
+                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">AI Engine Selection</h2>
                 </div>
               </div>
 
