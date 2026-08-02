@@ -62,5 +62,33 @@
     "payoutFrequency": "Frequência de Pagamento",
     "aiConfidence": "Confiança de IA",
     "legalSummary": "Folha de Resumo Legal"
+  },
+  "publicMarketplace": {
+    "heroTitle": "Marketplace Institucional de RWA",
+    "heroSubtitle": "Transparência de Grau Institucional",
+    "heroDesc": "Cada ativo é apoiado por uma auditoria granular de 126 histórias. Invista com clareza absoluta em ativos do mundo real verificados.",
+    "globalCatalog": "Catálogo Global de Ativos",
+    "activeOfferings": "Ofertas Ativas",
+    "activeOfferingsDesc": "Ativos verificados prontos para gerar rendimento.",
+    "filterClass": "Filtrar por Classe",
+    "allClasses": "Todas as Classes",
+    "realEstate": "Imóveis",
+    "logistics": "Logística",
+    "energy": "Energia",
+    "filterRisk": "Filtrar por Risco",
+    "allProfiles": "Todos os Perfis",
+    "conservative": "Conservador",
+    "base": "Base",
+    "aggressive": "Agressivo",
+    "viewAsset": "Ver Ficha do Ativo",
+    "assetClass": "Classe",
+    "targetYield": "Rendimento Alvo",
+    "riskProfile": "Perfil de Risco",
+    "auditStatus": "Status de Auditoria",
+    "moatTitle": "O Fosso das 126 Histórias",
+    "moatSubtitle": "Invista com clareza absoluta.",
+    "assetFinancials": "Finanças do Ativo",
+    "totalValue": "Valor Total",
+    "assetFicheId": "ID da Ficha"
   }
 }

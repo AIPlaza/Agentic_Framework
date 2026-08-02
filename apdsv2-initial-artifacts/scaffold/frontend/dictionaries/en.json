@@ -62,5 +62,33 @@
     "payoutFrequency": "Payout Frequency",
     "aiConfidence": "AI Confidence",
     "legalSummary": "Legal Summary Sheet"
+  },
+  "publicMarketplace": {
+    "heroTitle": "Institutional RWA Marketplace",
+    "heroSubtitle": "Institutional-Grade Transparency",
+    "heroDesc": "Every asset backed by a 126-story granular audit. Invest with absolute clarity in verified real-world assets.",
+    "globalCatalog": "Global Asset Catalog",
+    "activeOfferings": "Active Offerings",
+    "activeOfferingsDesc": "Verified assets ready for yield generation.",
+    "filterClass": "Filter by Asset Class",
+    "allClasses": "All Classes",
+    "realEstate": "Real Estate",
+    "logistics": "Logistics",
+    "energy": "Energy",
+    "filterRisk": "Filter by Risk Profile",
+    "allProfiles": "All Profiles",
+    "conservative": "Conservative",
+    "base": "Base",
+    "aggressive": "Aggressive",
+    "viewAsset": "View Asset Fiche",
+    "assetClass": "Asset Class",
+    "targetYield": "Target Yield",
+    "riskProfile": "Risk Profile",
+    "auditStatus": "Audit Status",
+    "moatTitle": "The 126-Story Moat",
+    "moatSubtitle": "Invest with absolute clarity.",
+    "assetFinancials": "Asset Financials",
+    "totalValue": "Total Value",
+    "assetFicheId": "Asset Fiche ID"
   }
 }

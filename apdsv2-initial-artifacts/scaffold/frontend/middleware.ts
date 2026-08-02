@@ -10,10 +10,16 @@ const locales = ['en', 'es', 'pt']
 const defaultLocale = 'en'
 
 function getLocale(request: NextRequest): string {
+  // 1. Check if user has explicitly set a locale via cookie
+  const cookieLocale = request.cookies.get('accet-locale')?.value
+  if (cookieLocale && locales.includes(cookieLocale)) {
+    return cookieLocale
+  }
+
+  // 2. Fallback to Negotiator (Browser preference)
   const negotiatorHeaders: Record<string, string> = {}
   request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
 
-  // Handle case where Accept-Language is not present
   if (!negotiatorHeaders['accept-language']) {
     return defaultLocale
   }
@@ -68,16 +74,14 @@ export async function middleware(request: NextRequest) {
             return request.cookies.get(name)?.value
           },
           set(name: string, value: string, options: CookieOptions) {
-            const domain = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.accet.com'
-            request.cookies.set({ name, value, ...options, domain })
+            request.cookies.set({ name, value, ...options })
             response = NextResponse.next({ request: { headers: request.headers } })
-            response.cookies.set({ name, value, ...options, domain })
+            response.cookies.set({ name, value, ...options })
           },
           remove(name: string, options: CookieOptions) {
-            const domain = process.env.NEXT_PUBLIC_COOKIE_DOMAIN || '.accet.com'
-            request.cookies.set({ name, value: '', ...options, domain })
+            request.cookies.set({ name, value: '', ...options })
             response = NextResponse.next({ request: { headers: request.headers } })
-            response.cookies.set({ name, value: '', ...options, domain })
+            response.cookies.set({ name, value: '', ...options })
           },
         },
       }
