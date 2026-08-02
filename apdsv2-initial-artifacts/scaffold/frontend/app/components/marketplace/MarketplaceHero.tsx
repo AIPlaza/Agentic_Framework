@@ -36,18 +36,18 @@ export function MarketplaceHero() {
         <CinematicBackground />
       </div>
       
-      <div className="relative z-20 max-w-4xl mx-auto px-6 text-center mt-[-40px]" ref={textRef}>
+      <div className="relative z-20 max-w-4xl mx-auto px-6 text-center" ref={textRef}>
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#5EC8F2] text-[10px] font-sans tracking-widest uppercase mb-6 backdrop-blur-md">
           <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
-          ACCET Public Marketplace
+          Active Management Suite
         </div>
         
         <h1 className="text-4xl md:text-6xl lg:text-7xl font-syne font-bold text-white tracking-tight leading-tight mb-6">
-          Invest in <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5EC8F2] to-white">Verified Reality</span>.
+          Institutional-Grade <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#5EC8F2] to-white">Transparency</span>.
         </h1>
         
         <p className="max-w-2xl mx-auto text-[15px] md:text-[17px] font-sans text-slate-300 leading-relaxed mb-10">
-          Move beyond superficial tokenization. ACCET projects are autonomously managed and backed by up to 126 granular, verified audit stories per asset class. Absolute transparency.
+          Move beyond opaque tokenization. ACCET mitigates investor risk through continuous, autonomous auditing. Every asset is backed by up to 126 granular, verified operational stories.
         </p>
       </div>
 

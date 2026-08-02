@@ -71,26 +71,26 @@ export function ProjectGrid() {
   }, []);
 
   return (
-    <section className="py-32 px-6 bg-[#162032] relative z-10" ref={gridRef}>
+    <section className="py-32 px-6 bg-[#F8FAFC] relative z-10" ref={gridRef}>
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <h2 className="text-3xl md:text-4xl font-syne font-bold text-white mb-4">
+            <h2 className="text-3xl md:text-4xl font-syne font-bold text-slate-900 mb-4">
               Active Offerings
             </h2>
-            <p className="text-[15px] font-sans text-slate-400 max-w-xl">
+            <p className="text-[15px] font-sans text-slate-600 max-w-xl">
               Explore our curated selection of high-yield, autonomously managed real-world assets. Every project is continuously audited by AI agents against strict PRINCE2 methodologies.
             </p>
           </div>
           
           <div className="flex items-center gap-2">
-            <button className="px-5 py-2.5 rounded-full bg-white/10 text-white font-sans text-[11px] uppercase tracking-widest font-medium hover:bg-white/20 transition-colors">
+            <button className="px-5 py-2.5 rounded-full bg-slate-900 text-white font-sans text-[11px] uppercase tracking-widest font-medium hover:bg-slate-800 transition-colors shadow-sm">
               All Assets
             </button>
-            <button className="px-5 py-2.5 rounded-full bg-transparent border border-white/10 text-slate-400 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-white hover:border-white/30 transition-colors">
+            <button className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-500 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-slate-900 hover:border-slate-300 transition-colors shadow-sm">
               Energy
             </button>
-            <button className="px-5 py-2.5 rounded-full bg-transparent border border-white/10 text-slate-400 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-white hover:border-white/30 transition-colors">
+            <button className="px-5 py-2.5 rounded-full bg-white border border-slate-200 text-slate-500 font-sans text-[11px] uppercase tracking-widest font-medium hover:text-slate-900 hover:border-slate-300 transition-colors shadow-sm">
               Real Estate
             </button>
           </div>
