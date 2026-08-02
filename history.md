@@ -8,6 +8,10 @@
 > **Continual Improvement & Methodology (July 31, 2026):**
 > We enforce a strict **"Brain vs. Body"** separation of concerns. `Agentic_Framework` acts as the "Brain", a pure LLM contextualization and methodology environment that never deploys to production. It holds `.agents` skills, histories, and prompts. The compiled Next.js applications (the "Body") are safely injected into deployment paths (e.g., Render pipelines) completely free of AI-specific scaffolding. This guarantees lean production environments while maximizing agent contextual awareness.
 
+> **Design Methodology Update (August 2, 2026):**
+> The "Chiaroscuro" aesthetic and the "Netflix Effect" for dark sections have been codified. Agents MUST now refer to `ACCET_Design_Manual.md` and `Dark_Mode_Components_Guide.md` located in the repository root to ensure "Divergencia 0". 
+> **Correction (Aug 2):** After an agent hallucinated raw Tailwind background classes, we implemented a strict architectural constraint: The Netflix Effect is now fully encapsulated within the `<CinematicBackground />` universal React component. Agents are explicitly forbidden from manually coding background gradient stacks and must use the component.
+
 > **Production Deployment Synchronization (July 31, 2026):**
 > The `accet-app` repository (The Body) has been strictly synchronized with `Agentic_Framework` version `v1.0.7-test.1.2` (The Brain). The APDSv2 architecture was merged to `main` in `accet-app` via branch `release/v2.0-marketplace-refactor` and successfully pushed to trigger the Render production deployment.
 

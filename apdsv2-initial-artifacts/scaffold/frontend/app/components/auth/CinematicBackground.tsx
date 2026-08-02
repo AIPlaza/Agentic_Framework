@@ -1,34 +1,63 @@
-'use client'
+import React, { useRef, useEffect } from 'react';
 
-import React, { useEffect, useRef } from 'react'
+interface CinematicBackgroundProps {
+  mediaType?: 'image' | 'video';
+  src?: string;
+  className?: string;
+  opacity?: number;
+}
 
-export default function CinematicBackground() {
-  const videoRef = useRef<HTMLVideoElement>(null)
+export default function CinematicBackground({ mediaType = 'image', src = '/images/accet-arq-main-1.JPG', className = '', opacity = 25 }: CinematicBackgroundProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(err => {
-        console.log('Cinematic background autoplay blocked:', err)
-      })
+    if (mediaType === 'video' && videoRef.current) {
+      videoRef.current.playbackRate = 0.5; // Cinematic slow motion
+      videoRef.current.play().catch(err => console.log("Video autoplay blocked:", err));
+      
+      const handleScroll = () => {
+        if (!videoRef.current) return;
+        const scrollY = window.scrollY;
+        const rate = Math.min(2.0, 0.5 + scrollY / 500);
+        videoRef.current.playbackRate = rate;
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      return () => window.removeEventListener("scroll", handleScroll);
     }
-  }, [])
+  }, [mediaType]);
 
   return (
-    <div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-0 bg-[#3866B3]">
-      <video
-        ref={videoRef}
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="w-full h-full object-cover opacity-25 blur-sm scale-105 saturate-50"
-      >
-        <source src="/background-video.mp4" type="video/mp4" />
-      </video>
+    <div className={`fixed inset-0 z-0 pointer-events-none parallax-layer bg-[#3866B3] ${className}`} data-parallax-speed="0.15">
+      {mediaType === 'video' ? (
+        <video 
+          ref={videoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="w-full h-full object-cover mix-blend-screen saturate-50 blur-sm"
+          style={{ opacity: opacity / 100 }}
+        >
+          <source src={src} type="video/mp4" />
+        </video>
+      ) : (
+        <img 
+          src={src}
+          alt="Cinematic Background"
+          className="w-full h-full object-cover mix-blend-screen saturate-50 blur-sm scale-105"
+          style={{ opacity: opacity / 100 }}
+        />
+      )}
       
-      {/* Cinematic Vignette & Netflix Blur Overlays (Left-to-Right #3866B3) */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90" />
+      {/* Netflix Left Blur & Cinematic Blue Gradient Overlay */}
+      <div className="absolute inset-y-0 left-0 w-full md:w-1/2 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent backdrop-blur-[4px] z-10"></div>
+      
+      {/* Overlays for blend and readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#3866B3]/90 via-transparent to-[#1A1A2E] z-10"></div>
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90 z-10"></div>
+      <div className="absolute inset-0 vignette z-10"></div>
+      <div className="absolute inset-0 grain z-10"></div>
     </div>
-  )
+  );
 }

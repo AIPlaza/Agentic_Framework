@@ -6,6 +6,9 @@
 > - **The Body (accet-app/apps/marketplace):** The isolated, highly optimized Next.js 16 production codebase deployed directly to Render.
 > - **Philosophy:** By strictly separating AI methodology/prompts from the production container, we ensure a clean deployment pipeline while maintaining a rich, historical "Agentic Brain" that continually learns and improves the ecosystem across multiple apps.
 
+> **Design Methodology Update (August 2, 2026):**
+> All UI/UX components built for this platform MUST strictly adhere to the `ACCET_Design_Manual.md` and `Dark_Mode_Components_Guide.md`. Generic styles, `.glass-platinum`, pure `#000000` or `#020624` backgrounds, and pure green colors are STRICTLY BANNED. We enforce "Divergencia 0" with our Chiaroscuro & Netflix aesthetic.
+
 
 Repository navigation
 

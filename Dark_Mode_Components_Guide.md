@@ -4,9 +4,12 @@ This document is the hyper-detailed technical reference for constructing **Dark 
 
 ---
 
-## 1. The "Netflix Effect" Background Architecture
+## 1. Backgrounds & "The Netflix Effect"
+**Rule:** Deep backgrounds use **Avalanche Dark Blue (`#1A1A2E`)**. Do NOT use pure black (`#000000`).
 
-The background is constructed using a multi-layered approach to achieve depth, cinematic texture, and high contrast for the foreground text.
+**CRITICAL COMPONENT RULE (Added Aug 2, 2026):** 
+**NEVER** manually write out Tailwind classes to construct the "Netflix Effect" background (the `#3866B3` gradient overlay, vignettes, or grains) on a page. You **MUST** import and use the `<CinematicBackground />` component. This prevents LLM hallucinations and drift in gradient tokens. 
+Example usage: `<CinematicBackground mediaType="video" src="/hero-video.mov" />` or `<CinematicBackground />`.
 
 ### Layer 1: Base & Image
 ```tsx
