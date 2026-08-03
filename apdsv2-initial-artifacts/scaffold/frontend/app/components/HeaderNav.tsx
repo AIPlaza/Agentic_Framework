@@ -66,7 +66,11 @@ export default function HeaderNav() {
         {/* Center Navigation Menu - Minimalist Pills */}
         <nav className="hidden md:flex items-center gap-1">
           {navItems.map((item) => {
-            const isActive = pathname === item.href || (item.href !== `/${lang}/onboarding` && pathname?.startsWith(item.href));
+            const isMarketplaceRoute = pathname?.endsWith('/marketplace');
+            const isActive = pathname === item.href || 
+              (item.href !== `/${lang}/onboarding` && 
+               pathname?.startsWith(item.href) && 
+               (!isMarketplaceRoute || item.href.endsWith('/marketplace')));
 
             return (
               <Link
