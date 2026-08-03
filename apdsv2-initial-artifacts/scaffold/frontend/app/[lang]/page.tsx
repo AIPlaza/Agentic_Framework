@@ -36,7 +36,7 @@ export default function Home({ params: { lang } }: { params: { lang: string } })
           Step into the future of verifiable impact and active management.
         </p>
 
-        <Link href={`/${lang}/onboarding`}>
+        <Link href={`/${lang}/project/demo-project-001`}>
           <motion.button 
             whileHover={{ opacity: 0.9 }}
             className="flex items-center justify-center mx-auto gap-2 bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] font-sans font-medium text-[13px] rounded-full px-8 py-3.5 transition-opacity"
