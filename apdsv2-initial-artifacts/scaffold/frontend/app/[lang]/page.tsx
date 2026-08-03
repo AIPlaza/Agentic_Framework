@@ -3,8 +3,10 @@
 import { motion } from 'framer-motion'
 import { ArrowRight, Activity, Layers, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
+import { useDictionary } from '@/app/components/DictionaryProvider'
 
-export default function Home({ params: { lang } }: { params: { lang: string } }) {
+export default function Home() {
+  const { lang } = useDictionary()
   return (
     <div className="min-h-screen bg-[#1A1A2E] flex flex-col items-center justify-center p-8 relative overflow-hidden font-sans">
       
