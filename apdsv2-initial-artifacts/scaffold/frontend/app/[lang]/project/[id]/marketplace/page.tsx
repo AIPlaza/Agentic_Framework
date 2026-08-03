@@ -31,15 +31,15 @@ export default function InternalMarketplaceEditor({ params }: { params: any }) {
         } else {
           setProject({
             id: targetId,
-            title: 'ACCET Verified Project',
-            description: 'Sustainable real-world asset project with verified operational standards and telemetry oracles.'
+            title: dict?.internalMarketplace?.defaultTitle || 'ACCET Verified Project',
+            description: dict?.internalMarketplace?.defaultDesc || 'Sustainable real-world asset project with verified operational standards and telemetry oracles.'
           });
         }
       } catch (e) {
         setProject({
           id: targetId,
-          title: 'ACCET Verified Project',
-          description: 'Sustainable real-world asset project with verified operational standards and telemetry oracles.'
+          title: dict?.internalMarketplace?.defaultTitle || 'ACCET Verified Project',
+          description: dict?.internalMarketplace?.defaultDesc || 'Sustainable real-world asset project with verified operational standards and telemetry oracles.'
         });
       } finally {
         setLoading(false);
@@ -58,10 +58,10 @@ export default function InternalMarketplaceEditor({ params }: { params: any }) {
   };
 
   const transparencyFeed = [
-    { date: 'Today, 14:30', event: 'Milestone Payout executed programmatically via Smart Contract', type: 'PAYOUT' },
-    { date: 'Yesterday, 18:00', event: 'Independent Quality Audit Report signed by Accredited Auditor', type: 'AUDIT' },
-    { date: '29 Jul, 10:15', event: 'Sensor hardware logged 100% operational standards compliance', type: 'IOT' },
-    { date: '28 Jul, 09:00', event: 'Daily Operational Quality Log validated with zero defects', type: 'CHECKLIST' }
+    { date: dict?.internalMarketplace?.event1Date || 'Today, 14:30', event: dict?.internalMarketplace?.event1Text || 'Milestone Payout executed programmatically via Smart Contract', type: dict?.internalMarketplace?.event1Type || 'PAYOUT' },
+    { date: dict?.internalMarketplace?.event2Date || 'Yesterday, 18:00', event: dict?.internalMarketplace?.event2Text || 'Independent Quality Audit Report signed by Accredited Auditor', type: dict?.internalMarketplace?.event2Type || 'AUDIT' },
+    { date: dict?.internalMarketplace?.event3Date || '29 Jul, 10:15', event: dict?.internalMarketplace?.event3Text || 'Sensor hardware logged 100% operational standards compliance', type: dict?.internalMarketplace?.event3Type || 'IOT' },
+    { date: dict?.internalMarketplace?.event4Date || '28 Jul, 09:00', event: dict?.internalMarketplace?.event4Text || 'Daily Operational Quality Log validated with zero defects', type: dict?.internalMarketplace?.event4Type || 'CHECKLIST' }
   ];
 
   if (loading) {
@@ -79,8 +79,10 @@ export default function InternalMarketplaceEditor({ params }: { params: any }) {
   }
 
   return (
-    <div className="min-h-screen p-6 md:p-12 bg-[#1A1A2E] text-white relative overflow-hidden font-sans">
+    <div className="min-h-screen p-6 md:p-12 bg-[#050505] text-white relative overflow-hidden font-sans">
       <CinematicBackground />
+      <div className="absolute inset-0 vignette pointer-events-none z-10" />
+      <div className="absolute inset-0 grain pointer-events-none z-[1]" />
       
       <div className="max-w-7xl mx-auto relative z-20">
         {/* Marketplace Header */}
@@ -88,14 +90,14 @@ export default function InternalMarketplaceEditor({ params }: { params: any }) {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <span className="px-3 py-1 bg-amber-500/10 text-amber-500 border border-amber-500/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider flex items-center gap-1.5">
-                <Edit3 className="w-3 h-3" /> Internal Draft Mode
+                <Edit3 className="w-3 h-3" /> {dict?.internalMarketplace?.draftMode || 'Internal Draft Mode'}
               </span>
               <span className="px-3 py-1 bg-[#5EC8F2]/10 text-white border border-[#5EC8F2]/20 rounded-md text-[10px] font-mono font-bold uppercase tracking-wider">
-                Milestone-Based Asset
+                {dict?.internalMarketplace?.milestoneAsset || 'Milestone-Based Asset'}
               </span>
             </div>
             <h1 className="text-4xl md:text-6xl font-syne font-bold text-white tracking-tight flex items-center gap-4">
-              {project?.title || 'ACCET Real World Asset Project'}
+              {project?.title || dict?.internalMarketplace?.defaultTitle || 'ACCET Real World Asset Project'}
             </h1>
             <p className="text-slate-300 text-[16px] mt-4 max-w-2xl font-sans leading-relaxed">
               {project?.description}
@@ -107,7 +109,7 @@ export default function InternalMarketplaceEditor({ params }: { params: any }) {
               <Download className="w-4 h-4 text-[#5EC8F2]" /> {dict?.marketplace?.legalSummary || 'Legal Summary Sheet'}
             </button>
             <button className="px-6 py-3.5 bg-gradient-to-r from-[#5EC8F2] to-[#3866B3] text-white font-mono text-[11px] uppercase tracking-widest font-bold rounded-xl transition-all hover:shadow-[0_0_20px_rgba(94,200,242,0.3)]">
-              Publish to Public Grid
+              {dict?.internalMarketplace?.publishToGrid || 'Publish to Public Grid'}
             </button>
           </div>
         </header>

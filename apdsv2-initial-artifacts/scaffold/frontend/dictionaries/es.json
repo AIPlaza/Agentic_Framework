@@ -157,5 +157,24 @@
     "status": "Estado:",
     "initializing": "INICIALIZANDO PROTOCOLO DE CUMPLIMIENTO [APDS-v2.0]...",
     "subtitle": "Red Base L2 · Motor RWA"
+  },
+  "internalMarketplace": {
+    "draftMode": "Modo Borrador Interno",
+    "milestoneAsset": "Activo Basado en Hitos",
+    "defaultTitle": "Proyecto Verificado ACCET",
+    "defaultDesc": "Proyecto sostenible de activos del mundo real con estándares operativos verificados y oráculos de telemetría.",
+    "publishToGrid": "Publicar en la Red Pública",
+    "event1Date": "Hoy, 14:30",
+    "event1Text": "Pago de Hito ejecutado programáticamente mediante Smart Contract",
+    "event1Type": "PAGO",
+    "event2Date": "Ayer, 18:00",
+    "event2Text": "Reporte de Auditoría de Calidad Independiente firmado por Auditor Acreditado",
+    "event2Type": "AUDITORÍA",
+    "event3Date": "29 Jul, 10:15",
+    "event3Text": "Hardware de sensores registró 100% de cumplimiento en estándares operativos",
+    "event3Type": "IOT",
+    "event4Date": "28 Jul, 09:00",
+    "event4Text": "Registro Diario de Calidad Operativa validado con cero defectos",
+    "event4Type": "CHECKLIST"
   }
 }

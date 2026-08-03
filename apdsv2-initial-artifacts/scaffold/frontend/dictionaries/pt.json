@@ -157,5 +157,24 @@
     "status": "Status:",
     "initializing": "INICIALIZANDO PROTOCOLO DE CONFORMIDADE [APDS-v2.0]...",
     "subtitle": "Rede Base L2 · Motor RWA"
+  },
+  "internalMarketplace": {
+    "draftMode": "Modo Rascunho Interno",
+    "milestoneAsset": "Ativo Baseado em Marcos",
+    "defaultTitle": "Projeto Verificado ACCET",
+    "defaultDesc": "Projeto sustentável de ativos do mundo real com padrões operacionais verificados e oráculos de telemetria.",
+    "publishToGrid": "Publicar na Rede Pública",
+    "event1Date": "Hoje, 14:30",
+    "event1Text": "Pagamento de Marco executado programaticamente via Smart Contract",
+    "event1Type": "PAGAMENTO",
+    "event2Date": "Ontem, 18:00",
+    "event2Text": "Relatório de Auditoria de Qualidade Independente assinado por Auditor Credenciado",
+    "event2Type": "AUDITORIA",
+    "event3Date": "29 Jul, 10:15",
+    "event3Text": "Hardware de sensores registrou 100% de conformidade nos padrões operacionais",
+    "event3Type": "IOT",
+    "event4Date": "28 Jul, 09:00",
+    "event4Text": "Registro Diário de Qualidade Operacional validado com zero defeitos",
+    "event4Type": "CHECKLIST"
   }
 }
