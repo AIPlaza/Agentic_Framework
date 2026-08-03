@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import { ArrowRight, Activity, Layers, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 
-export default function Home() {
+export default function Home({ params: { lang } }: { params: { lang: string } }) {
   return (
     <div className="min-h-screen bg-[#1A1A2E] flex flex-col items-center justify-center p-8 relative overflow-hidden font-sans">
       
@@ -36,7 +36,7 @@ export default function Home() {
           Step into the future of verifiable impact and active management.
         </p>
 
-        <Link href="/onboarding">
+        <Link href={`/${lang}/onboarding`}>
           <motion.button 
             whileHover={{ opacity: 0.9 }}
             className="flex items-center justify-center mx-auto gap-2 bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] font-sans font-medium text-[13px] rounded-full px-8 py-3.5 transition-opacity"

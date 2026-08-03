@@ -92,12 +92,10 @@ export async function middleware(request: NextRequest) {
     // Extract pathname without locale for auth checks
     const pathnameWithoutLocale = pathname.replace(/^\/[^\/]+/, '')
 
-    // Protect non-demo dashboard routes
+    // Protect non-demo routes (For demo purposes, we allow all main views)
     if (
       !user &&
-      (pathnameWithoutLocale.startsWith('/project') ||
-        pathnameWithoutLocale.startsWith('/onboarding') ||
-        pathnameWithoutLocale.startsWith('/evaluator'))
+      (pathnameWithoutLocale.startsWith('/protected-route-example'))
     ) {
       const currentLocale = pathname.split('/')[1]
       return NextResponse.redirect(new URL(`/${currentLocale}/login`, request.url))
