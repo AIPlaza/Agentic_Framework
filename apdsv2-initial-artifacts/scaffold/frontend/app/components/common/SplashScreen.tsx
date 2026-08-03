@@ -2,8 +2,10 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { useDictionary } from '@/app/components/DictionaryProvider'
 
 export default function SplashScreen() {
+  const { dict } = useDictionary()
   const [isVisible, setIsVisible] = useState(true)
   const [progress, setProgress] = useState(0)
 
@@ -66,7 +68,7 @@ export default function SplashScreen() {
           </h1>
           
           <p className="font-mono text-[9px] tracking-[8px] text-[#5EC8F2]/20 uppercase mt-2">
-            Base L2 Network · RWA Engine
+            {dict?.loading?.subtitle || 'Base L2 Network · RWA Engine'}
           </p>
         </div>
 
@@ -80,9 +82,9 @@ export default function SplashScreen() {
       </div>
 
       {/* Status caption */}
-      <div className="absolute bottom-16 px-8 py-3 bg-[#1A1A2E]/60 backdrop-blur-xl border border-white/5 rounded-full text-white/40 font-mono text-[9px] tracking-widest uppercase"
+      <div className="absolute bottom-16 px-8 py-3 bg-black/60 backdrop-blur-xl border border-white/5 rounded-full text-white/40 font-mono text-[9px] tracking-widest uppercase"
         style={{ animation: 'fade-in 1.5s ease-out 1s both' }}>
-        <span className="text-[#5EC8F2]/60 mr-2">Status:</span> INITIALIZING COMPLIANCE PROTOCOL [APDS-v2.0]...
+        <span className="text-[#5EC8F2]/60 mr-2">{dict?.loading?.status || 'Status:'}</span> {dict?.loading?.initializing || 'INITIALIZING COMPLIANCE PROTOCOL [APDS-v2.0]...'}
       </div>
 
       <style>{`

@@ -6,79 +6,54 @@ import { Search, DollarSign, User } from 'lucide-react';
 import { TaskItem, TaskDetailModal } from './TaskDetailModal';
 import { useDictionary } from '@/app/components/DictionaryProvider';
 
-function generateInitialStories(projectTitle: string): TaskItem[] {
-  const categories = ['White Space Distribution', 'Typography', 'Desaturation & Clarity', 'Visual Hierarchy'];
+function generateInitialStories(projectTitle: string, dict: any): TaskItem[] {
+  const categories = [dict?.kanbanData?.catStrategy || 'Strategy & Legal', dict?.kanbanData?.catEngineering || 'Engineering & IoT', dict?.kanbanData?.catQuality || 'Quality & ISO 9001', dict?.kanbanData?.catTokenomics || 'Tokenomics & Tranches', dict?.kanbanData?.catOperations || 'Operations & Field'];
   const priorities: ('CRITICAL' | 'HIGH' | 'NORMAL')[] = ['CRITICAL', 'HIGH', 'NORMAL'];
-  const assignees = ['Lead Designer', 'UI Architect', 'UX Engineer', 'Motion Specialist'];
+  const assignees = [dict?.kanbanData?.assigneeLead || 'Lead Architect', dict?.kanbanData?.assigneeField || 'Field Operator #1', dict?.kanbanData?.assigneeAuditor || 'Independent Auditor (TPA)', dict?.kanbanData?.assigneeDev || 'Smart Contract Dev', dict?.kanbanData?.assigneePM || 'Project Manager'];
 
-  const vignelliStories = [
-    { title: "Replace heavy gradient cards with crisp white #FFFFFF surfaces", cat: "Desaturation & Clarity" },
-    { title: "Implement subtle 1px slate borders for structural definition", cat: "Visual Hierarchy" },
-    { title: "Increase padding to 24px in cards for better cognitive distribution", cat: "White Space Distribution" },
-    { title: "Remove muddy transparency overlays from primary content areas", cat: "Desaturation & Clarity" },
-    { title: "Transition typography to dark slate for high legibility", cat: "Typography" },
-    { title: "Apply soft Apple-style drop shadows (0 4px 20px) to cards", cat: "Visual Hierarchy" },
-    { title: "Use solid sky blue (#5EC8F2) for primary accents instead of gradients", cat: "Desaturation & Clarity" },
-    { title: "Standardize corner radius to 12px for consistent pill shapes", cat: "Visual Hierarchy" },
-    { title: "Ensure WCAG AAA contrast ratio on all gray text elements", cat: "Typography" },
-    { title: "Introduce generous margins between dashboard sections", cat: "White Space Distribution" },
-    { title: "Convert saturated priority badges to light pastel tints", cat: "Desaturation & Clarity" },
-    { title: "Enhance column headers with bolder, darker slate colors", cat: "Typography" },
-    { title: "Implement the Vignelli baseline grid for vertical rhythm", cat: "White Space Distribution" },
-    { title: "Reduce UI noise by eliminating unnecessary borders", cat: "White Space Distribution" },
-    { title: "Simplify hover states to gentle Y-axis translations", cat: "Visual Hierarchy" },
-    { title: "Establish 'Syne' font weights for clear header hierarchy", cat: "Typography" },
-    { title: "Align all text strictly left to create a clean ragged edge", cat: "White Space Distribution" },
-    { title: "Remove background blurs that conflict with solid layouts", cat: "Desaturation & Clarity" },
-    { title: "Use JetBrains Mono exclusively for data and IDs", cat: "Typography" },
-    { title: "Increase line-height to 1.6 for improved reading stamina", cat: "Typography" },
-    { title: "Desaturate secondary icons to slate-400 for balance", cat: "Desaturation & Clarity" },
-    { title: "Group related information visually using Gestalt proximity", cat: "White Space Distribution" },
-    { title: "Design minimalist button states without heavy borders", cat: "Visual Hierarchy" },
-    { title: "Ensure white space represents 40% of the active canvas", cat: "White Space Distribution" },
-    { title: "Audit the Auditor Review Queue for clean aesthetics", cat: "Desaturation & Clarity" },
-    { title: "Refactor the Marketplace Preview container backgrounds", cat: "Desaturation & Clarity" },
-    { title: "Establish a clear Z-index architecture for modals and overlays", cat: "Visual Hierarchy" },
-    { title: "Harmonize the 'Chiaroscuro' transition to favor light modes", cat: "Desaturation & Clarity" },
-    { title: "Optimize font loading to prevent layout shifts (FOUT)", cat: "Typography" },
-    { title: "Implement semantic HTML5 tags for accessibility structure", cat: "Visual Hierarchy" },
-    { title: "Refine form inputs to use clean lines and light backgrounds", cat: "Desaturation & Clarity" },
-    { title: "Balance the visual weight of the sidebar navigation", cat: "Visual Hierarchy" },
-    { title: "Use negative space to draw attention to primary CTAs", cat: "White Space Distribution" },
-    { title: "Standardize letter-spacing for uppercase metadata tags", cat: "Typography" },
-    { title: "Eliminate color-banding in background transitions", cat: "Desaturation & Clarity" },
-    { title: "Create focus states that are visible but not overwhelming", cat: "Visual Hierarchy" },
-    { title: "Apply Vignelli's minimalist philosophy to dashboard metrics", cat: "White Space Distribution" },
-    { title: "Ensure text color contrast passes accessibility on white cards", cat: "Typography" },
-    { title: "Design empty states that feel intentional and spacious", cat: "White Space Distribution" },
-    { title: "Reduce the number of brand colors used simultaneously to 2", cat: "Desaturation & Clarity" },
-    { title: "Streamline the visual experience for first-time users", cat: "Visual Hierarchy" },
-    { title: "Conduct a final visual QA on the 42-story implementation", cat: "White Space Distribution" }
+  const baseTemplates = [
+    { title: dict?.kanbanData?.story1 || 'Draft Project Brief & Executive Summary', cat: categories[0], status: 'DONE', p: 'HIGH' },
+    { title: dict?.kanbanData?.story2 || 'Incorporate SPV Vehicle & Legal Ownership Structure', cat: categories[0], status: 'DONE', p: 'CRITICAL' },
+    { title: dict?.kanbanData?.story3 || 'Map Logical Framework Impact -> Outcome -> Output Tree', cat: categories[0], status: 'DONE', p: 'CRITICAL' },
+    { title: dict?.kanbanData?.story4 || 'Define RACER Performance Indicators & Verification Sources', cat: categories[3], status: 'DONE', p: 'HIGH' },
+    { title: dict?.kanbanData?.story5 || 'Deploy Smart Contract Escrow Vault for Tranche Disbursement', cat: categories[3], status: 'EXECUTION', p: 'CRITICAL', usd: 45000 },
+    { title: dict?.kanbanData?.story6 || 'Configure IoT Telemetry Sensor Gateways (MQTT / TLS)', cat: categories[1], status: 'EXECUTION', p: 'CRITICAL' },
+    { title: dict?.kanbanData?.story7 || 'Establish Cold Chain & Storage Temperature Baseline (<4°C)', cat: categories[2], status: 'EXECUTION', p: 'HIGH' },
+    { title: dict?.kanbanData?.story8 || 'Set Up PRINCE2 Budget Tolerance Alerting Threshold (+10%)', cat: categories[0], status: 'DESIGN', p: 'NORMAL' },
+    { title: dict?.kanbanData?.story9 || 'Set Up PRINCE2 Schedule Deviation Alerting Threshold (+15%)', cat: categories[0], status: 'DESIGN', p: 'NORMAL' },
+    { title: dict?.kanbanData?.story10 || 'Implement Daily Operational Quality Log Schema (ISO 9001)', cat: categories[2], status: 'DESIGN', p: 'HIGH' },
+    { title: dict?.kanbanData?.story11 || 'Independent Auditor Verification of Milestone #1 Deliverables', cat: categories[2], status: 'AUDIT', p: 'CRITICAL', usd: 25000 },
+    { title: dict?.kanbanData?.story12 || 'Publish Glassmorphism Public Marketplace Fiche & Return Simulator', cat: categories[3], status: 'DONE', p: 'HIGH' },
+    { title: dict?.kanbanData?.story13 || 'Connect Real-Time Audit Stream to Investor Transparency Portal', cat: categories[1], status: 'EXECUTION', p: 'HIGH' },
+    { title: dict?.kanbanData?.story14 || 'Conduct 5-Why Root Cause Analysis for Relay Transfer Variance', cat: categories[2], status: 'AUDIT', p: 'CRITICAL' },
+    { title: dict?.kanbanData?.story15 || 'Finalize Tranche #2 Payout Rules with Independent TPA Auditor', cat: categories[3], status: 'BACKLOG', p: 'HIGH', usd: 35000 }
   ];
 
   const stories: TaskItem[] = [];
 
-  for (let i = 0; i < 42; i++) {
-    const base = vignelliStories[i];
-    const priority = priorities[i % 3];
+  for (let i = 1; i <= 126; i++) {
+    const base = baseTemplates[(i - 1) % baseTemplates.length];
+    const cat = categories[(i - 1) % categories.length];
+    const priority = (base.p || priorities[i % 3]) as 'CRITICAL' | 'HIGH' | 'NORMAL';
     const assignee = assignees[i % assignees.length];
 
     let status: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE' = 'BACKLOG';
-    if (i < 12) status = 'DONE';
-    else if (i < 24) status = 'EXECUTION';
-    else if (i < 34) status = 'AUDIT';
-    else if (i < 38) status = 'DESIGN';
+    if (i <= 48) status = 'DONE';
+    else if (i <= 78) status = 'EXECUTION';
+    else if (i <= 96) status = 'AUDIT';
+    else if (i <= 112) status = 'DESIGN';
 
     stories.push({
-      id: `DESIGN-${String(i + 1).padStart(3, '0')}`,
-      title: base.title,
-      category: base.cat,
+      id: `TASK-${String(i).padStart(3, '0')}`,
+      title: `${base.title}`,
+      category: cat,
       priority,
       status,
       assignee,
-      payoutUsd: i % 5 === 0 ? 1200 + i * 50 : undefined,
-      description: `Implementation of the Vignelli Canon design principle: ${base.title}.`,
-      racerMetric: i % 4 === 0 ? `Visual Standard #${i + 1}` : undefined
+      payoutUsd: i % 7 === 0 ? 15000 + i * 250 : undefined,
+      description: (dict?.kanbanData?.storyDesc || 'Operational story requirement for {title}. Ensures full ISO 9001 quality standards and milestone disbursement compliance.').replace('{title}', projectTitle),
+      racerMetric: i % 7 === 0 ? `Metric #${i} Audit Standard` : undefined,
+      whyAnalysis: i % 15 === 0 ? [`Why 1: Variance in telemetry pulse #${i}`, `Why 2: Scheduled sensor recalibration required.`] : undefined
     });
   }
 
@@ -86,12 +61,13 @@ function generateInitialStories(projectTitle: string): TaskItem[] {
 }
 
 export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projectTitle?: string }) {
-  const [tasks, setTasks] = useState<TaskItem[]>(() => generateInitialStories(projectTitle));
+  const { dict } = useDictionary();
+  const [tasks, setTasks] = useState<TaskItem[]>(() => generateInitialStories(projectTitle, dict));
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);
   
-  const { dict } = useDictionary();
+
 
   const columns: { id: 'BACKLOG' | 'DESIGN' | 'EXECUTION' | 'AUDIT' | 'DONE'; label: string; color: string; badgeBg: string }[] = [
     { id: 'BACKLOG', label: dict?.kanban?.col1 || '1. Backlog & Requirements', color: 'border-slate-200', badgeBg: 'bg-slate-50 text-slate-500 border border-slate-100' },
@@ -120,23 +96,23 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
           <Search className="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" />
           <input
             type="text"
-            placeholder={dict?.kanban?.search || 'Search 42 stories...'}
+            placeholder={dict?.kanban?.search || 'Search 126 stories...'}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-white/20 border border-slate-200 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-slate-900 placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
+            className="w-full bg-black/20 border border-slate-200 rounded-xl py-2.5 pl-11 pr-4 text-[13px] font-sans text-white placeholder-slate-500 focus:outline-none focus:border-[#5EC8F2]/50 transition-all shadow-inner"
           />
         </div>
 
         {/* Category Filter Pills */}
         <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto font-mono text-[11px] uppercase tracking-wider">
-          {['ALL', 'White Space Distribution', 'Typography', 'Desaturation & Clarity', 'Visual Hierarchy'].map((cat) => (
+          {['ALL', dict?.kanbanData?.catStrategy || 'Strategy & Legal', dict?.kanbanData?.catEngineering || 'Engineering & IoT', dict?.kanbanData?.catQuality || 'Quality & ISO 9001', dict?.kanbanData?.catTokenomics || 'Tokenomics & Tranches'].map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-2 rounded-xl font-medium transition-all ${
                 selectedCategory === cat
-                  ? 'bg-slate-900 text-white shadow-md'
-                  : 'bg-transparent text-slate-500 hover:text-slate-900 border border-slate-200 hover:bg-slate-50'
+                  ? 'bg-slate-100 text-white border border-slate-200'
+                  : 'bg-transparent text-slate-500 hover:text-slate-900 border border-slate-100 hover:bg-slate-50'
               }`}
             >
               {cat === 'ALL' ? (dict?.kanban?.all || 'ALL') : cat}
@@ -157,7 +133,7 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
             >
               {/* Column Header */}
               <div className="flex items-center justify-between pb-2">
-                <h4 className="text-[12px] font-mono font-bold text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
+                <h4 className="text-[12px] font-mono font-medium text-slate-600 uppercase tracking-wider flex items-center gap-1.5">
                   {col.label.replace(/^[0-9]\.\s/, '')}
                 </h4>
                 <span className={`px-2 py-0.5 rounded-full text-[10px] font-mono ${col.badgeBg}`}>
@@ -172,45 +148,49 @@ export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projec
                     key={task.id}
                     layout
                     onClick={() => setSelectedTask(task)}
-                    className="vignelli-clean-card p-5 space-y-4 cursor-pointer group relative overflow-hidden"
+                    className="glass-blue-card p-4 space-y-3 cursor-pointer group relative"
                   >
                     {/* Top ID & Priority */}
-                    <div className="flex justify-between items-center relative z-10">
-                      <span className="text-[11px] font-mono font-semibold text-[#5EC8F2] group-hover:text-[#377D8C] transition-colors tracking-wide">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-mono font-medium text-[#5EC8F2] group-hover:text-slate-900 transition-colors">
                         {task.id}
                       </span>
                       <span
-                        className={`text-[9px] font-mono px-2.5 py-1 rounded-full tracking-wider font-semibold ${
+                        className={`text-[9px] font-mono px-2 py-0.5 rounded-md ${
                           task.priority === 'CRITICAL'
-                            ? 'bg-red-50 text-red-600 border border-red-100'
+                            ? 'bg-red-500/10 text-red-400 border border-red-500/20'
                             : task.priority === 'HIGH'
-                            ? 'bg-amber-50 text-amber-600 border border-amber-100'
-                            : 'bg-slate-50 text-slate-500 border border-slate-200'
+                            ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
+                            : 'bg-slate-50 text-slate-500 border border-slate-100'
                         }`}
                       >
-                        {task.priority}
+                        {task.priority === 'CRITICAL' 
+                          ? (dict?.kanbanData?.priorityCritical || 'CRITICAL') 
+                          : task.priority === 'HIGH' 
+                          ? (dict?.kanbanData?.priorityHigh || 'HIGH') 
+                          : (dict?.kanbanData?.priorityNormal || 'NORMAL')}
                       </span>
                     </div>
 
                     {/* Title */}
-                    <p className="text-[14px] font-sans font-medium text-slate-800 group-hover:text-black leading-relaxed relative z-10 transition-colors">
+                    <p className="text-[13px] font-sans font-medium text-slate-700 group-hover:text-slate-900 leading-relaxed">
                       {task.title}
                     </p>
 
                     {/* Category Tag */}
-                    <div className="text-[10px] font-mono text-slate-500 relative z-10 uppercase tracking-widest font-medium">
+                    <div className="text-[10px] font-mono text-slate-500">
                       <span>{task.category}</span>
                     </div>
 
                     {/* Bottom Metadata */}
-                    <div className="pt-3 flex items-center justify-between text-[11px] font-mono text-slate-500 relative z-10 border-t border-slate-100">
-                      <span className="flex items-center gap-1.5 font-medium">
-                        <User className="w-3.5 h-3.5 text-slate-500" /> {task.assignee.split(' ')[0]}
+                    <div className="pt-3 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                      <span className="flex items-center gap-1.5">
+                        <User className="w-3 h-3 text-[#5EC8F2]" /> {task.assignee.split(' ')[0]}
                       </span>
 
                       {task.payoutUsd && (
-                        <span className="text-[#5EC8F2] font-bold flex items-center bg-[#5EC8F2]/10 px-2 py-0.5 rounded-md">
-                          <DollarSign className="w-3.5 h-3.5 -mr-0.5" />
+                        <span className="text-[#5EC8F2] font-semibold flex items-center">
+                          <DollarSign className="w-3 h-3 -mr-0.5" />
                           {task.payoutUsd.toLocaleString()}
                         </span>
                       )}

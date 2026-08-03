@@ -1,15 +1,20 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FileText, Cpu, CheckCircle2, ArrowRight, UploadCloud, File, Settings, ShieldCheck } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import CinematicBackground from '@/app/components/auth/CinematicBackground';
+import { useDictionary } from '@/app/components/DictionaryProvider';
 
 export default function OnboardingPage() {
+  const { dict } = useDictionary();
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [projectId, setProjectId] = useState<string>('demo-project-001');
+  const params = useParams();
+  const lang = params?.lang || 'en';
 
   const [formData, setFormData] = useState({
     title: '',
@@ -96,24 +101,10 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#1A1A2E] text-white flex items-center justify-center p-4 sm:p-8 relative overflow-hidden font-sans">
-      {/* Base Background Image */}
-      <div 
-        className="fixed inset-0 w-full h-full pointer-events-none z-0 bg-[#3866B3]"
-      >
-        <img 
-          src="/images/accet-arq-main-1.JPG"
-          alt="Archetype Background"
-          className="w-full h-full object-cover opacity-25 blur-sm scale-105 saturate-50"
-        />
-        
-        {/* Cinematic Vignette & Netflix Blur Overlays (Left-to-Right #3866B3) */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#3866B3] via-[#3866B3]/80 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,#162032_100%)] opacity-90" />
-      </div>
-
+    <div className="min-h-screen bg-[#050505] text-white flex items-center justify-center p-4 sm:p-8 relative overflow-hidden font-sans">
+      <CinematicBackground />
       <div className="fixed inset-0 vignette pointer-events-none z-10" />
-      <div className="fixed inset-0 grain pointer-events-none z-10" />
+      <div className="fixed inset-0 grain pointer-events-none z-0" />
 
       <motion.div
         layout
@@ -130,30 +121,30 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <FileText className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 01 / 03
                   </span>
-                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">Project Identity</h2>
+                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">{dict?.onboardingFlow?.step1Title || 'Project Identity'}</h2>
                 </div>
               </div>
 
               <p className="text-slate-300 text-[15px] font-sans leading-relaxed max-w-2xl">
-                Define the core concept and real-world asset (RWA) onboarding into the ACCET Active Management platform.
+                {dict?.onboardingFlow?.step1Desc || 'Define the core concept and real-world asset (RWA) onboarding into the ACCET Active Management platform.'}
               </p>
 
               <div className="space-y-8">
                 <div>
                   <label className="block text-[11px] font-sans text-slate-400 uppercase tracking-widest mb-3 font-medium">
-                    Project Title
+                    {dict?.onboardingFlow?.projectTitle || 'Project Title'}
                   </label>
                   <input
                     type="text"
-                    className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
-                    placeholder="e.g. Clean Biogas & Agroindustrial Facility"
+                    className="w-full bg-black/40 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none text-[15px] shadow-inner"
+                    placeholder={dict?.onboardingFlow?.projectTitlePlaceholder || 'e.g. Clean Biogas & Agroindustrial Facility'}
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                   />
@@ -161,13 +152,13 @@ export default function OnboardingPage() {
 
                 <div>
                   <label className="block text-[11px] font-sans text-slate-400 uppercase tracking-widest mb-3 font-medium">
-                    Asset Class & Category
+                    {dict?.onboardingFlow?.assetClass || 'Asset Class & Category'}
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     {[
-                      { id: 'Tech', label: 'Clean Energy & Tech' },
-                      { id: 'Físico', label: 'Agro & Operations' },
-                      { id: 'Impacto', label: 'Real Estate & Infra' }
+                      { id: 'Tech', label: dict?.onboardingFlow?.classTech || 'Clean Energy & Tech' },
+                      { id: 'Físico', label: dict?.onboardingFlow?.classAgro || 'Agro & Operations' },
+                      { id: 'Impacto', label: dict?.onboardingFlow?.classRealEstate || 'Real Estate & Infra' }
                     ].map((v) => (
                       <button
                         key={v.id}
@@ -175,7 +166,7 @@ export default function OnboardingPage() {
                         className={`py-4 px-4 rounded-xl font-sans text-[12px] uppercase tracking-wide font-medium transition-all border ${
                           formData.vertical === v.id
                             ? 'bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] text-[#050505] border-transparent shadow-[0_0_20px_rgba(94,200,242,0.3)]'
-                            : 'bg-[#1A1A2E]/20 text-slate-300 border-white/5 hover:border-white/10 hover:bg-white/5'
+                            : 'bg-black/20 text-slate-300 border-white/5 hover:border-white/10 hover:bg-white/5'
                         }`}
                       >
                         {v.label}
@@ -191,7 +182,7 @@ export default function OnboardingPage() {
                   disabled={!formData.title}
                   className="flex items-center px-8 py-3.5 rounded-full text-[13px] font-sans font-medium text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Continue <ArrowRight className="w-4 h-4 ml-2 text-[#050505]" />
+                  {dict?.onboardingFlow?.continueBtn || 'Continue'} <ArrowRight className="w-4 h-4 ml-2 text-[#050505]" />
                 </button>
               </div>
             </motion.div>
@@ -207,32 +198,32 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <Cpu className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 02 / 03
                   </span>
-                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">
-                    AI Context & Documents
+                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">
+                    {dict?.onboardingFlow?.step2Title || 'AI Context & Documents'}
                   </h2>
                 </div>
               </div>
 
               <p className="text-slate-300 text-[15px] font-sans leading-relaxed">
-                Provide executive summary notes or upload documentation. The AI agent will auto-generate 126 stories and RACER metrics.
+                {dict?.onboardingFlow?.step2Desc || 'Provide executive summary notes or upload documentation. The AI agent will auto-generate 126 stories and RACER metrics.'}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <label className="block text-[11px] font-sans text-slate-400 uppercase tracking-widest mb-3 font-medium">
-                    Executive Project Brief
+                    {dict?.onboardingFlow?.projectBrief || 'Executive Project Brief'}
                   </label>
                   <textarea
                     rows={7}
-                    className="w-full bg-[#1A1A2E]/20 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
-                    placeholder="Describe the asset, target production goals, quality standards, and milestone targets..."
+                    className="w-full bg-black/40 border border-white/10 rounded-xl p-5 text-white placeholder-slate-500 focus:ring-1 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2]/50 transition-all font-sans outline-none resize-none text-[14px] leading-relaxed shadow-inner"
+                    placeholder={dict?.onboardingFlow?.projectBriefPlaceholder || 'Describe the asset, target production goals, quality standards, and milestone targets...'}
                     value={formData.brief}
                     onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
                   />
@@ -240,9 +231,9 @@ export default function OnboardingPage() {
 
                 <div className="space-y-5">
                   <label className="block text-[11px] font-sans text-slate-400 uppercase tracking-widest mb-3 font-medium">
-                    Supporting Documents
+                    {dict?.onboardingFlow?.supportingDocs || 'Supporting Documents'}
                   </label>
-                  <div className="border border-dashed border-white/20 hover:border-white/40 rounded-xl p-8 flex flex-col items-center justify-center text-center bg-[#1A1A2E]/20 hover:bg-white/5 transition-all relative group cursor-pointer">
+                  <div className="border border-dashed border-white/20 hover:border-white/40 rounded-xl p-8 flex flex-col items-center justify-center text-center bg-black/20 hover:bg-white/5 transition-all relative group cursor-pointer">
                     <input
                       type="file"
                       className="absolute inset-0 opacity-0 cursor-pointer"
@@ -251,9 +242,9 @@ export default function OnboardingPage() {
                     />
                     <UploadCloud className="w-6 h-6 text-slate-400 mb-3 group-hover:text-white transition-colors" />
                     <p className="text-slate-300 text-[12px] font-sans font-medium tracking-wide">
-                      Drop files here or click to browse
+                      {dict?.onboardingFlow?.dropFiles || 'Drop files here or click to browse'}
                     </p>
-                    <p className="text-slate-500 text-[11px] font-sans mt-2">PDF, TXT, DOCX (Max 50MB)</p>
+                    <p className="text-slate-500 text-[11px] font-sans mt-2">{dict?.onboardingFlow?.fileTypes || 'PDF, TXT, DOCX (Max 50MB)'}</p>
                   </div>
 
                   {documents.length > 0 && (
@@ -261,7 +252,7 @@ export default function OnboardingPage() {
                       {documents.map((d, i) => (
                         <div
                           key={i}
-                          className="flex items-center gap-3 bg-[#1A1A2E]/40 border border-white/5 p-3 rounded-xl text-[13px] text-slate-300"
+                          className="flex items-center gap-3 bg-black/40 border border-white/5 p-3 rounded-xl text-[13px] text-slate-300"
                         >
                           <File className="w-4 h-4 text-slate-400" />
                           <span className="truncate flex-1 font-sans">{d.name}</span>
@@ -276,10 +267,10 @@ export default function OnboardingPage() {
               </div>
 
               {/* Token Context Manager */}
-              <div className="bg-[#1A1A2E]/20 border border-white/5 rounded-xl p-5">
+              <div className="bg-black/20 border border-white/5 rounded-xl p-5">
                 <div className="flex justify-between items-center mb-3">
                   <h4 className="text-[11px] font-sans uppercase tracking-widest text-slate-400 font-medium">
-                    Context Window Usage
+                    {dict?.onboardingFlow?.contextUsage || 'Context Window Usage'}
                   </h4>
                   <span className="text-[11px] font-sans text-slate-400">
                     {totalTokens.toLocaleString()} / {maxTokens.toLocaleString()} tokens
@@ -300,14 +291,14 @@ export default function OnboardingPage() {
                   onClick={() => setStep(1)}
                   className="text-slate-400 hover:text-white font-sans text-[12px] uppercase tracking-wide font-medium transition-colors"
                 >
-                  ← Back
+                  {dict?.onboardingFlow?.backBtn || '← Back'}
                 </button>
                 <button 
                   onClick={() => setStep(3)} 
                   disabled={!formData.brief && documents.length === 0}
                   className="flex items-center px-8 py-3.5 rounded-full text-[13px] font-sans font-medium text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Continue <ArrowRight className="w-4 h-4 ml-2 text-[#050505]" />
+                  {dict?.onboardingFlow?.continueBtn || 'Continue'} <ArrowRight className="w-4 h-4 ml-2 text-[#050505]" />
                 </button>
               </div>
             </motion.div>
@@ -323,28 +314,28 @@ export default function OnboardingPage() {
               className="flex flex-col gap-10"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
+                <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-white">
                   <Settings className="w-5 h-5 text-[#5EC8F2]" />
                 </div>
                 <div>
                   <span className="text-[11px] font-sans text-[#5EC8F2] uppercase tracking-[0.2em] font-semibold mb-1 block">
                     Step 03 / 03
                   </span>
-                  <h2 className="text-3xl font-syne font-medium text-white tracking-tight">AI Engine Selection</h2>
+                  <h2 className="text-3xl font-sans font-medium text-white tracking-tight">{dict?.onboardingFlow?.step3Title || 'AI Engine Selection'}</h2>
                 </div>
               </div>
 
               <p className="text-slate-300 text-[15px] font-sans leading-relaxed">
-                Select the intelligence model to analyze your context and formulate 126 stories & RACER metrics.
+                {dict?.onboardingFlow?.step3Desc || 'Select the intelligence model to analyze your context and formulate 126 stories & RACER metrics.'}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <button
                   onClick={() => setFormData({ ...formData, model: 'claude-3-haiku-20240307' })}
-                  className={`p-6 text-left rounded-xl transition-all border ${
+                  className={`p-6 text-left rounded-2xl transition-all border ${
                     formData.model === 'claude-3-haiku-20240307'
                       ? 'bg-white/10 border-white/20'
-                      : 'bg-[#1A1A2E]/20 border-white/5 hover:bg-white/5'
+                      : 'bg-black/20 border-white/5 hover:bg-white/5'
                   }`}
                 >
                   <h3 className="text-[15px] font-sans font-medium text-white mb-2 flex items-center justify-between">
@@ -352,16 +343,16 @@ export default function OnboardingPage() {
                     {formData.model === 'claude-3-haiku-20240307' && <CheckCircle2 className="w-4 h-4 text-[#5EC8F2]" />}
                   </h3>
                   <p className="text-slate-400 text-[13px] font-sans leading-relaxed">
-                    Ultra-fast response for instant logical mapping and metric generation.
+                    {dict?.onboardingFlow?.haikuDesc || 'Ultra-fast response for instant logical mapping and metric generation.'}
                   </p>
                 </button>
 
                 <button
                   onClick={() => setFormData({ ...formData, model: 'claude-3-5-sonnet-20240620' })}
-                  className={`p-6 text-left rounded-xl transition-all border ${
+                  className={`p-6 text-left rounded-2xl transition-all border ${
                     formData.model === 'claude-3-5-sonnet-20240620'
                       ? 'bg-white/10 border-white/20'
-                      : 'bg-[#1A1A2E]/20 border-white/5 hover:bg-white/5'
+                      : 'bg-black/20 border-white/5 hover:bg-white/5'
                   }`}
                 >
                   <h3 className="text-[15px] font-sans font-medium text-white mb-2 flex items-center justify-between">
@@ -369,7 +360,7 @@ export default function OnboardingPage() {
                     {formData.model === 'claude-3-5-sonnet-20240620' && <CheckCircle2 className="w-4 h-4 text-[#5EC8F2]" />}
                   </h3>
                   <p className="text-slate-400 text-[13px] font-sans leading-relaxed">
-                    Deep multi-document reasoning for complex assets and large datasets.
+                    {dict?.onboardingFlow?.sonnetDesc || 'Deep multi-document reasoning for complex assets and large datasets.'}
                   </p>
                 </button>
               </div>
@@ -379,14 +370,14 @@ export default function OnboardingPage() {
                   onClick={() => setStep(2)}
                   className="text-slate-400 hover:text-white font-sans text-[12px] uppercase tracking-wide font-medium transition-colors"
                 >
-                  ← Back
+                  {dict?.onboardingFlow?.backBtn || '← Back'}
                 </button>
                 <button 
                   onClick={handleSubmit} 
                   disabled={loading}
                   className="flex items-center px-8 py-3.5 rounded-full text-[13px] font-sans font-medium text-[#050505] bg-gradient-to-r from-[#5EC8F2] to-[#377D8C] hover:opacity-90 transition-opacity disabled:opacity-50"
                 >
-                  {loading ? 'Initializing...' : 'Start AI Diagnosis'}
+                  {loading ? (dict?.onboardingFlow?.initBtn || 'Initializing...') : (dict?.onboardingFlow?.startBtn || 'Start AI Diagnosis')}
                 </button>
               </div>
             </motion.div>
@@ -406,23 +397,23 @@ export default function OnboardingPage() {
 
               <div className="space-y-3">
                 <span className="text-[11px] font-sans text-slate-400 uppercase tracking-[0.3em] font-medium">
-                  ORCHESTRATION TASK QUEUED
+                  {dict?.onboardingFlow?.queuedBadge || 'ORCHESTRATION TASK QUEUED'}
                 </span>
                 <h2 className="text-3xl font-sans font-medium text-white tracking-tight">
-                  Project Analysis Scheduled
+                  {dict?.onboardingFlow?.queuedTitle || 'Project Analysis Scheduled'}
                 </h2>
               </div>
 
               <p className="text-slate-400 max-w-md text-[14px] font-sans leading-relaxed">
-                Project brief dispatched to <strong className="text-white font-medium">{formData.model}</strong>. The agent is generating the 126 stories, Results Chain, and RACER metrics.
+                {dict?.onboardingFlow?.queuedDesc1 || 'Project brief dispatched to'} <strong className="text-white font-medium">{formData.model}</strong>{dict?.onboardingFlow?.queuedDesc2 || '. The agent is generating the 126 stories, Results Chain, and RACER metrics.'}
               </p>
 
               <div className="pt-8">
                 <button
-                  onClick={() => (window.location.href = `/project/${projectId}`)}
+                  onClick={() => (window.location.href = `/${lang}/project/${projectId}`)}
                   className="flex items-center px-8 py-4 rounded-full text-[13px] font-sans font-medium text-white bg-white/10 border border-white/10 hover:bg-white/20 transition-all"
                 >
-                  GO TO PROJECT STUDIO →
+                  {dict?.onboardingFlow?.goToStudio || 'GO TO PROJECT STUDIO →'}
                 </button>
               </div>
             </motion.div>
