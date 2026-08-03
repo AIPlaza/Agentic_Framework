@@ -27,12 +27,14 @@ interface SidebarNavProps {
 export function SidebarNav({
   activeView,
   onViewChange,
-  projectTitle = 'Clean Biogas Facility',
+  projectTitle,
   totalTasks = 126,
   completedTasks = 48
 }: SidebarNavProps) {
   const [collapsed, setCollapsed] = useState(false);
   const { dict, lang } = useDictionary();
+
+  const finalProjectTitle = projectTitle || dict?.mockProject?.title || 'Clean Biogas Facility';
 
   const viewItems: { id: 'board' | 'list' | 'timeline' | 'audit' | 'marketplace'; label: string; icon: any }[] = [
     { id: 'board', label: dict?.nav?.kanbanBoard || 'Kanban Board', icon: LayoutGrid },
@@ -44,7 +46,7 @@ export function SidebarNav({
 
   return (
     <aside
-      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col bg-gradient-to-r from-[#0a1128] via-[#0a1128]/60 to-transparent border-none ${
+      className={`h-[calc(100vh-4rem)] sticky top-16 z-30 transition-all duration-300 flex flex-col glass-blue-card border-none border-r border-slate-100 ${
         collapsed ? 'w-20' : 'w-72'
       }`}
       style={{ borderRadius: '0' }}
@@ -53,14 +55,17 @@ export function SidebarNav({
       <div className="p-5 border-b border-white/5 flex items-center justify-between">
         {!collapsed && (
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0">
+            <a 
+              href={process.env.NEXT_PUBLIC_LANDING_URL || 'http://localhost:3000'} 
+              className="w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 hover:scale-105 transition-transform cursor-pointer"
+            >
               <Image src="/logo.png" alt="ACCET Logo" width={28} height={28} className="object-contain opacity-90" />
-            </div>
+            </a>
             <div className="truncate">
               <span className="text-[10px] font-mono text-slate-500 font-medium">
                 {dict?.sidebar?.activeWorkspace || 'ACTIVE WORKSPACE'}
               </span>
-              <h3 className="text-[14px] font-syne font-bold text-white truncate mt-0.5">{projectTitle}</h3>
+              <h3 className="text-[14px] font-syne font-bold text-white truncate mt-0.5">{finalProjectTitle}</h3>
             </div>
           </div>
         )}

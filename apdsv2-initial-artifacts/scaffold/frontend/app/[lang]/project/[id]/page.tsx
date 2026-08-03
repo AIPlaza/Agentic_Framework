@@ -72,14 +72,14 @@ export default function ProjectBoard({ params }: { params: any }) {
         } else {
           setProject({
             id: targetId,
-            title: localData?.title || (targetId.startsWith('proj-') ? 'New Custom RWA Project' : 'Clean Biogas & Agroindustrial Facility'),
-            description: localData?.description || 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
+            title: localData?.title || (targetId.startsWith('proj-') ? (dict?.mockProject?.newTitle || 'New Custom RWA Project') : (dict?.mockProject?.title || 'Clean Biogas & Agroindustrial Facility')),
+            description: localData?.description || (dict?.mockProject?.description || 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.'),
             status: 'ACTIVE',
             devLevel: 3,
             logicalFramework: {
-              impact: 'Clean energy conversion & operational zero-defect targets.',
-              outcomes: ['Continuous energy output', 'Certified food safety compliance'],
-              outputs: ['Sensor oracle deployment', 'Audit milestone tranche release']
+              impact: dict?.mockProject?.logicalFramework?.impact || 'Clean energy conversion & operational zero-defect targets.',
+              outcomes: dict?.mockProject?.logicalFramework?.outcomes || ['Continuous energy output', 'Certified food safety compliance'],
+              outputs: dict?.mockProject?.logicalFramework?.outputs || ['Sensor oracle deployment', 'Audit milestone tranche release']
             },
             indicators: []
           });
@@ -91,8 +91,8 @@ export default function ProjectBoard({ params }: { params: any }) {
       } else {
         setProject({
           id: targetId,
-          title: targetId.startsWith('proj-') ? 'New Custom RWA Project' : 'Clean Biogas & Agroindustrial Facility',
-          description: 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
+          title: targetId.startsWith('proj-') ? (dict?.mockProject?.newTitle || 'New Custom RWA Project') : (dict?.mockProject?.title || 'Clean Biogas & Agroindustrial Facility'),
+          description: dict?.mockProject?.description || 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
           status: 'ACTIVE',
           devLevel: 3,
           indicators: []

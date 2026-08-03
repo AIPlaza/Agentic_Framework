@@ -158,6 +158,22 @@
     "initializing": "INITIALIZING COMPLIANCE PROTOCOL [APDS-v2.0]...",
     "subtitle": "Base L2 Network · RWA Engine"
   },
+  "mockProject": {
+    "title": "Clean Biogas & Agroindustrial Facility",
+    "newTitle": "New Custom RWA Project",
+    "description": "Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.",
+    "logicalFramework": {
+      "impact": "Clean energy conversion & operational zero-defect targets.",
+      "outcomes": [
+        "Continuous energy output",
+        "Certified food safety compliance"
+      ],
+      "outputs": [
+        "Sensor oracle deployment",
+        "Audit milestone tranche release"
+      ]
+    }
+  },
   "internalMarketplace": {
     "draftMode": "Internal Draft Mode",
     "milestoneAsset": "Milestone-Based Asset",

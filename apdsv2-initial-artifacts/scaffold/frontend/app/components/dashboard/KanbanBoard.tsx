@@ -60,9 +60,10 @@ function generateInitialStories(projectTitle: string, dict: any): TaskItem[] {
   return stories;
 }
 
-export function KanbanBoard({ projectTitle = 'Clean Biogas Facility' }: { projectTitle?: string }) {
+export function KanbanBoard({ projectTitle }: { projectTitle?: string }) {
   const { dict } = useDictionary();
-  const [tasks, setTasks] = useState<TaskItem[]>(() => generateInitialStories(projectTitle, dict));
+  const finalProjectTitle = projectTitle || dict?.mockProject?.title || 'Clean Biogas Facility';
+  const [tasks, setTasks] = useState<TaskItem[]>(() => generateInitialStories(finalProjectTitle, dict));
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const [selectedTask, setSelectedTask] = useState<TaskItem | null>(null);

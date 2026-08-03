@@ -158,6 +158,22 @@
     "initializing": "INICIALIZANDO PROTOCOLO DE CUMPLIMIENTO [APDS-v2.0]...",
     "subtitle": "Red Base L2 · Motor RWA"
   },
+  "mockProject": {
+    "title": "Instalación de Biogás Limpio y Agroindustrial",
+    "newTitle": "Nuevo Proyecto RWA Personalizado",
+    "description": "Proyecto sostenible de tokenización RWA con estándares de calidad operativa certificados y oráculos de telemetría IoT.",
+    "logicalFramework": {
+      "impact": "Conversión de energía limpia y objetivos operativos de cero defectos.",
+      "outcomes": [
+        "Producción de energía continua",
+        "Cumplimiento certificado de seguridad alimentaria"
+      ],
+      "outputs": [
+        "Despliegue de oráculos de sensores",
+        "Liberación de tramo por hito de auditoría"
+      ]
+    }
+  },
   "internalMarketplace": {
     "draftMode": "Modo Borrador Interno",
     "milestoneAsset": "Activo Basado en Hitos",

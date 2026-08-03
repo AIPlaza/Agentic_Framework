@@ -39,7 +39,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
           className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
             activeTab === 'quality'
               ? 'bg-[#5EC8F2]/20 text-[#5EC8F2] border border-[#5EC8F2]/40 shadow-[0_0_15px_rgba(94,200,242,0.2)]'
-              : 'text-slate-500 hover:text-slate-900 bg-white shadow-sm border border-slate-200'
+              : 'text-slate-500 hover:text-slate-900 bg-black/40 border border-slate-200'
           }`}
         >
           <FileCheck className="w-4 h-4" /> Daily Quality & Standards Log
@@ -49,7 +49,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
           className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
             activeTab === 'cold_chain'
               ? 'bg-[#377D8C]/20 text-[#5ED7F2] border border-[#377D8C]/40 shadow-[0_0_15px_rgba(55,125,140,0.2)]'
-              : 'text-slate-500 hover:text-slate-900 bg-white shadow-sm border border-slate-200'
+              : 'text-slate-500 hover:text-slate-900 bg-black/40 border border-slate-200'
           }`}
         >
           <Thermometer className="w-4 h-4" /> Cold Chain & Storage Controls
@@ -59,7 +59,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
           className={`px-4 py-2 rounded-xl text-xs font-mono font-bold uppercase tracking-wider flex items-center gap-2 transition-all ${
             activeTab === 'iot'
               ? 'bg-[#5EC8F2]/20 text-[#5EC8F2] border border-[#5EC8F2]/40'
-              : 'text-slate-500 hover:text-slate-900 bg-white shadow-sm border border-slate-200'
+              : 'text-slate-500 hover:text-slate-900 bg-black/40 border border-slate-200'
           }`}
         >
           <Activity className="w-4 h-4" /> IoT Telemetry & Oracle Stream
@@ -69,7 +69,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
       {/* Tab 1: Quality Standards Log */}
       {activeTab === 'quality' && (
         <div className="space-y-4">
-          <div className="flex justify-between items-center vignelli-clean-card p-4 rounded-xl border border-slate-200">
+          <div className="flex justify-between items-center bg-[#020624]/60 p-4 rounded-2xl border border-slate-200">
             <div>
               <h4 className="text-base font-syne font-bold text-slate-900">Daily Operational Quality Log</h4>
               <p className="text-xs font-mono text-slate-500">Standard operational compliance & zero-defect verification</p>
@@ -93,7 +93,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
             {qualityEntries.map((entry, idx) => (
               <div
                 key={idx}
-                className="flex justify-between items-center p-4 bg-slate-50 border border-slate-200 rounded-xl text-xs"
+                className="flex justify-between items-center p-4 bg-black/50 border border-slate-200 rounded-xl text-xs"
               >
                 <div className="space-y-1">
                   <span className="font-mono font-bold text-[#5EC8F2]">{entry.date}</span>
@@ -121,19 +121,19 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
 
       {/* Tab 2: Cold Chain Controls */}
       {activeTab === 'cold_chain' && (
-        <div className="p-5 vignelli-clean-card border border-slate-200 rounded-xl space-y-4 text-xs">
+        <div className="p-5 bg-[#020624]/60 border border-slate-200 rounded-2xl space-y-4 text-xs">
           <div className="flex justify-between items-center">
             <span className="text-slate-500 font-mono">Assigned Sensor Hardware:</span>
             <span className="font-mono font-bold text-[#5EC8F2]">{coldChain.sensorId}</span>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 vignelli-clean-card border border-slate-100 rounded-xl">
+            <div className="p-4 bg-black/60 border border-slate-100 rounded-xl">
               <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-bold">Safe Range</span>
               <div className="text-base font-mono font-bold text-slate-900 mt-1">
                 {coldChain.tempMin} - {coldChain.tempMax}
               </div>
             </div>
-            <div className="p-4 vignelli-clean-card border border-slate-100 rounded-xl">
+            <div className="p-4 bg-black/60 border border-slate-100 rounded-xl">
               <span className="text-[10px] font-mono text-slate-500 uppercase tracking-wider font-bold">Real-Time Reading</span>
               <div className="text-base font-mono font-bold text-[#5EC8F2] mt-1">{coldChain.lastReading}</div>
             </div>
@@ -143,7 +143,7 @@ export function ChecklistBuilder({ projectId }: { projectId: string }) {
 
       {/* Tab 3: IoT Oracle */}
       {activeTab === 'iot' && (
-        <div className="p-5 vignelli-clean-card border border-slate-200 rounded-xl space-y-3 text-xs">
+        <div className="p-5 bg-[#020624]/60 border border-slate-200 rounded-2xl space-y-3 text-xs">
           <div className="flex justify-between items-center text-slate-900">
             <span className="font-syne font-bold text-sm">Biogas / KWh Telemetry Oracle Stream</span>
             <span className="text-[#5EC8F2] font-mono font-bold">Connected (MQTT / TLS Secure)</span>

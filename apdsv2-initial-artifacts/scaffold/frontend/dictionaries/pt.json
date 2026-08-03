@@ -158,6 +158,22 @@
     "initializing": "INICIALIZANDO PROTOCOLO DE CONFORMIDADE [APDS-v2.0]...",
     "subtitle": "Rede Base L2 · Motor RWA"
   },
+  "mockProject": {
+    "title": "Instalação de Biogás Limpo e Agroindustrial",
+    "newTitle": "Novo Projeto RWA Personalizado",
+    "description": "Projeto sustentável de tokenização RWA com padrões de qualidade operacional certificados e oráculos de telemetria IoT.",
+    "logicalFramework": {
+      "impact": "Conversão de energia limpa e metas operacionais de zero defeitos.",
+      "outcomes": [
+        "Produção de energia contínua",
+        "Conformidade certificada de segurança alimentar"
+      ],
+      "outputs": [
+        "Implantação de oráculos de sensores",
+        "Liberação de parcela por marco de auditoria"
+      ]
+    }
+  },
   "internalMarketplace": {
     "draftMode": "Modo Rascunho Interno",
     "milestoneAsset": "Ativo Baseado em Marcos",

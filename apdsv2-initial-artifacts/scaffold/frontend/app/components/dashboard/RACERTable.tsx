@@ -18,7 +18,7 @@ export function RACERTable({ indicators, projectId }: { indicators: any[]; proje
 
   if (data.length === 0) {
     return (
-      <div className="text-center p-8 vignelli-clean-card rounded-xl border border-slate-200">
+      <div className="text-center p-8 bg-[#020624]/60 rounded-2xl border border-slate-200">
         <ShieldAlert className="w-8 h-8 text-[#5EC8F2]/40 mx-auto mb-2" />
         <p className="text-slate-500 font-mono text-xs uppercase tracking-wider">
           No key performance indicators defined yet. Generating RACER metrics...
@@ -28,9 +28,9 @@ export function RACERTable({ indicators, projectId }: { indicators: any[]; proje
   }
 
   return (
-    <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white shadow-sm backdrop-blur-xl">
+    <div className="overflow-x-auto rounded-2xl border border-slate-200 bg-[#020624]/40 backdrop-blur-xl">
       <table className="w-full text-left text-sm text-slate-700">
-        <thead className="text-[10px] font-mono uppercase tracking-widest vignelli-clean-card text-[#5EC8F2] border-b border-slate-200">
+        <thead className="text-[10px] font-mono uppercase tracking-widest bg-black/60 text-[#5EC8F2] border-b border-slate-200">
           <tr>
             <th className="px-5 py-4 rounded-tl-xl font-bold flex items-center gap-2">
               <Award className="w-3.5 h-3.5 text-[#5EC8F2]" />
@@ -61,7 +61,7 @@ export function RACERTable({ indicators, projectId }: { indicators: any[]; proje
                     }`}
                   >
                     <div
-                      className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-transform ${
+                      className={`w-4 h-4 rounded-full bg-[#020624] absolute top-1 transition-transform ${
                         ind.fnvcEligible ? 'left-7' : 'left-1'
                       }`}
                     />
@@ -78,7 +78,7 @@ export function RACERTable({ indicators, projectId }: { indicators: any[]; proje
                     disabled={!ind.fnvcEligible}
                     value={ind.usdValue || ''}
                     onChange={(e) => updateUSD(ind.id, e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 text-slate-900 font-mono text-xs rounded-xl py-2 pl-8 pr-3 focus:outline-none focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all disabled:opacity-30"
+                    className="w-full bg-black/50 border border-slate-200 text-slate-900 font-mono text-xs rounded-xl py-2 pl-8 pr-3 focus:outline-none focus:ring-2 focus:ring-[#5EC8F2]/50 focus:border-[#5EC8F2] transition-all disabled:opacity-30"
                     placeholder="0.00"
                   />
                 </div>

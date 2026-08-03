@@ -8,52 +8,53 @@ import { useDictionary } from '@/app/components/DictionaryProvider';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MOCK_PROJECTS = [
-  {
-    id: 'demo-project-001',
-    title: 'Clean Biogas & Agroindustrial Facility',
-    assetType: 'Energy / IoT',
-    imageSrc: '/images/accet-arq-main-1.JPG', // Fallback to our existing image
-    verifiedStories: 126,
-    totalStories: 126,
-    value: '$12,500,000',
-    apy: '14.5%',
-  },
-  {
-    id: 'madrid-real-estate-002',
-    title: 'Tokenized Real Estate - Madrid Prime',
-    assetType: 'Real Estate',
-    imageSrc: '/images/accet-arq-main-2.JPG', // Assuming these exist, they will break gracefully if missing by showing alt text or fallback if handled
-    verifiedStories: 104,
-    totalStories: 126,
-    value: '$4,200,000',
-    apy: '8.2%',
-  },
-  {
-    id: 'agro-supply-chain-003',
-    title: 'Agroindustrial Supply Chain Financing',
-    assetType: 'Commodities',
-    imageSrc: '/images/accet-arq-main-3.JPG',
-    verifiedStories: 89,
-    totalStories: 126,
-    value: '$8,000,000',
-    apy: '11.0%',
-  },
-  {
-    id: 'solar-farm-latam-004',
-    title: 'Distributed Solar Farm LATAM',
-    assetType: 'Clean Energy',
-    imageSrc: '/images/accet-arq-main-1.JPG',
-    verifiedStories: 126,
-    totalStories: 126,
-    value: '$21,000,000',
-    apy: '12.8%',
-  }
-];
-
 export function ProjectGrid() {
   const { dict } = useDictionary();
   const gridRef = useRef<HTMLDivElement>(null);
+
+  const MOCK_PROJECTS = [
+    {
+      id: 'demo-project-001',
+      title: dict?.mockProject?.title || 'Clean Biogas & Agroindustrial Facility',
+      description: dict?.mockProject?.description || 'Sustainable RWA tokenization project with certified operational quality standards and IoT telemetry oracles.',
+      assetType: 'Energy / IoT',
+      imageSrc: '/images/accet-arq-main-1.JPG', // Fallback to our existing image
+      verifiedStories: 126,
+      totalStories: 126,
+      value: '$12,500,000',
+      apy: '14.5%',
+    },
+    {
+      id: 'madrid-real-estate-002',
+      title: 'Tokenized Real Estate - Madrid Prime',
+      assetType: 'Real Estate',
+      imageSrc: '/images/accet-arq-main-2.JPG', // Assuming these exist, they will break gracefully if missing by showing alt text or fallback if handled
+      verifiedStories: 104,
+      totalStories: 126,
+      value: '$4,200,000',
+      apy: '8.2%',
+    },
+    {
+      id: 'agro-supply-chain-003',
+      title: 'Agroindustrial Supply Chain Financing',
+      assetType: 'Commodities',
+      imageSrc: '/images/accet-arq-main-3.JPG',
+      verifiedStories: 89,
+      totalStories: 126,
+      value: '$8,000,000',
+      apy: '11.0%',
+    },
+    {
+      id: 'solar-farm-latam-004',
+      title: 'Distributed Solar Farm LATAM',
+      assetType: 'Clean Energy',
+      imageSrc: '/images/accet-arq-main-1.JPG',
+      verifiedStories: 126,
+      totalStories: 126,
+      value: '$21,000,000',
+      apy: '12.8%',
+    }
+  ];
 
   useEffect(() => {
     const ctx = gsap.context(() => {

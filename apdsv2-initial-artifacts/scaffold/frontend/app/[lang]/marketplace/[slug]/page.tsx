@@ -30,8 +30,8 @@ export default function PublicAssetFiche({ params }: { params: any }) {
         } else {
           setProject({
             id: targetSlug,
-            title: 'Clean Biogas & Agroindustrial Facility',
-            description: 'Institutional-grade renewable energy asset, autonomously managed and verified through 126 continuous audit stories.',
+            title: dict?.mockProject?.title || 'Clean Biogas & Agroindustrial Facility',
+            description: dict?.mockProject?.description || 'Sustainable RWA tokenization project with certified operational quality standards.',
             assetType: 'Energy / IoT',
             value: '$12,500,000',
             apy: '14.5%'
@@ -40,8 +40,8 @@ export default function PublicAssetFiche({ params }: { params: any }) {
       } catch (e) {
         setProject({
           id: targetSlug,
-          title: 'Clean Biogas & Agroindustrial Facility',
-          description: 'Institutional-grade renewable energy asset, autonomously managed and verified through 126 continuous audit stories.',
+          title: dict?.mockProject?.title || 'Clean Biogas & Agroindustrial Facility',
+          description: dict?.mockProject?.description || 'Sustainable RWA tokenization project with certified operational quality standards.',
           assetType: 'Energy / IoT',
           value: '$12,500,000',
           apy: '14.5%'
