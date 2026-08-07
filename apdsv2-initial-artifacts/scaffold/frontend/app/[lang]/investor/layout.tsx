@@ -8,7 +8,7 @@ export default function InvestorLayout({
   params
 }: {
   children: React.ReactNode;
-  params: { lang: string };
+  params: Promise<{ lang: string }>;
 }) {
   return (
     <div className="min-h-screen bg-[#050505] text-white flex flex-col relative overflow-hidden font-sans">
