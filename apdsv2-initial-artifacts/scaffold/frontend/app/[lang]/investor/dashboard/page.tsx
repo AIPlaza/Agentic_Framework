@@ -5,6 +5,10 @@ import { useDictionary } from '@/app/components/DictionaryProvider';
 import { PortfolioOverview } from '@/app/components/investor/PortfolioOverview';
 import { ActiveInvestmentsGrid } from '@/app/components/investor/ActiveInvestmentsGrid';
 import { KeylessWalletWidget } from '@/app/components/investor/KeylessWalletWidget';
+import { EvolutionChart } from '@/app/components/investor/EvolutionChart';
+import { TransactionHistoryTable } from '@/app/components/investor/TransactionHistoryTable';
+import { ReferralHub } from '@/app/components/investor/ReferralHub';
+import { SettingsAndDocs } from '@/app/components/investor/SettingsAndDocs';
 
 export default function InvestorDashboardPage() {
   const { dict } = useDictionary();
@@ -29,10 +33,29 @@ export default function InvestorDashboardPage() {
       {/* Main Stats / Overview */}
       <PortfolioOverview />
 
-      {/* Grid of Investments */}
+      {/* Main Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+        {/* Left Column: Chart and Investments */}
+        <div className="lg:col-span-2 flex flex-col gap-6">
+          <div className="h-[300px]">
+            <EvolutionChart />
+          </div>
+          <div>
+            <h2 className="text-xl font-syne font-medium text-white mb-6">Active Investments</h2>
+            <ActiveInvestmentsGrid />
+          </div>
+        </div>
+
+        {/* Right Column: Referrals and Settings */}
+        <div className="flex flex-col gap-6">
+          <ReferralHub />
+          <SettingsAndDocs />
+        </div>
+      </div>
+
+      {/* Bottom Section: Transaction History */}
       <div className="mt-8">
-        <h2 className="text-xl font-syne font-medium text-white mb-6">Active Investments</h2>
-        <ActiveInvestmentsGrid />
+        <TransactionHistoryTable />
       </div>
     </main>
   );
