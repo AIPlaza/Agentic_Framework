@@ -63,30 +63,32 @@ export default function HeaderNav() {
           </Link>
         </div>
 
-        {/* Center Navigation Menu - Minimalist Pills */}
-        <nav className="hidden md:flex items-center gap-1">
-          {navItems.map((item) => {
-            const isMarketplaceRoute = pathname?.endsWith('/marketplace');
-            const isActive = pathname === item.href || 
-              (item.href !== `/${lang}/onboarding` && 
-               pathname?.startsWith(item.href) && 
-               (!isMarketplaceRoute || item.href.endsWith('/marketplace')));
+        {/* Center Navigation Menu - Minimalist Pills (Hidden for Investors) */}
+        {!pathname?.includes('/investor') && (
+          <nav className="hidden md:flex items-center gap-1">
+            {navItems.map((item) => {
+              const isMarketplaceRoute = pathname?.endsWith('/marketplace');
+              const isActive = pathname === item.href || 
+                (item.href !== `/${lang}/onboarding` && 
+                 pathname?.startsWith(item.href) && 
+                 (!isMarketplaceRoute || item.href.endsWith('/marketplace')));
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex items-center px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all duration-300 ${
-                  isActive
-                    ? 'text-white bg-white/10 border border-white/10'
-                    : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
-                }`}
-              >
-                <span>{item.name}</span>
-              </Link>
-            );
-          })}
-        </nav>
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center px-4 py-2 rounded-full font-sans text-[13px] font-medium transition-all duration-300 ${
+                    isActive
+                      ? 'text-white bg-white/10 border border-white/10'
+                      : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                  }`}
+                >
+                  <span>{item.name}</span>
+                </Link>
+              );
+            })}
+          </nav>
+        )}
 
         {/* Right Status / Auth */}
         <div className="flex items-center gap-4">
@@ -96,10 +98,7 @@ export default function HeaderNav() {
 
           {/* User & Sign Out */}
           <div className="flex items-center gap-3">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/40 border border-white/5 text-[#5EC8F2] text-[11px] font-sans tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#5EC8F2] animate-pulse" />
-            <span>{dict?.nav?.nodeActive || 'Node Active'}</span>
-          </div>
+
 
           <Link
             href={`/${lang}/login`}

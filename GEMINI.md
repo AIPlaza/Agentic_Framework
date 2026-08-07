@@ -9,3 +9,9 @@ Any agent operating in this framework MUST rigorously follow our "Chiaroscuro & 
 - **`ACCET_Design_Manual.md`**: The master branding guide (Avalanche Dark Blue, Syne/DM Sans fonts, strict 12px border radii, no heavy shadows, no green).
 - **`Dark_Mode_Components_Guide.md`**: The hyper-detailed reference for Dark Sections (Netflix effect gradients, bg-black/20 inputs, Sky Blue glow states, pill-shaped gradients).
 - NEVER use generic bootstrap styles, pure black (`#000000`), or legacy classes like `.glass-platinum`. Always enforce the pixel-perfect ACCET brand identity.
+
+# Branch Naming & Version Control Rules (Appendix)
+3. **Strict SemVer on ALL Branches:** Every single branch created (including hotfixes, small tweaks, or UI gaps) MUST strictly follow Semantic Versioning in its name, prefixed by the action type.
+   - Example Feature: `feat/v2.5.0-investor-dashboard`
+   - Example Hotfix: `fix/v2.5.1-nextjs-layout-params`
+   - NEVER create a branch without the `vX.X.X` sequence identifier.
