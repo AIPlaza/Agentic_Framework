@@ -1,0 +1,1000 @@
+
+
+ACCET
+AgoraLink S.A.S.
+PRD Hiperdetallado
+Módulo de Revista Digital · Vista Integral del Inversionista
+Piloto ACCET 001 — Ronda Friends &amp; Family RBF (Meta US$100.000)
+
+Alcance: Épica 1 (Módulos A·B·C) · Épica 2 (Módulos D·E·F) · Épica 4 (Módulos L·M·N·O)
+194 Historias de Usuario · 18 Sprints · 4 Fases
+Comité de Gestión: Frank Camelo (CEO) · Oscar Antonio Rangel Hernández (Director de Tecnología / PM)
+Versión 1.0 · Agosto 2026
+
+Índice
+(El índice se genera automáticamente al abrir este documento en Microsoft Word. Si aparece en blanco, haga clic derecho sobre esta sección y seleccione “Actualizar campo” / “Actualizar toda la tabla”.)
+ TOC \h \u \z \t &quot;Heading 1,1,Heading 2,2,Heading 3,3,&quot;
+
+
+1. Resumen Ejecutivo
+Este documento constituye el Documento de Requisitos del Producto (PRD) hiperdetallado del Módulo de Revista Digital y su correspondiente Vista Integral del Inversionista para la plataforma ACCET, operada por AgoraLink S.A.S. Consolida, organiza y traza a fases de ejecución (sprints) las 194 historias de usuario que conforman el recorrido completo del inversionista: desde el primer contacto en el “Dashboard Revista” hasta la ejecución financiera on-chain y la asistencia continua de agentes de inteligencia artificial.
+El propósito de este PRD es doble: (1) servir como backlog técnico accionable para el equipo de desarrollo, con criterios claros de priorización, secuenciación y auditoría; y (2) funcionar como artefacto de credibilidad institucional frente a los acreedores de la ronda Friends &amp; Family (meta de US$100.000), demostrando que el Piloto ACCET 001 cuenta con una arquitectura de producto seria, auditable y escalable a futuros proyectos (agropecuario, energético, inmobiliario).
+El módulo de Revista Digital no se concibe como un sitio estático, sino como una plantilla editorial reutilizable y multi-tenant: cada proyecto futuro tokenizado en ACCET será un nuevo “número” de la misma revista, no una revista nueva. Esto exige decisiones de arquitectura específicas —detalladas en la Sección 3— que garantizan modularidad y escalabilidad para múltiples usuarios y múltiples proyectos simultáneos.
+2. Alcance: Vista del Inversionista / Revista Digital
+El alcance de este PRD cubre el recorrido íntegro del inversionista como un solo organismo funcional, compuesto por tres capas que deben operar de forma sincronizada:
+2.1 · La Vitrina (Épica 1 — Módulos A, B, C)
+Onboarding con Didit KYC y generación de DID; el Dashboard Revista propiamente dicho (MkDocs Material + Mermaid.js + llms.txt); y el widget de IA con guardrails prudenciales que ejecuta el handoff hacia WhatsApp para el cierre humano de la venta.
+2.2 · La Ejecución Financiera (Épica 2 — Módulos D, E, F)
+El desbloqueo de la billetera keyless (ERC-4337, gas patrocinado), la firma biométrica tipo DocuSign anclada a la Filecoin Virtual Machine (FVM), y el dashboard privado post-inversión (portafolio, mercado P2P, referidos, retiros).
+2.3 · La Capa de Inteligencia orientada al Inversionista (Épica 4 — Módulos L, M, N, O)
+El comportamiento anti-alucinación del agente, su autonomía económica configurable, la sincronización con el frontend (navegación asistida) y la interoperabilidad del Servidor MCP para agentes externos de Family Offices (Free Tier).
+Explícitamente fuera de alcance para esta versión del documento: los módulos G–K de la Épica 3 (Sala de Control del Emisor) y los módulos P–Q de la Épica 4 (pipeline RAG interno y analítica avanzada del emisor), por corresponder a la experiencia del Emisor/Administrador y no a la del Inversionista. Se documentan de forma referencial en el Anexo A.
+3. Arquitectura Técnica y Diseño Multi-Tenant
+Para soportar múltiples proyectos (ACCET, y en el futuro proyectos agropecuarios, de biogás, y de bienes raíces) y múltiples usuarios concurrentes sin duplicar código ni infraestructura, la plataforma se diseña bajo los siguientes principios de modularidad:
+Namespacing por proyecto en Graphiti/FalkorDB: cada proyecto tokenizado vive en su propio subgrafo temporal, permitiendo lecturas aisladas y agregadas.
+Un llms.txt y un CID raíz por tenant en IPFS: cada proyecto publica su propia fuente de verdad consumible por agentes, sin mezclar contexto entre proyectos.
+RBAC (Control de Acceso Basado en Roles) por perfil: Inversionista, Emisor/Administrador, Agente de IA interno y Agente externo (Family Office vía token MCP).
+Servidor MCP sin estado (stateless): permite auto-escalado horizontal sin duplicar lógica de negocio ni comprometer la coherencia de los datos.
+La “Revista Digital” como plantilla, no como sitio único: el tema MkDocs y los componentes de UI se parametrizan por proyecto, reutilizando el 100% del código base entre pilotos.
+
+3.1 · Stack Tecnológico por Capa
+Capa
+Componentes y Justificación
+Presentación (Revista Digital)
+MkDocs Material + Mermaid.js para diagramas y líneas de tiempo versionables como Markdown; tema con tokens de marca ACCET (azul liquidez #185FA5, navy, dorado).
+Contenido para Agentes
+Estándar llms.txt en la raíz del sitio, condensando el modelo de negocio para consumo directo de LLMs; vectorizado en chunks para RAG.
+Identidad y Cumplimiento
+Didit API (KYC/AML biométrico) + Identificadores Descentralizados (DID) + credenciales de cumplimiento ERC-3643 (whitelist on-chain).
+Billeteras
+Account Abstraction (ERC-4337) sobre Base / Base Sepolia; proveedores tipo Privy, Biconomy o Coinbase Smart Wallet para billeteras keyless con login social y Paymaster patrocinado.
+Firma y Legal
+Componente de firma biométrica tipo DocuSign, vinculado a Passkeys/FaceID y a la billetera del usuario; anclaje del hash del contrato a IPFS.
+Fuente Única de la Verdad (SSOT)
+Graphiti (grafo de conocimiento temporal) sobre FalkorDB; exportación periódica a JSON-LD/GraphSON anclada en IPFS mediante CIDs.
+Contratos Inteligentes
+Filecoin Virtual Machine (FVM, compatible EVM) para lógica de negocio del RBF, tesorería, distribución de utilidades y Circuit Breakers multi-firma.
+Agentes / MCP
+Servidor MCP (FastMCP / SDK oficial) exponiendo herramientas de lectura y preparación de transacciones; autenticación por token para agentes externos.
+Observabilidad
+Paneles de analítica (embudo de conversión, tasa de redirección, engagement) y alertas automáticas de salud de nodos (IPFS/FVM/MCP).
+Infraestructura
+Contenedores con auto-escalado horizontal para el Servidor MCP (sin estado); backups automáticos de FalkorDB a IPFS cada 12 horas.
+
+3.2 · Flujo Macro del Ecosistema
+Backend Emisor / Graphiti → Grafo de Conocimiento Temporal → Anclaje a IPFS (CIDs, inmutabilidad y portabilidad) → Servidor MCP (interfaz del agente) → Consumo por el Dashboard Revista, el widget de IA y agentes externos autorizados. Cada estado validado del proyecto se exporta periódicamente como JSON-LD, se ancla en IPFS, y su CID se registra en la Filecoin Virtual Machine (FVM), que además gestiona la lógica financiera del RBF (fondeo, distribución de utilidades y reglas de cierre de ronda).
+4. Tabla Isomórfica del Backlog (194 Historias)
+La siguiente tabla resume la correlación exacta entre épicas, módulos, categoría funcional y volumen de historias que conforman el alcance de este PRD.
+Épica
+Módulo
+Categoría Funcional
+Historias
+Épica 1 — La Vitrina
+A
+Identidad, KYC y Onboarding (Didit API + Billetera Keyless)
+42 (1.1–1.42)
+Épica 1 — La Vitrina
+B
+Exploración del Dashboard Revista (MkDocs + 5 Ejes)
+42 (2.1–2.42)
+Épica 1 — La Vitrina
+C
+Consumo de Smart Content (Widget IA + llms.txt + Handoff WhatsApp)
+42 (3.1–3.42)
+Épica 2 — Ejecución Financiera
+D
+Desbloqueo de Billetera y Fondeo (Base Sepolia)
+9 (E2-1.1–1.9)
+Épica 2 — Ejecución Financiera
+E
+Firma Biométrica y Ejecución FVM
+5 (E2-1.10–1.14)
+Épica 2 — Ejecución Financiera
+F
+Dashboard Privado del Inversionista (Portafolio y P2P)
+28 (E2-1.15–1.42)
+Épica 4 — Inteligencia del Ecosistema
+L
+Comportamiento del Agente y Manejo de Alucinaciones
+5 (E4-1.1–1.5)
+Épica 4 — Inteligencia del Ecosistema
+M
+Autonomía Económica y Transacciones (FVM)
+7 (E4-1.6–1.12)
+Épica 4 — Inteligencia del Ecosistema
+N
+Sincronización Interfaz-Agente y Navegación
+5 (E4-1.13–1.17)
+Épica 4 — Inteligencia del Ecosistema
+O
+Interoperabilidad y API Gateway del MCP (Free Tier)
+9 (E4-1.18–1.26)
+TOTAL ALCANCE
+10
+Módulos que componen la Vista del Inversionista / Revista Digital
+194 historias
+
+5. Backlog Detallado — Épica 1: La Vitrina
+Perfiles involucrados: Inversionista Institucional, Inversionista Minorista, Aliados Estratégicos (en fase de staging, sin exposición pública hasta su activación formal en el Hot Sale). Objetivo de la épica: llevar al prospecto desde el registro hasta la intención de fondeo, resolviendo sus dudas mediante contenido asistido por IA.
+Módulo A · Identidad, KYC y Onboarding
+Épica 1 — La Vitrina  ·  Rango: 1.1 – 1.42  ·  Total: 42 historias  ·  Cobertura: Sprints 1–4
+ID
+Historia de Usuario
+Sprint / Prioridad
+1.1
+Como Inversionista Institucional, quiero validar mi identidad mediante el API de Didit de forma rápida, para cumplir con las normativas sin exponer mis datos sensibles.
+MUST
+1.2
+Como Aliado Estratégico, quiero que el onboarding genere un identificador descentralizado (DID), para que terceros autorizados reconozcan al usuario de forma legal e interoperable.
+MUST
+1.3
+Como Inversionista Minorista, quiero ver una lista visual de los documentos aceptados antes de iniciar el flujo, para prepararlos con anticipación.
+MUST
+1.4
+Como Inversionista Minorista, quiero ver un indicador de progreso (spinner o porcentaje) mientras la API procesa mis datos, para saber que el sistema está trabajando.
+MUST
+1.5
+Como Inversionista, quiero recibir un correo de confirmación de “KYC Exitoso” con un enlace al Dashboard, para tener certeza de que puedo continuar.
+MUST
+1.6
+Como Inversionista Minorista, quiero recibir una guía en pantalla si mi rostro no está centrado durante la prueba de vida (liveness check), para evitar un rechazo automático.
+MUST
+1.7
+Como Inversionista Institucional, quiero tener la opción de “Reintentar captura” si la foto de mi pasaporte sale borrosa, para corregirlo inmediatamente.
+MUST
+1.8
+Como Sistema (Backend), quiero encriptar el payload de validación de Didit antes de asociarlo al DID del usuario, para garantizar la protección de la privacidad.
+MUST
+1.9
+Como Emisor, quiero que el sistema bloquee temporalmente el proceso si un usuario falla el KYC tres veces consecutivas, para enviar el caso a revisión manual.
+MUST
+1.10
+Como Sistema (Backend), quiero registrar el timestamp de cada verificación en una base de datos segura, para mantener una pista de auditoría sólida de cara a reguladores.
+MUST
+1.11
+Como Inversionista Minorista, quiero que mi billetera keyless se genere automáticamente en la red Base tras aprobar el KYC, para poder fondear mi cuenta sin pasos técnicos adicionales.
+MUST
+1.12
+Como Inversionista, quiero poder recuperar el acceso a mi billetera utilizando mi correo electrónico y una nueva prueba biométrica, para no perder mis fondos si cambio de dispositivo.
+MUST
+1.13
+Como Inversionista Institucional, quiero ver la dirección pública de mi billetera de forma simplificada en mi perfil, para saber exactamente dónde se alojarán mis activos.
+MUST
+1.14
+Como Sistema (Backend), quiero reintentar la creación de la billetera si la red Base experimenta congestión, para asegurar que el usuario no quede bloqueado en la pantalla de carga.
+MUST
+1.15
+Como Inversionista Institucional, quiero confirmar que mi billetera keyless es compatible con los contratos de cumplimiento ERC-3643, para asegurar que mis futuras inversiones cumplan con la ley.
+MUST
+1.16
+Como Inversionista, quiero firmar digitalmente el Contrato RBF utilizando mi identificador descentralizado (DID), para que mi participación sobre el % de utilidades quede vinculada legalmente a mi cuenta.
+MUST
+1.17
+Como Inversionista Institucional, quiero completar un formulario integrado para declarar el origen lícito de mis fondos y mi estado PEP, para cumplir con el Anexo 2 del contrato y normativas AML.
+MUST
+1.18
+Como Inversionista Minorista, quiero que el botón de “Aceptar Contrato” permanezca inactivo hasta que haya desplazado la vista hasta el final del documento, para asegurar que reconozco los términos y riesgos.
+MUST
+1.19
+Como Sistema (Backend), quiero generar un hash criptográfico del contrato firmado y anclarlo a IPFS mediante un CID, para crear una prueba inmutable del acuerdo en la red (FVM).
+MUST
+1.20
+Como Inversionista, quiero recibir una copia en formato PDF de mi contrato firmado y sus anexos por correo electrónico, para mantener un respaldo en mis archivos personales.
+MUST
+1.21
+Como Inversionista Minorista, quiero poder subir un avatar o foto de perfil, para personalizar mi experiencia dentro de la plataforma.
+MUST
+1.22
+Como Inversionista Institucional, quiero poder activar la Autenticación de Dos Factores (2FA) en mi cuenta, para añadir una capa extra de protección a mis inversiones.
+MUST
+1.23
+Como Inversionista, quiero poder actualizar mi número de teléfono o correo electrónico requiriendo un código OTP, para mantener mi cuenta segura ante cambios de contacto.
+MUST
+1.24
+Como Aliado Estratégico, quiero que si un inversionista cambia su país de residencia en el perfil, el sistema detenga sus inversiones hasta re-evaluar el KYC, para cumplir con normativas internacionales.
+MUST
+1.25
+Como Sistema (Backend), quiero eliminar los datos biométricos temporales inmediatamente después de que Didit valide el DID, para minimizar riesgos de privacidad.
+MUST
+1.26
+Como Inversionista, quiero ver un indicador de “Autoguardado” si pauso mi proceso de registro, para no tener que empezar desde cero si cierro el navegador.
+MUST
+1.27
+Como Sistema (Backend), quiero enviar un correo automático recordatorio a los usuarios que abandonaron el proceso de KYC a la mitad, para recuperar prospectos del Hot Sale.
+MUST
+1.28
+Como Inversionista, quiero un panel para elegir si deseo recibir notificaciones sobre el contrato RBF vía correo, SMS o Push, para evitar el exceso de mensajes.
+MUST
+1.29
+Como Inversionista Minorista, quiero ver un mensaje claro y un botón de “Reenviar” si el enlace mágico de confirmación de mi correo ha expirado.
+MUST
+1.30
+Como Inversionista, quiero recibir una alerta automática al correo si se detecta un inicio de sesión desde un dispositivo o IP nueva.
+MUST
+1.31
+Como Inversionista Minorista, quiero un botón de chat flotante visible en todas las pantallas del onboarding, para pedir ayuda si no entiendo algún paso del KYC.
+MUST
+1.32
+Como Agente de IA, quiero poder consultar el estado actual del onboarding del usuario en el grafo de conocimiento (Graphiti), para responderle con contexto exacto en el chat.
+MUST
+1.33
+Como Inversionista Institucional, quiero poder descargar un borrador “demo” del contrato RBF antes de pasar el KYC, para que mis asesores legales puedan revisarlo.
+MUST
+1.34
+Como Emisor, quiero un panel administrativo interno que me muestre en qué paso exacto del onboarding se están estancando más usuarios, para optimizar el embudo.
+MUST
+1.35
+Como Inversionista de ticket alto, quiero ver una opción para agendar una videollamada directa de soporte si tengo problemas técnicos con mi billetera keyless.
+MUST
+1.36
+Como Inversionista, quiero acceder a una sección de Preguntas Frecuentes en formato acordeón, enfocada en resolver dudas sobre la tecnología FVM e IPFS de forma sencilla.
+MUST
+1.37
+Como Inversionista Minorista, quiero ver una animación de “Onboarding Exitoso” una vez firmado el contrato RBF, para sentirme seguro de que he completado todo correctamente.
+MUST
+1.38
+Como Inversionista, quiero ser redirigido automáticamente a la pantalla principal del “Dashboard Revista” tras el mensaje de éxito, para empezar a explorar el proyecto.
+MUST
+1.39
+Como Inversionista, quiero que el Dashboard Revista me salude por mi nombre y muestre mi saldo actual en cero en la esquina superior, confirmando que mi billetera está conectada.
+MUST
+1.40
+Como Sistema (Backend), quiero que la creación del nuevo usuario se registre como un nuevo nodo en FalkorDB, para que el ecosistema MCP lo reconozca inmediatamente.
+MUST
+1.41
+Como Inversionista, quiero que un tooltip ilumine el botón de mi Billetera Keyless en su primer uso, enseñándome dónde encontrar mi dirección pública.
+MUST
+1.42
+Como Inversionista, quiero que el primer elemento visual (Hero Banner) del Dashboard sea un botón “Explorar Piloto ACCET”, para dirigir mi atención directamente a la inversión.
+MUST
+
+Módulo B · Exploración del Dashboard Revista (MkDocs)
+Épica 1 — La Vitrina  ·  Rango: 2.1 – 2.42  ·  Total: 42 historias  ·  Cobertura: Sprints 5–7
+ID
+Historia de Usuario
+Sprint / Prioridad
+2.1
+Como Inversionista, quiero ver un menú lateral minimalista con las secciones clave del modelo ACCET, para navegar sin abrumarme con jerga técnica.
+MUST
+2.2
+Como Inversionista, quiero que la sección principal muestre un resumen ejecutivo ultra-condensado de la propuesta de valor de ACCET, para entender el propósito en 10 segundos.
+MUST
+2.3
+Como Inversionista, quiero una barra de búsqueda indexada rápida, para encontrar términos clave del modelo (ej. “RBF”, “FVM”, “ERC-3643”).
+MUST
+2.4
+Como Sistema (Frontend), quiero mostrar un estado de esqueleto (skeleton loader) mientras cargan los diagramas interactivos, para mantener la fluidez visual.
+MUST
+2.5
+Como Inversionista, quiero un botón para alternar entre Modo Claro y Modo Oscuro, para leer la documentación cómodamente.
+MUST
+2.6
+Como Inversionista, quiero ver una barra de progreso global (Header) que muestre cuánto capital se ha levantado de la meta de US$100.000, para percibir el avance de la ronda.
+MUST
+2.7
+Como Inversionista, quiero un gráfico interactivo que simule cómo un ticket genera utilidades netas en el horizonte del RBF, para clarificar mi expectativa de retorno.
+MUST
+2.8
+Como Sistema (Backend), quiero que el simulador consulte las tasas actualizadas desde el grafo local (FalkorDB), para asegurar precisión en milisegundos.
+MUST
+2.9
+Como Inversionista, quiero ver un diagrama explicativo de los “Tres Motores” (Plataforma, Factoring, Administradora), para entender cómo ACCET genera liquidez real.
+MUST
+2.10
+Como Inversionista, quiero que al hacer clic en conceptos como “Tokenización RWA” aparezca un tooltip con analogías sencillas, facilitando mi comprensión.
+MUST
+2.11
+Como Inversionista Institucional, quiero ver un enlace al CID de IPFS debajo de cada métrica financiera, para comprobar que los datos mostrados son inmutables.
+MUST
+2.12
+Como Inversionista, quiero poder descargar un One-Pager en PDF del modelo ACCET, para revisarlo fuera de línea.
+MUST
+2.13
+Como Inversionista, quiero un glosario flotante interactivo para resolver dudas rápidas sobre términos del contrato RBF.
+MUST
+2.14
+Como Inversionista, quiero una opción de lectura en voz alta (text-to-speech) para las secciones más extensas del modelo.
+MUST
+2.15
+Como Inversionista, quiero ver un diagrama de línea de tiempo interactivo que muestre el progreso de los 5 ejes de ACCET (Tecnológico, Legal, Financiero, Comercial, Operativo).
+MUST
+2.16
+Como Inversionista, quiero hacer clic en el eje legal y ver los hitos de constitución societaria y estructuración del RBF, para confirmar la seriedad jurídica.
+MUST
+2.17
+Como Inversionista, quiero ver el estado de desarrollo del Oráculo Legal y la infraestructura FVM/IPFS, para validar el respaldo técnico.
+MUST
+2.18
+Como Inversionista, quiero desplegar el eje financiero y ver el plan post-RBF (Pre-Seed, Serie A), para entender la escalabilidad a futuro.
+MUST
+2.19
+Como Inversionista, quiero ver el cronograma de despliegue binacional (Colombia–Venezuela), para conocer la estrategia territorial.
+MUST
+2.20
+Como Inversionista, quiero ver la estrategia de marketing y adquisición de usuarios descrita en la hoja de ruta.
+MUST
+2.21
+Como Sistema (Frontend), quiero que el timeline se construya dinámicamente consumiendo el archivo JSON-LD desde IPFS, asegurando la Fuente Única de la Verdad.
+MUST
+2.22
+Como Sistema, quiero mostrar la última versión en caché del timeline si el nodo de IPFS tarda más de 3 segundos en responder.
+MUST
+2.23
+Como Agente de IA, quiero leer el archivo llms.txt del emisor para obtener el contexto completo del modelo de negocio ACCET.
+MUST
+2.24
+Como Inversionista, quiero un botón de “Resumir con IA” en secciones clave, para obtener versiones simplificadas del texto.
+MUST
+2.25
+Como Inversionista, quiero poder hacer preguntas en un chat integrado sobre el funcionamiento de ACCET, y que la IA responda basándose en el grafo de conocimiento.
+MUST
+2.26
+Como Backend, quiero limitar los prompts del chat estrictamente a la documentación de ACCET, para evitar alucinaciones.
+MUST
+2.27
+Como Inversionista, quiero que la IA cite la sección exacta del Dashboard de donde extrajo su respuesta.
+MUST
+2.28
+Como Backend, quiero procesar las consultas del Agente de IA a través de FalkorDB, para asegurar baja latencia en el chat.
+MUST
+2.29
+Como Inversionista, quiero que el chat me ofrezca transferirme con un asesor humano si la IA no puede resolver mi duda técnica sobre la billetera.
+MUST
+2.30
+Como Inversionista, quiero ver una sección dedicada al Comité de Gestión del Oráculo Legal (Frank y Oscar), para saber quién ejecuta el proyecto.
+MUST
+2.31
+Como Inversionista, quiero que los perfiles del equipo incluyan enlaces a sus credenciales profesionales, aportando prueba social.
+MUST
+2.32
+Como Inversionista, quiero ver la explicación de AgoraLink S.A.S. como la entidad operativa central, para entender a quién le estoy prestando el capital.
+MUST
+2.33
+Como Inversionista Institucional, quiero ver la hoja de ruta de registro y protección del código base y la marca, para confirmar el blindaje del proyecto.
+MUST
+2.34
+Como Inversionista, quiero leer un resumen del principio de participación igualitaria 50/50 del equipo fundador, demostrando estabilidad interna.
+MUST
+2.35
+Como Inversionista, quiero ver un diagrama visual que explique cómo mi capital RBF construye la plataforma y la administradora de forma equilibrada.
+MUST
+2.36
+Como Inversionista, quiero ver una tarjeta destacada del Piloto ACCET al final del Dashboard, invitándome a participar en la ronda.
+MUST
+2.37
+Como Inversionista Minorista, quiero ingresar mi monto de inversión en esta tarjeta y ver el retorno proyectado automático, motivando mi deseo de invertir.
+MUST
+2.38
+Como Inversionista, quiero ver el beneficio de obtener un descuento por referir a otros, incentivándome a invitar a mi red.
+MUST
+2.39
+Como Inversionista, quiero poder marcar el Piloto ACCET con una estrella para guardarlo en mis favoritos.
+MUST
+2.40
+Como Inversionista, si hago clic en “Invertir” sin haber completado mi KYC, quiero un modal que me redirija amablemente a terminar mi registro.
+MUST
+2.41
+Como Inversionista, quiero ver un checkbox final confirmando que he leído los riesgos inherentes antes de proceder al pago.
+MUST
+2.42
+Como Inversionista con KYC aprobado, al hacer clic en “Fondear ACCET”, quiero ser llevado a la interfaz de mi Billetera Keyless para confirmar la transacción en USDC/USDT.
+MUST
+
+Módulo C · Consumo de Smart Content (Widget IA / llms.txt)
+Épica 1 — La Vitrina  ·  Rango: 3.1 – 3.42  ·  Total: 42 historias  ·  Cobertura: Sprints 8–10
+ID
+Historia de Usuario
+Sprint / Prioridad
+3.1
+Como Inversionista, quiero ver un icono flotante discreto en la esquina inferior de la pantalla, para invocar al asistente de IA en cualquier momento de mi lectura.
+MUST
+3.2
+Como Inversionista, quiero que al abrir el widget por primera vez la IA me salude por mi nombre y me ofrezca 3 preguntas rápidas predefinidas.
+MUST
+3.3
+Como Agente de IA, quiero cargar de forma asíncrona el archivo llms.txt al iniciar sesión el usuario, para tener el contexto listo en caché.
+MUST
+3.4
+Como Inversionista, quiero poder minimizar el widget sin perder mi historial de chat, para retomar la conversación después.
+MUST
+3.5
+Como Inversionista Minorista, quiero poder arrastrar el widget a cualquier lado de la pantalla, para que no me tape los diagramas.
+MUST
+3.6
+Como Inversionista, quiero escribir una pregunta sobre rentabilidad y que la IA la procese usando el Servidor MCP conectado a FalkorDB, para una respuesta instantánea y precisa.
+MUST
+3.7
+Como Inversionista Institucional, quiero que la respuesta incluya enlaces clicables a la sección exacta del Dashboard de donde sacó la información.
+MUST
+3.8
+Como Sistema (Frontend), quiero mostrar un indicador de “escribiendo...” con timeout de 5 segundos y un mensaje de error amigable si la IA no responde.
+MUST
+3.9
+Como Agente de IA, quiero tener memoria del contexto de la conversación actual, para responder preguntas de seguimiento sin repetir el escenario.
+MUST
+3.10
+Como Inversionista, quiero un botón para enviarme la transcripción del chat por correo electrónico.
+MUST
+3.11
+Como Inversionista Minorista, quiero un menú de opciones rápidas dentro del widget (ej. “Ver términos”, “Explicar RBF”, “Contactar Soporte”), para resolver dudas con un clic.
+MUST
+3.12
+Como Sistema (Agente de IA), quiero detectar consultas de asesoría financiera personalizada o garantías absolutas de rendimiento, para responder con un disclaimer de rol informativo.
+MUST
+3.13
+Como Equipo Técnico, quiero compilar y estructurar un dataset de al menos 1.000 casos de uso, para afinar el modelo (fine-tuning/RAG) con el tono y los límites legales correctos.
+MUST
+3.14
+Como Sistema (Backend), quiero guardar un registro encriptado de las sesiones donde se activaron disclaimers legales, para auditoría en caso de disputa.
+MUST
+3.15
+Como Inversionista, quiero ver un texto estático en la base del widget: “La IA puede cometer errores. Esta información no constituye asesoría financiera”.
+MUST
+3.16
+Como Inversionista, si expreso intención de invertir en el chat, quiero un botón destacado que me redirija a WhatsApp para continuar el fondeo con un asesor humano.
+MUST
+3.17
+Como Inversionista, quiero que el enlace abra WhatsApp con un mensaje pre-llenado, reduciendo la fricción.
+MUST
+3.18
+Como Sistema (Backend), quiero registrar el momento exacto del clic al enlace de WhatsApp, para medir la tasa de conversión del Hot Sale.
+MUST
+3.19
+Como Inversionista, si la IA no responde satisfactoriamente tras 2 intentos, quiero que me sugiera proactivamente contactar el WhatsApp de soporte.
+MUST
+3.20
+Como Inversionista, quiero ver los horarios de atención humana antes de enviarme a WhatsApp, para saber si me responderán de inmediato.
+MUST
+3.21
+Como Emisor, quiero que la IA le recuerde al usuario que el cierre formal requerirá la firma digital del contrato RBF, para fijar expectativas correctas.
+MUST
+3.22
+Como Asesor (WhatsApp), quiero que el enlace incluya un ID de sesión oculto, para dar seguimiento sin hacer repetir al cliente sus dudas.
+MUST
+3.23
+Como Agente MCP, quiero detectar si el archivo llms.txt fue actualizado, para refrescar mi base de conocimiento y no dar respuestas obsoletas.
+MUST
+3.24
+Como Backend, quiero vectorizar el contenido del llms.txt en fragmentos (chunks), para que las búsquedas semánticas sean ultrarrápidas.
+MUST
+3.25
+Como Inversionista, quiero que si pregunto por un dato que NO está en el llms.txt la IA me lo indique honestamente en lugar de alucinar.
+MUST
+3.26
+Como Agente de IA, quiero usar las herramientas del Servidor MCP para combinar métricas en tiempo real con el texto del llms.txt.
+MUST
+3.27
+Como Inversionista, quiero que la IA sea capaz de interpretar y explicarme en texto simple los diagramas de Mermaid.js que veo en pantalla.
+MUST
+3.28
+Como Inversionista extranjero, quiero poder preguntar en inglés y que la IA traduzca el contexto del llms.txt (en español) de forma nativa.
+MUST
+3.29
+Como Backend, quiero sanitizar las entradas del usuario en el chat para prevenir inyecciones de prompt (prompt injection).
+MUST
+3.30
+Como Inversionista, quiero un botón de dictado por voz (Speech-to-Text) en el widget, para preguntar sin teclear.
+MUST
+3.31
+Como Inversionista, quiero que la IA me lea sus respuestas en voz alta si presiono un icono de altavoz.
+MUST
+3.32
+Como Inversionista, quiero que el chat soporte formato Markdown enriquecido, para que las explicaciones sean fáciles de escanear.
+MUST
+3.33
+Como Inversionista, quiero ver sugerencias de autocompletado si cometo un error tipográfico al preguntar.
+MUST
+3.34
+Como Inversionista, quiero que los colores y la tipografía del widget coincidan con la identidad gráfica de ACCET.
+MUST
+3.35
+Como Inversionista, quiero que el widget me sugiera enlaces integrados a la sección exacta del MkDocs relacionada con mi pregunta.
+MUST
+3.36
+Como Inversionista, quiero poder calificar la respuesta de la IA con un pulgar arriba o abajo, para ayudar a mejorar el sistema.
+MUST
+3.37
+Como Emisor, quiero un panel interno con las 10 preguntas más frecuentes que los usuarios le hacen a la IA, para identificar patrones de dudas.
+MUST
+3.38
+Como Emisor, quiero ver una gráfica de “Tasa de Redirección” que mida el % de chats que terminan en clic al enlace de WhatsApp.
+MUST
+3.39
+Como Project Manager, quiero recibir una alerta si la IA detecta que varios usuarios preguntan por un error o enlace roto en el Dashboard.
+MUST
+3.40
+Como Equipo Técnico, quiero poder filtrar y revisar el historial de respuestas calificadas con pulgar abajo, para afinar el prompt y el llms.txt.
+MUST
+3.41
+Como Emisor, quiero medir el tiempo promedio de retención de un usuario interactuando con el widget de IA, para evaluar el engagement.
+MUST
+3.42
+Como Asesor (WhatsApp), una vez cerrado el trato manual con el inversionista, quiero un botón en mi panel para enviarle un enlace único de acceso a su Billetera Keyless.
+MUST
+
+
+6. Backlog Detallado — Épica 2: Ejecución Financiera
+Perfiles involucrados: Inversionista con KYC aprobado, Sistema (Backend/Smart Contract), Paymaster. Objetivo de la épica: convertir la intención de inversión en una transacción on-chain auditable, y sostener la relación de largo plazo mediante el dashboard privado, el mercado secundario P2P y los pagos de utilidades.
+Módulo D · Desbloqueo de Billetera y Fondeo (Base Sepolia)
+Épica 2 — Ejecución Financiera  ·  Rango: E2-1.1 – E2-1.9  ·  Total: 9 historias  ·  Cobertura: Sprint 11
+ID
+Historia de Usuario
+Sprint / Prioridad
+E2-1.1
+Como Inversionista, al hacer clic en el enlace de WhatsApp, quiero ver una animación que confirme que mi billetera está “Desbloqueada y Verificada”.
+MUST
+E2-1.2
+Como Sistema (Backend), quiero validar en la blockchain que el DID del usuario tiene la credencial (claim) de KYC aprobada antes de permitir que la billetera reciba fondos.
+MUST
+E2-1.3
+Como Inversionista Minorista, quiero ver mi saldo actual ($0.00 USDC) y mi dirección de la red Base con un botón “Copiar”.
+MUST
+E2-1.4
+Como Inversionista, quiero ver una advertencia clara: “Transfiere SOLO USDC o USDT a través de la red Base”, para evitar perder mi capital en la red equivocada.
+MUST
+E2-1.5
+Como Inversionista Minorista, quiero un botón “Ayuda para fondear” con un tutorial de 30 segundos sobre cómo enviar USDC desde exchanges centralizados.
+MUST
+E2-1.6
+Como Sistema (Paymaster ERC-4337), quiero patrocinar automáticamente el costo de gas del usuario, para que no tenga que comprar criptomonedas nativas solo para operar.
+MUST
+E2-1.7
+Como Inversionista, quiero ver un indicador visual “Comisiones de red patrocinadas por ACCET”, para percibir un beneficio directo.
+MUST
+E2-1.8
+Como Inversionista, quiero que la interfaz detecte en tiempo real y me notifique con éxito visual (confeti/sonido) cuando mis USDC lleguen a la billetera.
+MUST
+E2-1.9
+Como Inversionista Institucional, quiero ver un enlace al explorador de bloques (BaseScan) correspondiente a mi depósito, para auditar la transacción de forma independiente.
+MUST
+
+Módulo E · Firma Biométrica y Ejecución en la FVM
+Épica 2 — Ejecución Financiera  ·  Rango: E2-1.10 – E2-1.14  ·  Total: 5 historias  ·  Cobertura: Sprint 11
+ID
+Historia de Usuario
+Sprint / Prioridad
+E2-1.10
+Como Inversionista, quiero tener la opción de revisar un resumen claro de mi orden de inversión y los términos del contrato RBF antes de proceder.
+MUST
+E2-1.11
+Como Inversionista, quiero firmar el documento mediante un componente integrado tipo DocuSign, sin salir de la plataforma ACCET.
+MUST
+E2-1.12
+Como Inversionista, quiero que la firma del contrato se autorice usando mi biometría encriptada (Passkeys/FaceID) y se vincule directamente a mi billetera keyless.
+MUST
+E2-1.13
+Como Sistema (Smart Contract), quiero empaquetar el hash del contrato firmado, la validación biométrica y la transferencia de USDC en una sola transacción en la FVM.
+MUST
+E2-1.14
+Como Inversionista, quiero ver una pantalla de “Inversión Exitosa” con el ID de mi transacción en la blockchain (Base/FVM).
+MUST
+
+Módulo F · Dashboard Privado del Inversionista (Portafolio y P2P)
+Épica 2 — Ejecución Financiera  ·  Rango: E2-1.15 – E2-1.42  ·  Total: 28 historias  ·  Cobertura: Sprints 12–13
+ID
+Historia de Usuario
+Sprint / Prioridad
+E2-1.15
+Como Inversionista, quiero ver un panel principal destacando mi “Capital Invertido” y “Rendimiento Acumulado”.
+MUST
+E2-1.16
+Como Sistema (Backend), quiero leer los saldos directamente desde el Smart Contract en la red Base/FVM, para garantizar información 100% auditable.
+MUST
+E2-1.17
+Como Inversionista, quiero ver un gráfico de evolución de mi inversión proyectada, marcando el momento actual respecto al horizonte del RBF.
+MUST
+E2-1.18
+Como Inversionista, quiero poder descargar mi contrato RBF firmado y mis certificados desde mi perfil en cualquier momento.
+MUST
+E2-1.19
+Como Inversionista, quiero ver un widget del Piloto ACCET con el estado de los Tres Motores de ingresos (Plataforma, Factoring, Administradora).
+MUST
+E2-1.20
+Como Agente de IA, quiero actualizar las notificaciones del panel del inversionista si hay un nuevo hito validado en el grafo de conocimiento.
+MUST
+E2-1.21
+Como Inversionista, quiero recibir un reporte semestral automatizado en mi panel, para auditar el avance del proyecto y la destinación de recursos.
+MUST
+E2-1.22
+Como Inversionista Minorista, quiero un botón “Liquidar Posición” para publicar mis tokens RBF en un mercado secundario P2P.
+MUST
+E2-1.23
+Como Sistema (Smart Contract), quiero bloquear la compra P2P de tokens si el comprador no tiene el KYC aprobado en su DID.
+MUST
+E2-1.24
+Como Inversionista, quiero ver un libro de órdenes (Order Book) sencillo dentro de la plataforma.
+MUST
+E2-1.25
+Como Sistema (Backend), quiero cobrar la comisión de “Salida Anticipada Premium” automáticamente vía Smart Contract si el usuario vende su participación.
+MUST
+E2-1.26
+Como Inversionista, quiero recibir los pagos de mis utilidades periódicas automáticamente en mi Billetera Keyless en USDC/USDT.
+MUST
+E2-1.27
+Como Inversionista, quiero poder retirar mis USDC directamente a mi cuenta bancaria local o exchange preferido.
+MUST
+E2-1.28
+Como Sistema (Frontend), quiero bloquear el botón “Invertir” y mostrar una alerta si el usuario intenta fondear un monto superior a su saldo disponible.
+MUST
+E2-1.29
+Como Sistema (Backend), quiero implementar un mecanismo de reintento automático si el nodo RPC de Base Sepolia falla.
+MUST
+E2-1.30
+Como Inversionista, si el Paymaster experimenta un retraso, quiero ver un mensaje amigable “Procesando pago sin comisiones...”.
+MUST
+E2-1.31
+Como Inversionista, quiero un botón “Disputa/Soporte” junto a cada transacción en mi historial, para abrir un ticket directo si mi fondeo no se refleja.
+MUST
+E2-1.32
+Como Inversionista Institucional, quiero poder descargar un “Recibo de Transacción” en PDF que incluya el Hash de la blockchain.
+MUST
+E2-1.33
+Como Inversionista, quiero generar un enlace de referido único vinculado a mi DID desde mi panel.
+MUST
+E2-1.34
+Como Inversionista, quiero ver un sub-panel “Mis Referidos” donde pueda monitorear registros y KYC completados.
+MUST
+E2-1.35
+Como Inversionista, quiero recibir mi bono de referido depositado directamente en mi Billetera Keyless mediante el Smart Contract.
+MUST
+E2-1.36
+Como Smart Contract (FVM), quiero validar que el código de referido sea legítimo y que el invitado haya fondeado con éxito antes de liberar el bono.
+MUST
+E2-1.37
+Como Inversionista, quiero recibir una notificación push cada vez que un referido mío realiza su primera inversión.
+MUST
+E2-1.38
+Como Inversionista, quiero poder cerrar todas mis sesiones activas de forma remota, para proteger mi Billetera Keyless si pierdo un dispositivo.
+MUST
+E2-1.39
+Como Inversionista Institucional, quiero ver una insignia “Contrato Auditado” con enlace al reporte técnico de seguridad del ERC-3643.
+MUST
+E2-1.40
+Como Inversionista, quiero poder configurar la frecuencia (diaria, semanal, mensual) de las notificaciones sobre el pago de mis utilidades.
+MUST
+E2-1.41
+Como Inversionista, quiero un botón para exportar todo el historial de mi portafolio a un archivo CSV, facilitando mi declaración de impuestos.
+MUST
+E2-1.42
+Como Inversionista, una vez que la meta del Piloto ACCET se alcance, quiero que el botón “Invertir” cambie a “Ronda Cerrada – Proyecto Operativo”.
+MUST
+
+
+7. Backlog Detallado — Épica 4: Inteligencia del Ecosistema (Módulos orientados al Inversionista)
+Perfiles involucrados: Agente de IA, Servidor MCP, Inversionista, Inversionista Institucional (agentes externos). Objetivo de la épica: garantizar que la capa de inteligencia artificial opere con límites prudenciales estrictos, sea capaz de operar económicamente solo bajo configuración explícita del Emisor, y permita interoperabilidad segura con agentes externos bajo un modelo Free Tier.
+Módulo L · Comportamiento del Agente y Manejo de Alucinaciones
+Épica 4 — Inteligencia del Ecosistema  ·  Rango: E4-1.1 – E4-1.5  ·  Total: 5 historias  ·  Cobertura: Sprint 14
+ID
+Historia de Usuario
+Sprint / Prioridad
+E4-1.1
+Como Agente de IA, quiero rechazar internamente cualquier intento de generar respuestas sobre ACCET que no estén respaldadas por un nodo válido en el grafo de conocimiento.
+MUST
+E4-1.2
+Como Servidor MCP, quiero generar automáticamente un ticket de soporte si la IA detecta que no posee la información solicitada por el usuario.
+MUST
+E4-1.3
+Como Inversionista, quiero que la IA me responda: “No tengo ese dato exacto en mis registros actuales, pero acabo de crear el Ticket #123...”, manteniendo la fluidez del servicio.
+MUST
+E4-1.4
+Como Sistema (Backend), quiero detectar si el Agente de IA falla al conectarse con el LLM o la base de datos y emitir una alerta crítica de forma autónoma.
+MUST
+E4-1.5
+Como Project Manager, quiero que los tickets generados por falta de información se vinculen a mi panel de diseño, sugiriendo qué nuevos hitos debo agregar.
+MUST
+
+Módulo M · Autonomía Económica y Gestión de Transacciones (FVM)
+Épica 4 — Inteligencia del Ecosistema  ·  Rango: E4-1.6 – E4-1.12  ·  Total: 7 historias  ·  Cobertura: Sprint 14
+ID
+Historia de Usuario
+Sprint / Prioridad
+E4-1.6
+Como Emisor, quiero un interruptor en mi panel para definir si la capacidad transaccional del Agente de IA operará en modo Manual o Automático.
+MUST
+E4-1.7
+Como Agente de IA, si el modo manual está activo, quiero generarle al usuario un enlace seguro (deep link) que lo redirija a su Billetera Keyless.
+MUST
+E4-1.8
+Como Agente de IA, si el modo automático está activo, quiero poder estructurar la transacción y presentarla como una “tarjeta de pago” interactiva dentro del chat.
+MUST
+E4-1.9
+Como Inversionista, quiero que al aceptar la tarjeta de pago en el chat, el sistema invoque la seguridad de mi dispositivo (FaceID/Passkeys) para firmar la transacción.
+MUST
+E4-1.10
+Como Sistema (Smart Contract), quiero restringir las llaves de acceso del Servidor MCP para que el Agente de IA tenga permisos exclusivos de “Lectura y Preparación”.
+MUST
+E4-1.11
+Como Agente de IA, quiero poder consultar el saldo de USDC del usuario mediante mis herramientas MCP, para confirmar liquidez antes de ofrecer opciones.
+MUST
+E4-1.12
+Como Agente de IA, si detecto que el saldo del usuario es $0.00, quiero mostrarle proactivamente las instrucciones para transferir fondos.
+MUST
+
+Módulo N · Sincronización Interfaz-Agente y Navegación
+Épica 4 — Inteligencia del Ecosistema  ·  Rango: E4-1.13 – E4-1.17  ·  Total: 5 historias  ·  Cobertura: Sprint 15
+ID
+Historia de Usuario
+Sprint / Prioridad
+E4-1.13
+Como Agente de IA, quiero utilizar mis herramientas MCP para hacer scroll automáticamente en el Dashboard Revista hacia la sección que responda la duda del usuario.
+MUST
+E4-1.14
+Como Inversionista, quiero que la IA me provea el enlace exacto en la burbuja del chat, para poder guardar o compartir esa sección.
+MUST
+E4-1.15
+Como Sistema (Frontend), quiero que la tarjeta o diagrama al que la IA me redirigió se resalte temporalmente, para enfocar mi atención de inmediato.
+MUST
+E4-1.16
+Como Agente de IA, quiero leer el estado de navegación del usuario, para saber exactamente qué gráfico está mirando en su pantalla.
+MUST
+E4-1.17
+Como Sistema (Frontend), quiero que el widget del chat minimice su tamaño inteligentemente cuando la IA me desplaza hacia un diagrama complejo.
+MUST
+
+Módulo O · Interoperabilidad y API Gateway del MCP (Free Tier)
+Épica 4 — Inteligencia del Ecosistema  ·  Rango: E4-1.18 – E4-1.26  ·  Total: 9 historias  ·  Cobertura: Sprint 15
+ID
+Historia de Usuario
+Sprint / Prioridad
+E4-1.18
+Como Inversionista Institucional, quiero poder generar un Token de Acceso MCP único desde mi panel, para conectar mi propio agente de IA externo a los datos de ACCET.
+MUST
+E4-1.19
+Como Servidor MCP, quiero interceptar cada solicitud externa y validar criptográficamente el token antes de exponer el grafo de conocimiento.
+MUST
+E4-1.20
+Como Sistema (Backend), quiero que los tokens externos tengan permisos estrictamente de Solo Lectura sobre los datos públicos del SSOT.
+MUST
+E4-1.21
+Como Servidor MCP, quiero limitar la cantidad de consultas por minuto asociadas a cada token, para prevenir que un bot externo sature la infraestructura.
+MUST
+E4-1.22
+Como Inversionista, quiero tener un botón para revocar y eliminar mi token de acceso instantáneamente.
+MUST
+E4-1.23
+Como Emisor, quiero ver un registro de auditoría de las consultas realizadas por tokens externos en mi Sala de Control.
+MUST
+E4-1.24
+Como Inversionista Institucional, quiero tener acceso gratuito (Free Tier) al API del Servidor MCP, para probar la calidad de los datos antes de comprometer capital.
+MUST
+E4-1.25
+Como Servidor MCP, quiero asignar una cuota mensual gratuita a cada token externo, incentivando la adopción pero protegiendo al sistema de abusos.
+MUST
+E4-1.26
+Como Inversionista Institucional, quiero ver un medidor visual de mi Cuota API en mi panel de configuración, para saber cuánto de mi Free Tier he consumido.
+MUST
+
+
+8. Plan de Fases y Sprints (Metodología Scrum)
+El plan se estructura en 4 fases y 18 sprints de 2 semanas (aprox. 36 semanas / ~8.5 meses de ejecución), asumiendo un equipo de desarrollo multidisciplinario (2–3 desarrolladores full-stack, 1 ingeniero blockchain, 1 diseñador UI/UX, 1 Scrum Master/PM). Cada sprint hereda como Definition of Ready las historias ya redactadas en las secciones 5–7, y cierra con una demo funcional y el checklist de auditoría correspondiente (Sección 9).
+Sprint
+Fase
+Duración
+Módulo(s)
+Historias
+Objetivo / Entregable
+Sprint 0
+Fase 0 — Fundación Arquitectónica
+2 semanas
+Infraestructura base
+N/A (spikes técnicos)
+Desplegar el andamiaje técnico compartido: repositorio del grafo de conocimiento (Graphiti sobre FalkorDB), nodo IPFS, esqueleto del Servidor MCP, contratos base en Base Sepolia (testnet) y sistema de diseño (tokens, tipografía, azul liquidez #185FA5).
+Sprint 1
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo A (parte 1/4)
+1.1 – 1.10
+Flujo de KYC vía Didit API (happy path + manejo de errores) y bitácora de auditoría de verificaciones.
+Sprint 2
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo A (parte 2/4)
+1.11 – 1.20
+Creación de billetera keyless en Base Sepolia (Account Abstraction ERC-4337) y firma del Contrato RBF con anclaje del hash a IPFS.
+Sprint 3
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo A (parte 3/4)
+1.21 – 1.30
+Configuración de perfil, seguridad extendida (2FA, OTP) y mecanismos de prevención de abandono del funnel.
+Sprint 4
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo A (parte 4/4)
+1.31 – 1.42
+Soporte interactivo temprano y el puente (handoff) hacia el Dashboard Revista. Cierre y QA del Módulo A completo.
+Sprint 5
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo B (parte 1/3)
+2.1 – 2.14
+Navegación global del Dashboard Revista (MkDocs Material) y visualización de la propuesta de valor / simulador de retornos del RBF.
+Sprint 6
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo B (parte 2/3)
+2.15 – 2.29
+Línea de tiempo interactiva de los 5 ejes del proyecto (consumo de JSON-LD desde IPFS) e interacción inteligente vía llms.txt.
+Sprint 7
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo B (parte 3/3)
+2.30 – 2.42
+Sección de transparencia y equipo fundador, y transición/conversión hacia el fondeo. Cierre y QA del Módulo B completo.
+Sprint 8
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo C (parte 1/3)
+3.1 – 3.15
+Widget flotante de IA (UI/UX, invocación) e interacción core con guardrails prudenciales (disclaimers, dataset de entrenamiento).
+Sprint 9
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo C (parte 2/3)
+3.16 – 3.29
+Cierre y handoff hacia WhatsApp, y pipeline de procesamiento RAG sobre llms.txt.
+Sprint 10
+Fase 1 — Épica 1: La Vitrina
+2 semanas
+Módulo C (parte 3/3)
+3.30 – 3.42
+Accesibilidad avanzada del chat y panel de analíticas del emisor. Cierre y QA de la Épica 1 completa (126 historias).
+Sprint 11
+Fase 2 — Épica 2: Ejecución Financiera
+2 semanas
+Módulos D + E
+E2-1.1 – E2-1.14
+Desbloqueo de billetera post KYC/WhatsApp, patrocinio de gas (Paymaster) y firma biométrica tipo DocuSign anclada a la FVM.
+Sprint 12
+Fase 2 — Épica 2: Ejecución Financiera
+2 semanas
+Módulo F (parte 1/2)
+E2-1.15 – E2-1.28
+Dashboard privado del inversionista: métricas de portafolio, mercado secundario P2P y control de saldo disponible.
+Sprint 13
+Fase 2 — Épica 2: Ejecución Financiera
+2 semanas
+Módulo F (parte 2/2)
+E2-1.29 – E2-1.42
+Manejo de errores transaccionales, sistema de referidos on-chain y seguridad de la cuenta. Cierre y QA de la Épica 2 completa (42 historias).
+Sprint 14
+Fase 3 — Épica 4: Inteligencia del Ecosistema
+2 semanas
+Módulos L + M
+E4-1.1 – E4-1.12
+Guardrails anti-alucinación con escalación automática a tickets (Human-in-the-Loop) y autonomía económica configurable del agente (modo manual/automático).
+Sprint 15
+Fase 3 — Épica 4: Inteligencia del Ecosistema
+2 semanas
+Módulos N + O
+E4-1.13 – E4-1.26
+Sincronización agente-frontend (auto-scroll, deep linking) e interoperabilidad segura del Servidor MCP con tokens y Free Tier para agentes externos.
+Sprint 16
+Fase 4 — Endurecimiento y Lanzamiento
+2 semanas
+Transversal
+N/A (QA / Seguridad)
+Auditoría de seguridad de contratos inteligentes (ERC-3643/ERC-4337), pruebas de carga del Servidor MCP, revisión de cumplimiento AML/KYC y pruebas de penetración.
+Sprint 17
+Fase 4 — Endurecimiento y Lanzamiento
+2 semanas
+Transversal
+N/A (UAT / Go-Live)
+Pruebas de aceptación de usuario (UAT) con el círculo Friends &amp; Family, migración de Base Sepolia a Base Mainnet, y checklist final de auditoría de funcionalidad previo al lanzamiento del Piloto ACCET.
+
+9. Checklist de Auditoría de Funcionalidad
+Checklist de cierre por fase, a validar por el Scrum Master junto al Comité de Gestión (Frank Camelo / Oscar Rangel) antes de dar por completada cada fase y habilitar el paso a la siguiente. Ítems no cumplidos deben registrarse como deuda técnica explícita con fecha de remediación.
+Fase 0 — Fundación Arquitectónica
+☐  Repositorio Graphiti desplegado sobre FalkorDB con esquema temporal (timestamps en nodos y relaciones) validado.
+☐  Nodo IPFS operativo (o pinning service) con generación y resolución de CIDs verificada.
+☐  Esqueleto del Servidor MCP (FastMCP) responde a llamadas de prueba (herramientas dummy).
+☐  Contratos base compilados y desplegados en Base Sepolia (testnet); direcciones documentadas.
+☐  Sistema de diseño (tokens de color, tipografía, componentes base) aprobado y versionado.
+☐  Pipeline de CI/CD configurado para frontend (MkDocs) y backend (Servidor MCP).
+
+Fase 1 — Épica 1: La Vitrina (Módulos A, B, C)
+☐  KYC vía Didit API integrado en ambiente de pruebas; tasa de falsos rechazos documentada.
+☐  Generación de DID confirmada y almacenada correctamente vinculada al usuario.
+☐  Billetera keyless se crea en Base Sepolia sin exponer al usuario ninguna frase semilla.
+☐  Contrato RBF se firma digitalmente y el hash se ancla a IPFS con CID verificable en BaseScan/IPFS gateway.
+☐  Dashboard Revista (MkDocs Material) carga en menos de 3 segundos con skeleton loaders funcionales.
+☐  Simulador de retornos del RBF calcula correctamente para el rango de tickets definido.
+☐  Línea de tiempo de los 5 ejes consume JSON-LD desde IPFS y degrada correctamente a caché si el nodo no responde.
+☐  Widget de IA responde únicamente con datos respaldados por el grafo de conocimiento (sin alucinaciones verificadas en pruebas).
+☐  Guardrails legales (disclaimers) se activan correctamente ante preguntas de garantía de rentabilidad.
+☐  Handoff a WhatsApp genera mensaje pre-llenado y registra el evento de conversión.
+☐  Accesibilidad: contraste de color, navegación por teclado y lectura en voz alta probados.
+☐  Panel interno del emisor muestra el embudo de onboarding con datos reales de staging.
+
+Fase 2 — Épica 2: Ejecución Financiera (Módulos D, E, F)
+☐  Desbloqueo de billetera ocurre solo tras validación on-chain de la credencial KYC (ERC-3643).
+☐  Paymaster patrocina el gas correctamente en transacciones de prueba (sin costo para el usuario).
+☐  Firma biométrica (Passkeys/FaceID) vinculada a la billetera keyless es auditada y no puede ser omitida.
+☐  Transacción atómica en la FVM empaqueta hash del contrato + validación biométrica + transferencia de USDC.
+☐  Dashboard privado refleja saldos leídos directamente del Smart Contract (no de caché desactualizada).
+☐  Mercado P2P bloquea compradores sin KYC aprobado; comisión de salida anticipada se cobra correctamente.
+☐  Pagos de utilidades se acreditan en la Billetera Keyless según la periodicidad configurada.
+☐  Sistema de referidos valida legitimidad del código antes de liberar el bono (prueba de anti-abuso).
+☐  Exportación de historial a CSV y recibos en PDF con hash de blockchain verificados.
+☐  Botón “Invertir” transiciona a “Ronda Cerrada” automáticamente al alcanzar la meta de recaudación.
+
+Fase 3 — Épica 4: Inteligencia del Ecosistema (Módulos L, M, N, O)
+☐  Agente de IA escala automáticamente a un ticket de soporte cuando no encuentra respaldo en el grafo de conocimiento.
+☐  Modo de autonomía económica (manual/automático) del agente es configurable y respeta el interruptor del emisor.
+☐  Tarjeta de pago generada por el agente requiere confirmación biométrica antes de ejecutar cualquier transacción.
+☐  Servidor MCP restringe las herramientas del agente a permisos de Lectura y Preparación (sin ejecución autónoma).
+☐  Auto-scroll y resaltado de secciones funcionan correctamente al recibir instrucciones del agente.
+☐  Generación, validación, límite de tasa (rate limiting) y revocación de tokens MCP externos probados.
+☐  Cuota Free Tier se aplica correctamente y el medidor visual refleja el consumo real del token.
+☐  Registro de auditoría de consultas externas es consultable por el Emisor en la Sala de Control.
+
+Fase 4 — Endurecimiento y Lanzamiento
+☐  Auditoría de seguridad externa de los contratos inteligentes (ERC-3643, ERC-4337, lógica RBF) completada sin hallazgos críticos abiertos.
+☐  Pruebas de carga del Servidor MCP y del backend confirman soporte de usuarios concurrentes esperados para el Hot Sale.
+☐  Revisión legal y de cumplimiento (AML/KYC, Anexo 2, PEP) validada por asesoría jurídica antes de mainnet.
+☐  Pruebas de penetración (frontend, API, prompt injection sobre el agente de IA) ejecutadas y remediadas.
+☐  Circuit Breaker multi-firma (Frank + Oscar) probado en ambiente de staging: pausa y reanudación funcionan correctamente.
+☐  Snapshot de respaldo del grafo de conocimiento (FalkorDB → IPFS) corriendo de forma automática cada 12 horas.
+☐  Plan de migración de Base Sepolia a Base Mainnet documentado y ensayado (dry-run).
+☐  UAT con un grupo piloto de la comunidad Friends &amp; Family completado con retroalimentación incorporada.
+☐  Checklist final de auditoría de funcionalidad (todas las fases) firmado por el Comité de Gestión 50/50 antes del Go-Live.
+
+
+10. Definition of Done y Gobernanza Scrum
+10.1 · Definition of Done (por historia de usuario)
+☐  Código revisado (peer review) y fusionado a la rama principal sin conflictos pendientes.
+☐  Criterios de aceptación de la historia verificados manualmente y, cuando aplique, con prueba automatizada.
+☐  Sin errores críticos o de seguridad abiertos (severidad alta) asociados a la funcionalidad.
+☐  Documentación técnica (README / comentarios en el grafo de conocimiento) actualizada si la historia introduce un nuevo componente reutilizable.
+☐  Validado en el entorno de staging (Base Sepolia) antes de marcarse como “Listo para Demo”.
+10.2 · Ceremonias Scrum
+☐  Sprint Planning (inicio de cada sprint): selección de historias desde el backlog priorizado de las Secciones 5–7.
+☐  Daily Stand-up (15 min): avance, bloqueos y coordinación entre frontend, backend/blockchain y diseño.
+☐  Sprint Review / Demo (cierre de sprint): demostración funcional al Comité de Gestión sobre Base Sepolia.
+☐  Sprint Retrospective: ajustes de proceso; el backlog de las Épicas 1, 2 y 4 se revisa contra la evolución comercial real del Hot Sale.
+☐  Refinamiento continuo (Backlog Grooming): historias de fases futuras se re-priorizan según hallazgos de las fases ya cerradas.
+10.3 · Roles
+Product Owner: Frank Camelo (CEO). Facilitador Técnico / Scrum Master y Project Manager: Oscar Antonio Rangel Hernández (Director de Tecnología). Ambos conforman el Comité de Gestión 50/50 con firma multi-sig requerida para hitos críticos, desembolsos y activación de mecanismos de emergencia (Circuit Breaker).
+
+11. Riesgos y Mitigaciones
+Riesgo
+Probabilidad
+Impacto
+Mitigación
+Congestión o caída de la red Base durante el Hot Sale
+Media
+Alto
+Reintentos automáticos (E2-1.29), caché local de estado, Paymaster con saldo monitoreado y alertado.
+Alucinación del Agente de IA con implicación legal (garantías de rentabilidad)
+Media
+Crítico
+Guardrails prudenciales (E4-1.1, 3.12), dataset de 1.000 casos de entrenamiento, disclaimers visibles y auditoría de sesiones.
+Fuga o mal uso de datos biométricos
+Baja
+Crítico
+Eliminación inmediata de biométricos temporales (1.25), encriptación end-to-end, cumplimiento de estándares de privacidad.
+Congelamiento de fondos por vulnerabilidad en el Smart Contract
+Baja
+Crítico
+Auditoría de seguridad externa antes de mainnet, Circuit Breaker multi-firma 50/50, bug bounty previo al lanzamiento.
+Abuso del Free Tier del Servidor MCP (scraping / DDoS)
+Media
+Medio
+Rate limiting por token, cuotas mensuales, revocación instantánea y logs de auditoría.
+Baja adopción por fricción percibida en Web3 (usuarios no técnicos)
+Media
+Alto
+Billeteras keyless con login social, gas patrocinado, lenguaje sin jerga técnica y widget de IA de acompañamiento.
+Desalineación entre backlog y hoja de ruta comercial en evolución
+Alta
+Medio
+Revisión de backlog al cierre de cada sprint junto al Comité de Gestión (Frank/Oscar); esta tabla isomórfica como fuente de verdad.
+
+Anexo A · Referencia a Módulos Fuera de Alcance (Sala de Control del Emisor)
+Los siguientes módulos pertenecen a la experiencia del Emisor/Administrador (no del Inversionista) y se documentan de forma referencial, ya que comparten la misma Fuente Única de la Verdad (SSOT) y deben desarrollarse en paralelo para que los módulos de este PRD tengan datos con los cuales operar:
+Épica 3 — Módulo G: Creación del Proyecto y Despliegue (parametrización del RBF, compilación del Smart Contract).
+Épica 3 — Módulo H: Oráculo Legal y Verificación de Hitos (evidencias, gobernanza multi-firma 50/50).
+Épica 3 — Módulos I–K: Gestión de Inversionistas (Whitelist), Analíticas de Campaña y Seguridad/Circuit Breakers.
+Épica 4 — Módulo P: Pipeline de Datos RAG y Optimización del LLM (vectorización, sincronización de llms.txt).
+Épica 4 — Módulo Q: Analíticas de IA y Cierre del Ecosistema (panel de tendencias, tasa de resolución, escalabilidad).
+Estos módulos serán objeto de un PRD complementario: “PRD — Sala de Control del Emisor”, siguiendo la misma metodología de fases y sprints aquí documentada.
